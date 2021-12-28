@@ -1399,6 +1399,13 @@ pre code {
     flex: 0 0 83.33333%;
     max-width: 83.33333%;
   }
+
+  .col-lg-10-m2 {
+    flex: 0 0 83.33333%;
+    max-width: 83.33333%;
+    margin: 0px 90px 0px 90px;
+  }
+
   .col-lg-11 {
     flex: 0 0 91.66667%;
     max-width: 91.66667%;
