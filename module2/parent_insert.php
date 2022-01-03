@@ -54,6 +54,7 @@
         </nav>
 
         <!-- Page Content  -->
+        <form name="form1" method="POST" action="insert.php">
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
                 <div class="d-flex justify-content-between mb-3">
@@ -130,10 +131,10 @@
                             <h3 class=" mb-4">Kid's Information</h3>
                             <form action="">
                                 <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Kid's Name" required="required" />
+                                    <input name="name" type="text" class="form-control border-0 p-4" placeholder="Kid's Name" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select border-0 px-4" name="age" style="height: 47px;">
+                                    <select name="age" class="custom-select border-0 px-4" name="age" style="height: 47px;">
                                         <option selected>Select Age</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
@@ -142,7 +143,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select border-0 px-4" name="gender" style="height: 47px;">
+                                    <select name="gender" class="custom-select border-0 px-4" name="gender" style="height: 47px;">
                                         <option selected>Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -150,7 +151,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control border-0 p-4" rows="6" placeholder="Medication History" required="required"></textarea>
+                                    <textarea name="medicationHistory" class="form-control border-0 p-4" rows="6" placeholder="Medication History" required="required"></textarea>
                                 </div>
 
                             </form>
@@ -177,6 +178,7 @@
             </div>
         </div>
         <!-- Back to Top -->
+</form>
         <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
