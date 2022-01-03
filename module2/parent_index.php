@@ -132,19 +132,21 @@
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 } else {
-                    $sql = "SELECT `name` from kids";
+                    $sql = "SELECT `kidsID`, `name` from kids";
                     $result = $conn->query($sql);
                     $count = $result->num_rows;
                     $i = 0;
                     if ($count > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $a[$i] = $row["name"];
+                            $b[$i] = $row["kidsID"];
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
+                            $url="parent_view.php?id=".$b[$i];
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
                             echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
                         }

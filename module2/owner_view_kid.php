@@ -151,41 +151,57 @@
                         <div class="card-footer bg-transparent py-4 px-5">
                             <div class="row border-bottom">
                                 <div class="col-6 py-1 text-right border-right"><strong>Parent's Name</strong></div>
-                                <div class="col-6 py-1">xxx</div>
-                            </div>
-                            <div class="row border-bottom">
-                                <div class="col-6 py-1 text-right border-right"><strong>Phone Number</strong></div>
-                                <div class="col-6 py-1">xxx</div>
-                            </div>
-                            <div class="row border-bottom">
-                                <div class="col-6 py-1 text-right border-right"><strong>Address</strong></div>
-                                <div class="col-6 py-1">xxx</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 py-1 text-right border-right"><strong>Year Register</strong></div>
-                                <div class="col-6 py-1">xxx</div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="card-body text-center">
-                            <h4 class="card-title">Kid's Information</h4>
-                        </div>
-                        <div class="card-footer bg-transparent py-4 px-5">
-                            <div class="row border-bottom">
-                                <div class="col-6 py-1 text-right border-right"><strong>Kid's Name</strong></div>
-                                <div class="col-6 py-1">xxx</div>
-                            </div>
-                            <div class="row border-bottom">
-                                <div class="col-6 py-1 text-right border-right"><strong>Age</strong></div>
-                                <div class="col-6 py-1">xxx</div>
-                            </div>
-                            <div class="row border-bottom">
-                                <div class="col-6 py-1 text-right border-right"><strong>Gender</strong></div>
-                                <div class="col-6 py-1">xxx</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 py-1 text-right border-right"><strong>Medication History</strong></div>
-                                <div class="col-6 py-1">xxx</div>
+                                <?php
+                        $kidsID= $_GET['id'];
+                        require "conn.php";
+                        if(isset($kidsID))
+                        {
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            } else {
+                                $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID where kids.kidsID=$kidsID";
+                                $result = $conn->query($sql);
+                                $count = $result->num_rows;
+                                $i = 0;
+                                $row = mysqli_fetch_assoc($result);
+                                if ($count > 0) {
+                                    $age = date("Y") - $row['yearOfBirth'];
+                                    echo "<div class='col-6 py-1'>".$row['username']."</div></div>" ;
+                                    echo "<div class='row border-bottom'>";
+                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
+                                    echo "<div class='col-6 py-1'>".$row['phoneNumber']."</div>";
+                                    echo "</div>";
+                                    echo "<div class='row border-bottom'>";
+                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
+                                    echo "<div class='col-6 py-1'>".$row['address']."</div>";
+                                    echo "</div>";
+                                    echo "<div class='row'>";
+                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                    echo "<div class='col-6 py-1'>".$row['yearRegister']."</div></div></div><hr>";
+                                    echo "<div class='card-body text-center'>";
+                                    echo "<h4 class='card-title'>Kid's Information</h4></div>";
+                                    echo "<div class='card-footer bg-transparent py-4 px-5'>";
+                                    echo "<div class='row border-bottom'>";
+                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
+                                    echo "<div class='col-6 py-1'>".$row['name']."</div></div>";
+                                    echo "<div class='row border-bottom'>";
+                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
+                                    echo "<div class='col-6 py-1'>".$age."</div></div>";
+                                    echo "<div class='row border-bottom'>";
+                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
+                                    echo "<div class='col-6 py-1'>".$row['gender']."</div></div>";
+                                    echo "<div class='row'>";
+                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
+                                    echo " <div class='col-6 py-1'>".$row['medicationHistory']."</div>";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            echo"error!";
+                        }
+                         
+                                ?>
                             </div>
                         </div>
                     </div>

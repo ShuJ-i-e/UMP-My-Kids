@@ -24,24 +24,6 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 8px;
-            width: 150px;
-        }
-
-        tr:hover {background-color: #dddddd;}
-    </style>
-
 </head>
 
 <body>
@@ -119,76 +101,90 @@
                 </div>
             </div>
             <!-- End Modal -->
-            <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
             <!-- Content Start-->
-            <table>
-                <tr>
-                    <th>Parent's Name</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT parentID, username from parents";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["username"];
-                            $b[$i] = $row["parentID"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            $url="owner_view_parent.php?id=".$b[$i];
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
-                        }
-                    }
-                }
-                ?>
-            </table>
-            <br>
-            <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
-            <table>
-                <tr>
-                    <th>Kid's Name</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT `kidsID`, `name` from kids";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["name"];
-                            $b[$i] = $row["kidsID"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            $url="owner_view_kid.php?id=".$b[$i];
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
-                        }
-                    }
-                }
-                ?>
-            </table>
+            <div class="col-lg-12 mb-5">
+                <div class="card border-0 bg-light shadow-sm pb-2">
 
+                    <div class="card-header bg-secondary text-center p-4">
+                        <h1 class="text-white m-0">Registered Kid</h1>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Parent's Information</h4>
+                    </div>
+                    <div class="card-footer bg-transparent py-4 px-5">
+                        <div class="row border-bottom">
+                            <div class="col-6 py-1 text-right border-right"><strong>Parent's Name</strong></div>
+                            <?php
+                            $parentID = $_GET['id'];
+                            require "conn.php";
+                            if (isset($parentID)) {
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } else {
+
+                                    $parents_sql = "SELECT * from parents where parentID=$parentID";
+                                    $result = $conn->query($parents_sql);
+                                    $count = $result->num_rows;
+                                    $i = 0;
+                                    $parent_row = mysqli_fetch_assoc($result);
+                                    if ($count > 0) {
+                                        echo "<div class='col-6 py-1'>" . $parent_row['username'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $parent_row['phoneNumber'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $parent_row['address'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $parent_row['yearRegister'] . "</div></div></div><hr>";
+                                        echo "<div class='card-body text-center'>";
+                                        echo "<h4 class='card-title'>Kid's Information</h4></div>";
+                                        echo "<div class='card-footer bg-transparent py-4 px-5'>";
+                                        $kids_sql = "SELECT * from parents join kids on parents.parentID=kids.parentID where parents.parentID=$parentID";
+                                        $result = $conn->query($kids_sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        if ($count > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $a[$i] = $row["name"];
+                                            $b[$i] = $row["yearOfBirth"];
+                                            $c[$i] = $row["gender"];
+                                            $d[$i] = $row["medicationHistory"];
+                                            $i++;
+                                        }
+                                        for ($i = 0; $i < $count; $i++) {
+                                            $age[$i] = date("Y") - $b[$i];
+                                            echo "<h5 class='card-title' style=text-align:center;'>Kid".$i."</h5>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $age[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
+                                            echo " <div class='col-6 py-1'>" . $d[$i] . "</div></div><br>";
+                                        }
+                                    }
+                                    }
+                                }
+                            } else {
+                                echo "error!";
+                            }
+
+                            ?>
+                        
+                    </div>
+                </div>
+            </div>
             <!-- Content End-->
+
                 <!-- Footer Start -->
                 <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
