@@ -10469,3 +10469,7 @@ a[data-toggle="collapse"] {
   from {top: -300px; opacity: 0}
   to {top: 0; opacity: 1}
 }
+
+.action-btn{
+  margin: 5px;
+}

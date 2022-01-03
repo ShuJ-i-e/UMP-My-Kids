@@ -24,6 +24,24 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 150px;
+        }
+
+        tr:hover {background-color: #dddddd;}
+    </style>
+
 </head>
 
 <body>
@@ -101,7 +119,72 @@
                 </div>
             </div>
             <!-- End Modal -->
+            <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
+            <!-- Content Start-->
+            <table>
+                <tr>
+                    <th>Parent's Name</th>
+                    <th>Actions</th>
+                </tr>
+                <?php
+                require "conn.php";
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                } else {
+                    $sql = "SELECT username from parents";
+                    $result = $conn->query($sql);
+                    $count = $result->num_rows;
+                    $i = 0;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $a[$i] = $row["username"];
+                            $i++;
+                        }
+                        for ($i = 0; $i < $count; $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $a[$i] . "</td>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
+                        }
+                    }
+                }
+                ?>
+            </table>
+            <br>
+            <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
+            <table>
+                <tr>
+                    <th>Kid's Name</th>
+                    <th>Actions</th>
+                </tr>
+                <?php
+                require "conn.php";
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                } else {
+                    $sql = "SELECT `name` from kids";
+                    $result = $conn->query($sql);
+                    $count = $result->num_rows;
+                    $i = 0;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $a[$i] = $row["name"];
+                            $i++;
+                        }
+                        for ($i = 0; $i < $count; $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $a[$i] . "</td>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
+                        }
+                    }
+                }
+                ?>
+            </table>
 
+            <!-- Content End-->
                 <!-- Footer Start -->
                 <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
