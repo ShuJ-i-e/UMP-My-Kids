@@ -24,6 +24,33 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 150px;
+            background-color: #dddddd;
+        }
+
+        td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 150px;
+            background-color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 
 <body>
@@ -141,59 +168,71 @@
                             <h1 class="text-white m-0">Kid Registration</h1>
                         </div>
                         <div class="card-body rounded-bottom bg-primary p-5">
-
-
                             <h3 class=" mb-4">Parent's Information</h3>
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Parent's Name" required="required" />
+                            <form action="edit_parent.php" method="POST" name="form1">
+                                <?php
+                                $parentsID = $_GET['id'];
+                                require "conn.php";
+                                if (isset($parentsID)) {
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    } else {
+                                        $sql = "SELECT * from parents where parentID=$parentsID";
+                                        $result = $conn->query($sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        $row = mysqli_fetch_assoc($result);
+                                        if ($count > 0) {
+                                            echo "<div class='form-group'><input name='ParentName' type='text' class='form-control border-0 p-4' placeholder='Parent&#39;s Name' disabled value='" . $row['username'] . "'></div>";
+                                            echo "<div class='form-group'><input name='phoneNumber' type='text' class='form-control border-0 p-4' placeholder='Phone Number' value='" . $row['phoneNumber'] . "'></div>";
+                                            echo "<div class='form-group'><input name='address' type='text' class='form-control border-0 p-4' placeholder='Address' value='" . $row['address'] . "'></div>";
+                                            echo "<div class='form-group'><input name='yearRegister' type='number' class='form-control border-0 p-4' placeholder='Year Register' value='" . $row['yearRegister'] . "'></div>";
+                                            echo "<hr>";
+                                            echo "<input type='hidden' id='ParentName' name='ParentName' value='" . $row['username'] . "'/>";
+                                            echo "<input type='hidden' id='parentID' name='parentID' value='" . $row['parentID'] . "'/>";
+                                            echo "<input type='hidden' id='page' name='page' value='owner'/>";
+                                        }
+                                    }
+                                } else {
+                                    echo "error!";
+                                }
+                                ?>
+                                <h3 class=' mb-4'>Kid's Information</h3>
+                                <table>
+                                    <tr>
+                                        <th>Kid's Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <?php
+                                        $sql = "SELECT `kidsID`, `name` from kids";
+                                        $result = $conn->query($sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        if ($count > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $a[$i] = $row["name"];
+                                                $b[$i] = $row["kidsID"];
+                                                $i++;
+                                            }
+                                            for ($i = 0; $i < $count; $i++) {
+                                                $view_url = "owner_view_kid.php?id=" . $b[$i];
+                                                $edit_url = "owner_edit_kid.php?id=" . $b[$i];
+                                                echo "<td>" . $a[$i] . "</td>";
+                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
+                                            }
+                                        }
+                                        ?>
+                                </table>
+                                <br>
+                                <br>
+                                <div>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="owner_index.php">Back</a>
+                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Phone Number" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Address" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" class="form-control border-0 p-4" placeholder="Year Register" required="required" />
-                                </div>
-                                <hr>
-
                             </form>
-
-                            <h3 class=" mb-4">Kid's Information</h3>
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Kid's Name" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select border-0 px-4" name="age" style="height: 47px;">
-                                        <option selected>Select Age</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select border-0 px-4" name="gender" style="height: 47px;">
-                                        <option selected>Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea class="form-control border-0 p-4" rows="6" placeholder="Medication History" required="required"></textarea>
-                                </div>
-
-                            </form>
-                            <br>
-                            <div>
-                                <button class="btn btn-light border-0 px-4 mx-auto mb-4">Back</button>
-                                <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
-                            </div>
-
                         </div>
                     </div>
                 </div>

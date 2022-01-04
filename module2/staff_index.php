@@ -39,9 +39,10 @@
             width: 150px;
         }
 
-        tr:hover {background-color: #dddddd;}
+        tr:hover {
+            background-color: #dddddd;
+        }
     </style>
-
 </head>
 
 <body>
@@ -119,6 +120,11 @@
                 </div>
             </div>
             <!-- End Modal -->
+            <?php
+            if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
+                echo "<div id='message'>".$_REQUEST["msg"]."</div>";
+            }
+            ?>
             <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
             <!-- Content Start-->
             <table>
@@ -142,11 +148,12 @@
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
-                            $url="owner_view_parent.php?id=".$b[$i];
+                            $view_url = "staff_view_parent.php?id=" . $b[$i];
+                            $edit_url = "staff_edit_parent.php?id=" . $b[$i];
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
                         }
                     }
@@ -176,11 +183,12 @@
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
-                            $url="owner_view_kid.php?id=".$b[$i];
+                            $view_url = "staff_view_kid.php?id=" . $b[$i];
+                            $edit_url = "staff_edit_kid.php?id=" . $b[$i];
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
                         }
                     }
@@ -189,66 +197,71 @@
             </table>
 
             <!-- Content End-->
-                <!-- Footer Start -->
-                <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+            <!-- Footer Start -->
+            <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
-                    <div class="container-fluid pt-5">
-                        <p class="m-0 text-center text-white">
-                            &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
-                        </p>
-                    </div>
+                <div class="container-fluid pt-5">
+                    <p class="m-0 text-center text-white">
+                        &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
+                    </p>
                 </div>
-                <!-- Footer End -->
-
             </div>
+            <!-- Footer End -->
+
         </div>
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="../lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="../lib/lightbox/js/lightbox.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#sidebarCollapse').on('click', function() {
-                    $('#sidebar').toggleClass('active');
-                });
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
             });
 
-            // Get the modal
-            var modal = document.getElementById("myModal");
+        });
 
-            // Get the button that opens the modal
-            var btn = document.getElementById("logoutBtn");
+        setTimeout(function() {
+            jQuery('#message').fadeOut('slow');
+        }, 1500);
 
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-            // When the user clicks on the button, open the modal
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
+        // Get the button that opens the modal
+        var btn = document.getElementById("logoutBtn");
 
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+    </script>
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-
-        <!-- Template Javascript -->
-        <script src="../js/main.js"></script>
+    <!-- Template Javascript -->
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

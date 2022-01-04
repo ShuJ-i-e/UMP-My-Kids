@@ -148,6 +148,12 @@
                     </div>
                 </div>
             </div>
+            <!-- End Modal -->
+            <?php
+            if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
+                echo "<div id='message'>".$_REQUEST["msg"]."</div>";
+            }
+            ?>
             <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
             <!-- Content Start-->
             <table>
@@ -171,11 +177,12 @@
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
-                            $url="owner_view_parent.php?id=".$b[$i];
+                            $view_url="owner_view_parent.php?id=".$b[$i];
+                            $edit_url = "owner_edit_parent.php?id=" . $b[$i];
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
                         }
                     }
@@ -205,11 +212,12 @@
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
-                            $url="owner_view_kid.php?id=".$b[$i];
+                            $view_url="owner_view_kid.php?id=".$b[$i];
+                            $edit_url="owner_edit_kid.php?id=".$b[$i];
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
                         }
                     }
