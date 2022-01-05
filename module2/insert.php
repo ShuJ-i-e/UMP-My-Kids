@@ -7,7 +7,7 @@ $medicationHistory =  $_POST["medicationHistory"];
 $yob=date("Y")-$_POST["age"];
 $gender=$_POST["gender"];
 $parentID=$_POST["parentID"];
-
+$page=$_POST['page'];
 
 if ($conn->connect_error) 
 {

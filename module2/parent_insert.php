@@ -109,24 +109,6 @@
                                 <h1 class="text-white m-0">Kid Registration</h1>
                             </div>
                             <div class="card-body rounded-bottom bg-primary p-5">
-
-
-                                <h3 class=" mb-4">Parent's Information</h3>
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Parent's Name" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Phone Number" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Address" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" class="form-control border-0 p-4" placeholder="Year Register" required="required" />
-                                </div>
-                                <hr>
-
-
                                 <h3 class=" mb-4">Kid's Information</h3>
                                 <div class="form-group">
                                     <input name="name" type="text" class="form-control border-0 p-4" placeholder="Kid's Name" required="required" />
