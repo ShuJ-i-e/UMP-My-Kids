@@ -43,11 +43,11 @@
                 <li class="active">
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
-                            <a href="#">List</a>
+                        <li class="active">
+                        <a href="owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                        <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>

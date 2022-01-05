@@ -69,7 +69,7 @@
                     <a href="#">Home</a>
                 </li>
                 <li class="active">
-                    <a href="#">Parents & Kids</a>
+                    <a href="staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
                     <a href="#">Activity</a>
