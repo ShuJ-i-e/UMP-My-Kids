@@ -24,6 +24,25 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 150px;
+        }
+
+        tr:hover {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,21 +60,19 @@
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li  class="active">
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Parents & Kids</a>
+                <li class="active">
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li  class="active">
-                            <a href="#">List</a>
-                        </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="owner_index.php">List</a>
+                        </li>
+                        <li  class="active">
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Manpower</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
@@ -67,8 +84,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Payment</a>
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenu">
                         <li>
                             <a href="#">List</a>
@@ -79,8 +95,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Activity</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
                             <a href="#">List</a>
@@ -106,8 +121,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -115,8 +129,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> Owner</a>
                         </nav>
@@ -125,21 +138,118 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
-                </div>
-              </div>
             </div>
             <!-- Modal End -->
+            <!-- Content Start -->
+            <div class="text-center">
+                <h4 class="card-title">Report</h4>
+            </div>
+            <table>
+                <tr>
+                    <th>Parent's Name</th>
+                    <th>Kid's Name</th>
+                    <th>Age</th>
+                    <th>Status</th>
+                    <th>Phone Number</th>
+                </tr>
+                <?php
+                require "conn.php";
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                } else {
+                    $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID";
+                    $result = $conn->query($sql);
+                    $count = $result->num_rows;
+                    $i = 0;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $age = date("Y") - $row["yearOfBirth"];
+                            $a[$i] = $row["username"];
+                            $b[$i] = $row["name"];
+                            $c[$i] = $age;
+                            $d[$i] = $row["status"];
+                            $e[$i] = $row["phoneNumber"];
+                            $i++;
+                        }
+                        for ($i = 0; $i < $count; $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $a[$i] . "</td>";
+                            echo "<td>" . $b[$i] . "</td>";
+                            echo "<td>" . $c[$i] . "</td>";
+                            echo "<td>" . $d[$i] . "</td>";
+                            echo "<td>" . $e[$i] . "</td>";
+                        }
+                    }
+                }
+                ?>
+            </table>
+            <br>
+            <div class="text-center">
+                <h4 class="card-title">Summary</h4>
+            </div>
+            <table>
+                <tr>
+                    <th>Total number of parents</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(parentID) FROM parents");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of kids</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(kidsID) FROM kids");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Average age of kids</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $i=0;
+                        $result = mysqli_query($conn, "SELECT yearOfBirth FROM kids");
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $kidAge[$i] = date("Y") - $row["yearOfBirth"];
+                            $i++;
+                        }
+                        $totalAge=0;
+                        
+                        for ($i = 0; $i < $count; $i++) {
+                            $totalAge = $totalAge + (int)$kidAge[$i];
+                        }
+                        $avgAge = $totalAge/$i;
+                        $row = $result->fetch_row();
+                        echo "<td>".$avgAge."</td>";
+                    }
+                    ?>
+                </tr>
+            </table>
+            <!-- Content End -->
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
@@ -165,8 +275,8 @@
     <script src="../lib/isotope/isotope.pkgd.min.js"></script>
     <script src="../lib/lightbox/js/lightbox.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
@@ -181,17 +291,17 @@
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
