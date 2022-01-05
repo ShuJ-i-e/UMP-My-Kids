@@ -128,6 +128,23 @@
                 </div>
             </div>
             <!-- End Modal -->
+            <!-- Delete Modal -->
+            <div class="modal" id="deleteBox">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete <span id="deleteSpan"><strong></strong></span>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="deleteBtn" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" id="closeDeleteBtn" style="margin: 10px;float:right">No</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Delete Modal -->
             <!-- Content Start -->
             <div class="center">
                 <div class="col-lg-10-m2">
@@ -139,68 +156,68 @@
                         <div class="card-body rounded-bottom bg-primary p-5">
                             <h3 class=" mb-4">Parent's Information</h3>
                             <form action="edit_parent.php" method="POST" name="form1">
-                            <?php
-                            $parentsID = $_GET['id'];
-                            require "conn.php";
-                            if (isset($parentsID)) {
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
+                                <?php
+                                $parentsID = $_GET['id'];
+                                require "conn.php";
+                                if (isset($parentsID)) {
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    } else {
+                                        $sql = "SELECT * from parents where parentID=$parentsID";
+                                        $result = $conn->query($sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        $row = mysqli_fetch_assoc($result);
+                                        if ($count > 0) {
+                                            echo "<div class='form-group'><input name='ParentName' type='text' class='form-control border-0 p-4' placeholder='Parent&#39;s Name' disabled value='" . $row['username'] . "'></div>";
+                                            echo "<div class='form-group'><input name='phoneNumber' type='text' class='form-control border-0 p-4' placeholder='Phone Number' value='" . $row['phoneNumber'] . "'></div>";
+                                            echo "<div class='form-group'><input name='address' type='text' class='form-control border-0 p-4' placeholder='Address' value='" . $row['address'] . "'></div>";
+                                            echo "<div class='form-group'><input name='yearRegister' type='number' class='form-control border-0 p-4' placeholder='Year Register' disabled value='" . $row['yearRegister'] . "'></div>";
+                                            echo "<hr>";
+                                            echo "<input type='hidden' id='ParentName' name='ParentName' value='" . $row['username'] . "'/>";
+                                            echo "<input type='hidden' id='parentID' name='parentID' value='" . $row['parentID'] . "'/>";
+                                            echo "<input type='hidden' id='page' name='page' value='staff'/>";
+                                        }
+                                    }
                                 } else {
-                                    $sql = "SELECT * from parents where parentID=$parentsID";
-                                    $result = $conn->query($sql);
-                                    $count = $result->num_rows;
-                                    $i = 0;
-                                    $row = mysqli_fetch_assoc($result);
-                                    if ($count > 0) {
-                                        echo "<div class='form-group'><input name='ParentName' type='text' class='form-control border-0 p-4' placeholder='Parent&#39;s Name' disabled value='" . $row['username'] . "'></div>";
-                                        echo "<div class='form-group'><input name='phoneNumber' type='text' class='form-control border-0 p-4' placeholder='Phone Number' value='" . $row['phoneNumber'] . "'></div>";
-                                        echo "<div class='form-group'><input name='address' type='text' class='form-control border-0 p-4' placeholder='Address' value='" . $row['address'] . "'></div>";
-                                        echo "<div class='form-group'><input name='yearRegister' type='number' class='form-control border-0 p-4' placeholder='Year Register' value='" . $row['yearRegister'] . "'></div>";
-                                        echo "<hr>";
-                                        echo "<input type='hidden' id='ParentName' name='ParentName' value='". $row['username']. "'/>";
-                                        echo "<input type='hidden' id='parentID' name='parentID' value='". $row['parentID']. "'/>";
-                                        echo "<input type='hidden' id='page' name='page' value='staff'/>";
-                                    }
+                                    echo "error!";
                                 }
-                            } else {
-                                echo "error!";
-                            }
-                            ?>
-                            <h3 class=' mb-4'>Kid's Information</h3>
-                            <table>
-                                <tr>
-                                    <th>Kid's Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                                <tr>
-                                    <?php
-                                    $sql = "SELECT `kidsID`, `name` from kids";
-                                    $result = $conn->query($sql);
-                                    $count = $result->num_rows;
-                                    $i = 0;
-                                    if ($count > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $a[$i] = $row["name"];
-                                            $b[$i] = $row["kidsID"];
-                                            $i++;
+                                ?>
+                                <h3 class=' mb-4'>Kid's Information</h3>
+                                <table>
+                                    <tr>
+                                        <th>Kid's Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <?php
+                                        $sql = "SELECT `kidsID`, `name` from kids";
+                                        $result = $conn->query($sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        if ($count > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $a[$i] = $row["name"];
+                                                $b[$i] = $row["kidsID"];
+                                                $i++;
+                                            }
+                                            for ($i = 0; $i < $count; $i++) {
+                                                $view_url = "staff_view_kid.php?id=" . $b[$i];
+                                                $edit_url = "staff_edit_kid.php?id=" . $b[$i];
+                                                echo "<td>" . $a[$i] . "</td>";
+                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
+                                            }
                                         }
-                                        for ($i = 0; $i < $count; $i++) {
-                                            $view_url = "staff_view_kid.php?id=" . $b[$i];
-                                            $edit_url = "staff_edit_kid.php?id=" . $b[$i];
-                                            echo "<td>" . $a[$i] . "</td>";
-                                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
-                                        }
-                                    }
-                                    ?>
-                            </table>
-                            <br>
-                            <br>
-                            <div>
-                                <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="staff_index.php">Back</a>
-                                <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
-                            </div>
+                                        ?>
+                                </table>
+                                <br>
+                                <br>
+                                <div>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="staff_index.php">Back</a>
+                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -236,6 +253,21 @@
                     $('#sidebar').toggleClass('active');
                 });
             });
+
+            var deleteDialog = document.getElementById("deleteBox");
+
+            function deleteFunc(name, id) {
+                deleteDialog.style.display = "block";
+                $('#deleteSpan').html("<strong>" + name + "</strong> with kids ID " + id);
+                $("#deleteBtn").click(function() {
+
+                    window.location.href = "delete.php?id=" + id + "&page=owner";
+                });
+            }
+            var closeDeleteBtn = document.getElementById("closeDeleteBtn");
+            closeDeleteBtn.onclick = function() {
+                deleteDialog.style.display = "none";
+            }
 
             // Get the modal
             var modal = document.getElementById("myModal");

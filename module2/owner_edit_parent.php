@@ -71,10 +71,10 @@
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li class="active">
-                        <a href="owner_index.php">List</a>
+                            <a href="owner_index.php">List</a>
                         </li>
                         <li>
-                        <a href="owner_report.php">Report</a>
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -158,7 +158,24 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Modal End -->
+            <!-- Delete Modal -->
+            <div class="modal" id="deleteBox">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete <span id="deleteSpan"><strong></strong></span>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="deleteBtn" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" id="closeDeleteBtn" style="margin: 10px;float:right">No</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Delete Modal -->
             <!-- Content Start -->
             <div class="center">
                 <div class="col-lg-10-m2">
@@ -186,7 +203,7 @@
                                             echo "<div class='form-group'><input name='ParentName' type='text' class='form-control border-0 p-4' placeholder='Parent&#39;s Name' disabled value='" . $row['username'] . "'></div>";
                                             echo "<div class='form-group'><input name='phoneNumber' type='text' class='form-control border-0 p-4' placeholder='Phone Number' value='" . $row['phoneNumber'] . "'></div>";
                                             echo "<div class='form-group'><input name='address' type='text' class='form-control border-0 p-4' placeholder='Address' value='" . $row['address'] . "'></div>";
-                                            echo "<div class='form-group'><input name='yearRegister' type='number' class='form-control border-0 p-4' placeholder='Year Register' value='" . $row['yearRegister'] . "'></div>";
+                                            echo "<div class='form-group'><input name='yearRegister' type='number' class='form-control border-0 p-4' disabled placeholder='Year Register' value='" . $row['yearRegister'] . "'></div>";
                                             echo "<hr>";
                                             echo "<input type='hidden' id='ParentName' name='ParentName' value='" . $row['username'] . "'/>";
                                             echo "<input type='hidden' id='parentID' name='parentID' value='" . $row['parentID'] . "'/>";
@@ -221,7 +238,7 @@
                                                 echo "<td>" . $a[$i] . "</td>";
                                                 echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
                                                 echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
+                                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
                                             }
                                         }
                                         ?>
@@ -267,6 +284,21 @@
                     $('#sidebar').toggleClass('active');
                 });
             });
+
+            var deleteDialog = document.getElementById("deleteBox");
+
+            function deleteFunc(name, id) {
+                deleteDialog.style.display = "block";
+                $('#deleteSpan').html("<strong>" + name + "</strong> with kids ID " + id);
+                $("#deleteBtn").click(function() {
+
+                    window.location.href = "delete.php?id=" + id + "&page=owner";
+                });
+            }
+            var closeDeleteBtn = document.getElementById("closeDeleteBtn");
+            closeDeleteBtn.onclick = function() {
+                deleteDialog.style.display = "none";
+            }
 
             // Get the modal
             var modal = document.getElementById("myModal");

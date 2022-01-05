@@ -5,7 +5,6 @@ require "conn.php";
 $name= $_POST["ParentName"];
 $phoneNumber =  $_POST["phoneNumber"];
 $address=$_POST["address"];
-$yearRegister=$_POST["yearRegister"];
 $parentID=$_POST['parentID'];
 $page=$_POST['page'];
 
@@ -15,7 +14,7 @@ if ($conn->connect_error)
 }
 else
 {
-    $sql="UPDATE parents SET `phoneNumber`='$phoneNumber', `address`='$address', `yearRegister`='$yearRegister' WHERE `parentID`='$parentID'";
+    $sql="UPDATE parents SET `phoneNumber`='$phoneNumber', `address`='$address'WHERE `parentID`='$parentID'";
      if ($conn->query($sql)=== TRUE) 
      {
          if($page=="parents")
