@@ -115,11 +115,28 @@
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                  <button class="btn btn-light" id="closeLogoutBtn" style="margin: 10px;float:right">No</button>
                 </div>
               </div>
             </div>
             <!-- End Modal -->
+                        <!-- Delete Modal -->
+                        <div class="modal" id="deleteBox">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete <span id="deleteSpan"><strong></strong></span>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="deleteBtn" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" id="closeDeleteBtn" style="margin: 10px;float:right">No</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Delete Modal -->
             <?php
             if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
                 echo "<div id='message'>".$_REQUEST["msg"]."</div>";
@@ -154,7 +171,7 @@
                             echo "<td>" . $a[$i] . "</td>";
                             echo "<td><a class='btn btn-info btn-sm action-btn' href=". $view_url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
                             echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
+                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
                         }
                     }
                 }
@@ -195,6 +212,20 @@
         setTimeout(function() {
             jQuery('#message').fadeOut('slow');
         }, 1500);
+        var deleteDialog = document.getElementById("deleteBox");
+
+        function deleteFunc(name, id) {
+            deleteDialog.style.display = "block";
+            $('#deleteSpan').html("<strong>" + name + "</strong> with kids ID " + id);
+            $("#deleteBtn").click(function() {
+
+                window.location.href = "delete.php?id="+id+"&page=parents";
+            });
+        }
+        var closeDeleteBtn = document.getElementById("closeDeleteBtn");
+        closeDeleteBtn.onclick = function() {
+            deleteDialog.style.display = "none";
+        }
 
         // Get the modal
         var modal = document.getElementById("myModal");
@@ -205,6 +236,8 @@
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
+        var closeBtn = document.getElementById("closeLogoutBtn");
+
         // When the user clicks on the button, open the modal
         btn.onclick = function () {
             modal.style.display = "block";
@@ -212,6 +245,10 @@
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        closeBtn.onclick = function() {
             modal.style.display = "none";
         }
 
