@@ -119,7 +119,12 @@
                 </div>
               </div>
             </div>
-
+            <!-- End Modal -->
+            <?php
+            if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
+                echo "<div id='message'>".$_REQUEST["msg"]."</div>";
+            }
+            ?>
             <!-- Content Start-->
             <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
             <table>
@@ -143,11 +148,12 @@
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
-                            $url="parent_view.php?id=".$b[$i];
+                            $view_url="parent_view.php?id=".$b[$i];
+                            $edit_url="parent_edit.php?id=".$b[$i];
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $view_url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
                         }
                     }
@@ -185,6 +191,10 @@
                 $('#sidebar').toggleClass('active');
             });
         });
+
+        setTimeout(function() {
+            jQuery('#message').fadeOut('slow');
+        }, 1500);
 
         // Get the modal
         var modal = document.getElementById("myModal");

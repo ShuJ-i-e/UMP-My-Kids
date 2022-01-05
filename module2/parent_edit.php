@@ -112,59 +112,97 @@
                             <h1 class="text-white m-0">Kid Registration</h1>
                         </div>
                         <div class="card-body rounded-bottom bg-primary p-5">
-
-
                             <h3 class=" mb-4">Parent's Information</h3>
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Parent's Name" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Phone Number" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Address" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" class="form-control border-0 p-4" placeholder="Year Register" required="required" />
-                                </div>
-                                <hr>
+                            <?php
+                        $kidsID= $_GET['id'];
+                        require "conn.php";
+                        if(isset($kidsID))
+                        {
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            } else {
+                                $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID where kids.kidsID=$kidsID";
+                                $result = $conn->query($sql);
+                                $count = $result->num_rows;
+                                $i = 0;
+                                $row = mysqli_fetch_assoc($result);
+                                if ($count > 0) {
+                                    $age = date("Y") - $row['yearOfBirth'];
+                                    echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Parent's Name' disabled value='". $row['username']. "'></div>";
+                                    echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Phone Number' disabled value='". $row['phoneNumber']. "'></div>";
+                                    echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Address' disabled value='". $row['address']. "'></div>";
+                                    echo "<div class='form-group'><input type='number' class='form-control border-0 p-4' placeholder='Year Register' disabled value='". $row['yearRegister']. "'></div>";
+                                    echo "<hr>";
+                                    echo "<h3 class=' mb-4'>Kid's Information</h3>";
+                                    echo "<form action='edit_kid.php' method='POST' id='form1' name='form1'>";
+                                    echo "<div class='form-group'><input type='text' name='name' class='form-control border-0 p-4' placeholder='Kid's Name' required='required' value='". $row['name']. "'></div>";
+                                    echo "<div class='form-group'>";
+                                    echo "<select class='custom-select border-0 px-4' name='age' style='height: 47px;'>";
+                                    echo "<option>Select Age</option>";
+                                    if($age==3)
+                                    {
+                                        echo "<option value='3' selected>3</option>";
+                                        echo "<option value='4'>4</option>";
+                                        echo "<option value='5'>5</option>";
+                                        echo "<option value='6'>6</option>";
+                                    }
+                                    else if($age==4)
+                                {
+                                    echo "<option value='3'>3</option>";
+                                    echo "<option value='4' selected>4</option>";
+                                    echo "<option value='5'>5</option>";
+                                    echo "<option value='6'>6</option>";
+                                }
+                                    else if ($age==5)
+                                    {
+                                        echo "<option value='3'>3</option>";
+                                        echo "<option value='4'>4</option>";
+                                        echo "<option value='5' selected>5</option>";
+                                        echo "<option value='6'>6</option>";
+                                    }
+                                    else
+                                    {
+                                        echo "<option value='3'>3</option>";
+                                        echo "<option value='4'>4</option>";
+                                        echo "<option value='5'>5</option>";
+                                        echo "<option value='6' selected>6</option>";
+                                    }
+                                    echo "</select></div>"; 
+                                    echo "<div class='form-group'><select class='custom-select border-0 px-4' name='gender' style='height: 47px;'>";
+                                    echo "<option>Select Gender</option>";
+                                    if($row['gender']=="Male")
+                                    {
+                                        echo "<option value='Male' selected>Male</option>";
+                                        echo "<option value='Female'>Female</option>";
+                                    }
+                                    else
+                                    {
+                                        echo "<option value='Male'>Male</option>";
+                                        echo "<option value='Female'selected>Female</option>";
+                                    }
+                                    echo "</select>";
+                                    echo "</div>";
+                                    echo "<div class='form-group'>";
+                                    echo "<textarea name='medicationHistory' class='form-control border-0 p-4' rows='6' placeholder='Medication History' required='required'>". $row['medicationHistory']. "</textarea>";
+                                    echo "</div>";
+                                    echo "<input type='hidden' id='kidsID' name='kidsID' value='". $row['kidsID']. "'/>";
+                                    echo "<input type='hidden' id='page' name='page' value='parents'/>";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            echo"error!";
+                        }
+                                ?>
 
-                            </form>
-
-                            <h3 class=" mb-4">Kid's Information</h3>
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Kid's Name" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select border-0 px-4" name="age" style="height: 47px;">
-                                        <option selected>Select Age</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select border-0 px-4" name="gender" style="height: 47px;">
-                                        <option selected>Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea class="form-control border-0 p-4" rows="6" placeholder="Medication History" required="required"></textarea>
-                                </div>
-
-                            </form>
                             <br>
                             <div>
-                                <button class="btn btn-light border-0 px-4 mx-auto mb-4">Back</button>
-                                <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
+                                <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="parent_index.php" >Back</a>
+                                <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right"
+                                    type="submit">Update</button>
                             </div>
-
+                            </form>
                         </div>
                     </div>
                 </div>
