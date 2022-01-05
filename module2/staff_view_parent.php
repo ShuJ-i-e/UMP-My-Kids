@@ -105,7 +105,7 @@
             <div class="col-lg-12 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
                     <div class="card-header bg-secondary text-center p-4">
-                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_insert.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
                         <h1 class="text-white m-0">Registered Kid</h1>
                     </div>
                     <div class="card-body text-center">
@@ -139,7 +139,7 @@
                                         echo "</div>";
                                         echo "<div class='row'>";
                                         echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
-                                        echo "<div class='col-6 py-1'>" . $parent_row['yearRegister'] . "</div></div></div><hr>";
+                                        echo "<div class='col-6 py-1' >" . $parent_row['yearRegister'] . "</div></div></div><hr>";
                                         echo "<div class='card-body text-center'>";
                                         echo "<h4 class='card-title'>Kid's Information</h4></div>";
                                         echo "<div class='card-footer bg-transparent py-4 px-5'>";
@@ -157,7 +157,8 @@
                                         }
                                         for ($i = 0; $i < $count; $i++) {
                                             $age[$i] = date("Y") - $b[$i];
-                                            echo "<h5 class='card-title' style=text-align:center;'>Kid".$i."</h5>";
+                                            $k=$i+1;
+                                            echo "<h5 class='card-title' style=text-align:center;'>Kid".$k."</h5>";
                                             echo "<div class='row border-bottom'>";
                                             echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
                                             echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
