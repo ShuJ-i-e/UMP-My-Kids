@@ -98,7 +98,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i>Staff</a>
+                                <i class="fas fa-lock"></i> Staff</a>
                         </nav>
                     </div>
                 </div>
@@ -142,6 +142,7 @@
                 echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
             }
             ?>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='staff_insert.php'"><i class='fa fa-plus'></i> Insert Kid</button>
             <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
             <!-- Content Start-->
             <table>
@@ -256,7 +257,7 @@
             $('#deleteSpan').html("<strong>" + name + "</strong> with kids ID " + id);
             $("#deleteBtn").click(function() {
 
-                window.location.href = "delete.php?id="+id+"&page=staff";
+                window.location.href = "delete.php?id=" + id + "&page=staff";
             });
         }
         var closeDeleteBtn = document.getElementById("closeDeleteBtn");

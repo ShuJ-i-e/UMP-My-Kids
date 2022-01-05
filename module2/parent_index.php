@@ -39,7 +39,9 @@
             width: 150px;
         }
 
-        tr:hover {background-color: #dddddd;}
+        tr:hover {
+            background-color: #dddddd;
+        }
     </style>
 </head>
 
@@ -58,7 +60,7 @@
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li  class="active">
+                <li class="active">
                     <a href="#">Parents & Kids</a>
                 </li>
                 <li>
@@ -86,8 +88,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -95,8 +96,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> Parent</a>
                         </nav>
@@ -105,23 +105,23 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" id="closeLogoutBtn" style="margin: 10px;float:right">No</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" id="closeLogoutBtn" style="margin: 10px;float:right">No</button>
-                </div>
-              </div>
             </div>
             <!-- End Modal -->
-                        <!-- Delete Modal -->
-                        <div class="modal" id="deleteBox">
+            <!-- Delete Modal -->
+            <div class="modal" id="deleteBox">
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="close">&times;</span>
@@ -139,9 +139,10 @@
             <!-- Delete Modal -->
             <?php
             if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
-                echo "<div id='message'>".$_REQUEST["msg"]."</div>";
+                echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
             }
             ?>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='parent_insert.php'"><i class='fa fa-plus'></i> Insert Kid</button>
             <!-- Content Start-->
             <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
             <table>
@@ -165,11 +166,11 @@
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
-                            $view_url="parent_view.php?id=".$b[$i];
-                            $edit_url="parent_edit.php?id=".$b[$i];
+                            $view_url = "parent_view.php?id=" . $b[$i];
+                            $edit_url = "parent_edit.php?id=" . $b[$i];
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=". $view_url. " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
                             echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
                         }
@@ -203,8 +204,8 @@
     <script src="../lib/isotope/isotope.pkgd.min.js"></script>
     <script src="../lib/lightbox/js/lightbox.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
@@ -219,7 +220,7 @@
             $('#deleteSpan').html("<strong>" + name + "</strong> with kids ID " + id);
             $("#deleteBtn").click(function() {
 
-                window.location.href = "delete.php?id="+id+"&page=parents";
+                window.location.href = "delete.php?id=" + id + "&page=parents";
             });
         }
         var closeDeleteBtn = document.getElementById("closeDeleteBtn");
@@ -239,12 +240,12 @@
         var closeBtn = document.getElementById("closeLogoutBtn");
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
@@ -253,7 +254,7 @@
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }

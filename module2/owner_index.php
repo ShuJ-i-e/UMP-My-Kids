@@ -173,6 +173,7 @@
                 echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
             }
             ?>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='owner_insert.php'" ><i class='fa fa-plus'></i> Insert Kid</button>
             <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
             <!-- Content Start-->
             <table>
