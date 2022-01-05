@@ -256,6 +256,10 @@
                 $('#sidebar').toggleClass('active');
             });
         });
+        
+        setTimeout(function() {
+            jQuery('#message').fadeOut('slow');
+        }, 1500);
 
         // Get the modal
         var modal = document.getElementById("myModal");

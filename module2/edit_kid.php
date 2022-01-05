@@ -22,7 +22,7 @@ else
          {
             header("Location: parent_index.php?msg=Record updated successfully!"); 
          }
-         else if($page=="staff")
+         else if($page=="owner")
          {
             header("Location: owner_index.php?msg=Record updated successfully!"); 
          }
