@@ -164,15 +164,6 @@
                                                     echo $menu[$i];
                                                     $i++;
                                                 }
-                                                //             echo "<div class='form-group'>
-                                                //             <input type='text' class='form-control border-0 p-4' placeholder='Phone Number' required='required' value=". $row['phoneNumber'] . " />
-                                                //         </div>";
-                                                //         echo "<div class='form-group'>
-                                                //         <input type='text' class='form-control border-0 p-4' placeholder='Address' required='required' />
-                                                //     </div>";
-                                                //     echo " <div class='form-group'>
-                                                //     <input type='number' class="form-control border-0 p-4" placeholder="Year Register" required="required" />
-                                                // </div>";
                                             } else {
                                                 $menu = "<option disabled='disabled'> No parents registered yet </option>";
                                                 echo $menu;
@@ -183,13 +174,13 @@
                                 </div>
                                 <div id="parentInfo" style="display: none">
                                     <div class="form-group">
-                                        <input type="text" class="form-control border-0 p-4" placeholder="Phone Number" />
+                                        <input type="text" id="phoneNumber" class="form-control border-0 p-4" placeholder="Phone Number" disabled />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control border-0 p-4" placeholder="Address" />
+                                        <input type="text" id="address" class="form-control border-0 p-4" placeholder="Address" disabled />
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" class="form-control border-0 p-4" placeholder="Year Register" />
+                                        <input type="number" id="yearRegister" class="form-control border-0 p-4" placeholder="Year Register" disabled />
                                     </div>
                                 </div>
                                 <hr>
@@ -219,9 +210,9 @@
                                     <textarea name="medicationHistory" class="form-control border-0 p-4" rows="6" placeholder="Medication History" required="required"></textarea>
                                 </div>
                                 <div>
-                                    <button class="btn btn-secondary btn-block border-0 py-3" type="submit">Submit</button>
+                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Submit</button>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="owner_index.php">Back</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -289,6 +280,21 @@
             div.style.display = 'block';
             var ParentId = document.getElementById("parentID");
             var selectedParentID = ParentId.value;
+            $.ajax({
+                type: "POST",
+                url: "getParentInfo.php",
+                data: "id=" + selectedParentID,
+                success: function(result) {
+                    console.log(result);
+                    parent_info = JSON.parse(result);
+                    $('#phoneNumber').val(parent_info[0].phoneNumber);
+                    $('#address').val(parent_info[0].address);
+                    $('#yearRegister').val(parent_info[0].yearRegister);
+                },
+                fail: function(xhr, textStatus, errorThrown) {
+                    console.log('request failed');
+                }
+            });
         }
     </script>
 
