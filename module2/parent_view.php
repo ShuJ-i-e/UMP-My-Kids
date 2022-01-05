@@ -107,6 +107,7 @@
             <div class="col-lg-12 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
                     <div class="card-header bg-secondary text-center p-4">
+                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='parent_insert.php'" ><i class='fa fa-chevron-left'></i> Back</button>
                         <h1 class="text-white m-0">Registered Kid</h1>
                     </div>
                     <div class="card-body text-center">
