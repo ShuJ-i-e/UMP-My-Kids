@@ -175,6 +175,7 @@
                                 <div class="form-group">
                                     <textarea name="medicationHistory" class="form-control border-0 p-4" rows="6" placeholder="Medication History" required="required"></textarea>
                                 </div>
+                                <input type='hidden' id='page' name='page' value='staff'/>
                                 <div>
                                     <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Submit</button>
                                     <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="parent_index.php">Back</a>

@@ -19,8 +19,18 @@ else
     VALUES ('$name', '$medicationHistory', '$yob','$gender', '$parentID')";
      if ($conn->query($sql) === TRUE) 
      {
-        echo"NICEEE";
-     } 
+        if($page=="parents")
+        {
+           header("Location: parent_index.php?msg=Record inserted successfully!"); 
+        }
+        else if($page=="owner")
+        {
+           header("Location: owner_index.php?msg=Record inserted successfully!"); 
+        }
+        else
+       {header("Location: staff_index.php?msg=Record inserted successfully!"); }
+       
+    } 
      else 
      {
          echo "Error: " . $sql . "<br>" . $conn->error;
