@@ -142,77 +142,146 @@
                 echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
             }
             ?>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='staff_insert.php'"><i class='fa fa-plus'></i> Insert Kid</button>
-            <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
             <!-- Content Start-->
-            <table>
-                <tr>
-                    <th>Parent's Name</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT parentID, username from parents";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["username"];
-                            $b[$i] = $row["parentID"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            $view_url = "staff_view_parent.php?id=" . $b[$i];
-                            $edit_url = "staff_edit_parent.php?id=" . $b[$i];
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                        }
-                    }
-                }
-                ?>
-            </table>
-            <br>
-            <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
-            <table>
-                <tr>
-                    <th>Kid's Name</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT `kidsID`, `name` from kids";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["name"];
-                            $b[$i] = $row["kidsID"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            $view_url = "staff_view_kid.php?id=" . $b[$i];
-                            $edit_url = "staff_edit_kid.php?id=" . $b[$i];
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
-                        }
-                    }
-                }
-                ?>
-            </table>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row align-items-center">
 
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label for="search">Search (Name)</label>
+                                <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: Ali">
+                                <p class="text-danger"></p>
+                                <select class="form-control" id="option">
+                                    <option value="parents">Parents</option>
+                                    <option value="kids">Kids</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <button name="SubmitButton" class="btn btn-primary float-right" onclick="search()"><i class="fas fa-search"></i> Search</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-2" style="display:none" id="clearSearchBtn">
+                            <div class="form-group">
+                                <button name="SubmitButton" class="btn btn-secondary float-right" onclick="clearSearch()">Clear Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='staff_insert.php'"><i class='fa fa-plus'></i> Insert Kid</button>
+            <div id="kidsInfoDiv">
+
+                <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
+
+                <table id="kidsInformation">
+                    <tr>
+                        <th>Kid's Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php
+                    require "conn.php";
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $sql = "SELECT `kidsID`, `name` from kids";
+                        $result = $conn->query($sql);
+                        $count = $result->num_rows;
+                        $i = 0;
+                        if ($count > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $a[$i] = $row["name"];
+                                $b[$i] = $row["kidsID"];
+                                $i++;
+                            }
+                            for ($i = 0; $i < $count; $i++) {
+                                $view_url = "staff_view_kid.php?id=" . $b[$i];
+                                $edit_url = "staff_edit_kid.php?id=" . $b[$i];
+                                echo "<tr>";
+                                echo "<td>" . $a[$i] . "</td>";
+                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
+                            }
+                        }
+                    }
+                    ?>
+                </table>
+                <table id="kidsInformationDynamic" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Kid's Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="container-fluid py-5" style="display:none;" id="kidsErrorTxt">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <h2 class="mb-4 text-left text-danger text-center">No Result Matches.</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div id="parentsInfoDiv">
+                <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
+                <table id="parentsInformationDynamic" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Parent's Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                <table id="parentsInformation">
+                    <tr>
+                        <th>Parent's Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php
+                    require "conn.php";
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $sql = "SELECT parentID, username from parents";
+                        $result = $conn->query($sql);
+                        $count = $result->num_rows;
+                        $i = 0;
+                        if ($count > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $a[$i] = $row["username"];
+                                $b[$i] = $row["parentID"];
+                                $i++;
+                            }
+                            for ($i = 0; $i < $count; $i++) {
+                                $view_url = "staff_view_parent.php?id=" . $b[$i];
+                                $edit_url = "staff_edit_parent.php?id=" . $b[$i];
+                                echo "<tr>";
+                                echo "<td>" . $a[$i] . "</td>";
+                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            }
+                        }
+                    }
+                    ?>
+                </table>
+                <div class="container-fluid py-5" style="display:none;" id="parentsErrorTxt">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <h2 class="mb-4 text-left text-danger text-center">No Result Matches.</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Content End-->
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
@@ -295,6 +364,95 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+
+
+        function search() {
+            var searchTxt = document.getElementById("searchTxt").value;
+            var select = document.getElementById("option").value;
+            $.ajax({
+                type: "POST",
+                url: "search.php",
+                data: {
+                    searchTxt: searchTxt,
+                    option: select
+                },
+                success: function(result) {
+                    console.log(select);
+                    if (select == "parents") {
+                        if (result == "fail") {
+                            $('#parentsErrorTxt').show();
+                            $('#parentsInformation').hide();
+                            $('#parentsInformationDynamic').hide();
+                            $('#clearSearchBtn').show();
+                            $('#parentsInfoDiv').show();
+                            $('#kidsInfoDiv').hide();
+                        } else {
+                            $('#parentsInfoDiv').show();
+                            $('#kidsInfoDiv').hide();
+                            $('#parentsErrorTxt').hide();
+                            $('#parentsInformation').hide();
+                            $('#clearSearchBtn').show();
+                            $('#parentsInformationDynamic').show();
+                            console.log(result);
+                            parent_info = JSON.parse(result);
+                            var view_url = "staff_view.php?id=" + parent_info[0].kidsID;
+                            var edit_url = "staff_edit.php?id=" + parent_info[0].kidsID;
+
+                            var row = '<tr><td>' + parent_info[0].username + '</td>' +
+                                '<td><a class="btn btn-info btn-sm action-btn" href="' + view_url + '" data-toggle="tooltip" id="View"><i class="fa fa-eye"></i></a>' +
+                                '<a class="btn btn-warning btn-sm action-btn" href="' + edit_url + '" data-toggle="tooltip" id="Edit"><i class="fa fa-edit"></i></a>' +
+                                '</td>';
+                            $('#parentsInformationDynamic').append(row);
+                        }
+                    } else {
+                        if (result == "fail") {
+                            $('#kidsErrorTxt').show();
+                            $('#kidsInformation').hide();
+                            $('#kidsInformationDynamic').hide();
+                            $('#clearSearchBtn').show();
+                            $('#parentsInfoDiv').hide();
+                            $('#kidsInfoDiv').show();
+                        } else {
+                            $('#parentsInfoDiv').hide();
+                            $('#kidsInfoDiv').show();
+                            $('#kidsErrorTxt').hide();
+                            $('#kidsInformation').hide();
+                            $('#clearSearchBtn').show();
+                            $('#kidsInformationDynamic').show();
+                            console.log(result);
+                            kids_info = JSON.parse(result);
+                            var view_url = "staff_view.php?id=" + kids_info[0].kidsID;
+                            var edit_url = "staff_edit.php?id=" + kids_info[0].kidsID;
+
+                            var row = '<tr><td>' + kids_info[0].name + '</td>' +
+                                '<td><a class="btn btn-info btn-sm action-btn" href="' + view_url + '" data-toggle="tooltip" id="View"><i class="fa fa-eye"></i></a>' +
+                                '<a class="btn btn-warning btn-sm action-btn" href="' + edit_url + '" data-toggle="tooltip" id="Edit"><i class="fa fa-edit"></i></a>' +
+                                '<a class="btn btn-danger btn-sm action-btn" onclick="deleteFunc(&#39;' + kids_info[0].kidsID + '"&#39;,"' + kids_info[0].name + '") data-toggle="tooltip" id="View"><i class="fa fa-times"></i></a>' +
+                                '</td>';
+                            $('#kidsInformationDynamic').append(row);
+                        }
+
+                    }
+
+                },
+                fail: function(xhr, textStatus, errorThrown) {
+                    console.log('request failed');
+                }
+            });
+        }
+
+        function clearSearch() {
+            $('#kidsInfoDiv').show();
+            $('#parentsInfoDiv').show();
+            $('#ParentsErrorTxt').hide();
+            $('#KidsErrorTxt').hide();
+            $('#kidsInformation').show();
+            $('#clearSearchBtn').hide();
+            $('#kidsInformationDynamic').hide();
+            $('#searchTxt').val("");
+            $('#parentsInformation').show();
+            $('#parentsInformationDynamic').hide();
         }
     </script>
 
