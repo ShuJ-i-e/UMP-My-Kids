@@ -42,6 +42,7 @@
         tr:hover {
             background-color: #dddddd;
         }
+
     </style>
 </head>
 
@@ -66,7 +67,7 @@
                         <li>
                             <a href="owner_index.php">List</a>
                         </li>
-                        <li  class="active">
+                        <li class="active">
                             <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
@@ -205,11 +206,11 @@
                     <th>Total number of parents</th>
                     <?php
                     if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     } else {
                         $result = mysqli_query($conn, "SELECT COUNT(parentID) FROM parents");
                         $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
+                        echo "<td>" . $row[0] . "</td>";
                     }
                     ?>
                 </tr>
@@ -217,11 +218,11 @@
                     <th>Total number of kids</th>
                     <?php
                     if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     } else {
                         $result = mysqli_query($conn, "SELECT COUNT(kidsID) FROM kids");
                         $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
+                        echo "<td>" . $row[0] . "</td>";
                     }
                     ?>
                 </tr>
@@ -229,26 +230,29 @@
                     <th>Average age of kids</th>
                     <?php
                     if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $i=0;
+                        $i = 0;
                         $result = mysqli_query($conn, "SELECT yearOfBirth FROM kids");
                         while ($row = mysqli_fetch_assoc($result)) {
                             $kidAge[$i] = date("Y") - $row["yearOfBirth"];
                             $i++;
                         }
-                        $totalAge=0;
-                        
+                        $totalAge = 0;
+
                         for ($i = 0; $i < $count; $i++) {
                             $totalAge = $totalAge + (int)$kidAge[$i];
                         }
-                        $avgAge = $totalAge/$i;
+                        $avgAge = $totalAge / $i;
                         $row = $result->fetch_row();
-                        echo "<td>".$avgAge."</td>";
+                        echo "<td>" . $avgAge . "</td>";
                     }
                     ?>
                 </tr>
             </table>
+            <div style="width: 500px; height: 500px;  margin:40px 0px 0px 250px">
+                <canvas id="myChart" ></canvas>
+            </div>
             <!-- Content End -->
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
@@ -274,6 +278,7 @@
     <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../lib/isotope/isotope.pkgd.min.js"></script>
     <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {
@@ -306,6 +311,37 @@
                 modal.style.display = "none";
             }
         }
+        $.get('getData.php', function(response, status) {
+            console.log(response);
+            const list = JSON.parse(response);
+            console.log(response);
+            const labels = [
+                '3',
+                '4',
+                '5',
+                '6',
+            ];
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Kid Age Report',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: list,
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true
+                }
+            };
+
+            const myChart = new Chart(document.getElementById('myChart'), config);
+        });
     </script>
 
     <!-- Template Javascript -->
