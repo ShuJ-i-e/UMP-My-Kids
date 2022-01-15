@@ -52,7 +52,11 @@
         }
     </style>
 </head>
-
+<?php
+// Start the session
+session_start();
+$_SESSION["username"] = "parent";
+?>
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -106,7 +110,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i>Staff</a>
+                                <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
                         </nav>
                     </div>
                 </div>

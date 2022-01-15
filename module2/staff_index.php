@@ -44,7 +44,11 @@
         }
     </style>
 </head>
-
+<?php
+// Start the session
+session_start();
+$_SESSION["username"] = "parent";
+?>
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
