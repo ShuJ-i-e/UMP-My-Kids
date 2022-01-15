@@ -136,7 +136,7 @@ $_SESSION["username"] = "owner";
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                            <i class="fas fa-lock"></i><?php echo $_SESSION["username"] ?></a></a>
+                            <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
                         </nav>
                     </div>
                 </div>

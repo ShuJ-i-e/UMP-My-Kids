@@ -48,8 +48,12 @@
 // Start the session
 session_start();
 $_SESSION["username"] = "parent";
+<<<<<<< HEAD
 // $userId = $_SESSION['user_id'];
 $userId = 1;
+=======
+$userId = $_SESSION['user_id'];
+>>>>>>> f8d39da83f2e911b3cd340b9498366f8e6ada378
 ?>
 <body>
     <div class="wrapper">
@@ -104,7 +108,11 @@ $userId = 1;
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
+<<<<<<< HEAD
                                 <i class="fas fa-lock"></i><?php echo $_SESSION["username"] ?></a>
+=======
+                                <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
+>>>>>>> f8d39da83f2e911b3cd340b9498366f8e6ada378
                         </nav>
                     </div>
                 </div>
