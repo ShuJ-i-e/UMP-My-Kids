@@ -43,6 +43,11 @@
     tr:hover {
         background-color: #dddddd;
     }
+
+    #outputArea{
+        display:none;
+    }
+
 </style>
 
 <body>
@@ -280,14 +285,14 @@
 
             </form>
 
-            <div class="container-fluid py-5">
+            <div class="container-fluid py-3" id="outputArea">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-8">
                             <h2 class="mb-4 text-left">Output</h2>
                         </div>
                         <div class="col-lg-4">
-                            <p class="mb-4 text-right" id="resultLbl">Showing </p>
+                            <p class="mb-4 text-right" id="showingLbl">Showing 2 of </p>
                         </div>
                     </div>
                 </div>
@@ -619,16 +624,18 @@
                             
                             //display in table
                             
-                            echo "<table>";
-                            echo "<tr>";
-                            echo "<th>No</th>";
-                            echo "<th>Kid name</th>";
-                            echo "<th>Staff name</th>";
-                            echo "<th>Staff type</th>";
-                            echo "<th>Time</th>";
-                            echo "<th>Status</th>";
-                            echo "<th>Action</th>";
-                            echo "</tr>";
+                            echo '<table id="data">';
+                            echo '<thead>';
+                                echo "<tr>";
+                                    echo "<th>No</th>";
+                                    echo "<th>Kid name</th>";
+                                    echo "<th>Staff name</th>";
+                                    echo "<th>Staff type</th>";
+                                    echo "<th>Time</th>";
+                                    echo "<th>Status</th>";
+                                    echo "<th>Action</th>";
+                                echo "</tr>";
+                            echo '</thead>';
 
                             for ($i = 0; $i < $count; $i++) {
                                 $view_url = "owner_view_activity.php?id=" . $NewsActivityID[$i];
@@ -744,6 +751,53 @@
                 modal.style.display = "none";
             }
         }
+
+        //pagination JS
+        $(document).ready(function(){
+            $('#data').after('<nav id="navHead"></nav>');
+            $('#navHead').append('<ul id="nav" class="pagination justify-content-end" style="margin: 20px">');
+            var rowsShown = 5;
+            var rowsTotal = $('#data tbody tr').length;
+            var numPages = rowsTotal/rowsShown;
+            for(i = 0;i < numPages;i++) {
+                var pageNum = i + 1;
+                $('#nav').append('<li class="page-item"><a class="page-link" href="#" rel="'+i+'">'+pageNum+'</a></li>');
+            }
+
+            //hide data 
+            $('#data tbody tr').hide();
+            //only show 4
+            $('#data tbody tr').slice(0, rowsShown).show();
+            $('#nav a:first').addClass('active');
+            
+            $('#nav a').bind('click', function(){
+
+                $('#nav a').removeClass('active');
+                $(this).addClass('active');
+                var currPage = $(this).attr('rel');
+                var startItem = currPage * rowsShown;
+                var endItem = startItem + rowsShown;
+                $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+                css('display','table-row').animate({opacity:1}, 300);
+            });
+
+            
+            if(rowsTotal > 0){
+
+                if(rowsTotal < 5){
+                    //change showing word
+                    document.getElementById("showingLbl").innerHTML = "Showing " +rowsTotal +  " of " +rowsTotal ;
+                }
+                else{
+                    //change showing word
+                    document.getElementById("showingLbl").innerHTML = "Showing 5 of " +rowsTotal;
+                }
+
+                //display output area
+                document.getElementById("outputArea").style.display = "block";
+            }
+            
+        });
     </script>
 
     <!-- Template Javascript -->
