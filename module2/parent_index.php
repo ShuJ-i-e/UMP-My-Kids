@@ -44,7 +44,13 @@
         }
     </style>
 </head>
-
+<?php
+// Start the session
+session_start();
+$_SESSION["username"] = "parent";
+// $userId = $_SESSION['user_id'];
+$userId = 1;
+?>
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -98,7 +104,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Parent</a>
+                                <i class="fas fa-lock"></i><?php echo $_SESSION["username"] ?></a>
                         </nav>
                     </div>
                 </div>
@@ -199,9 +205,11 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $sql = "SELECT `kidsID`, `name` from kids";
+                        $sql = "SELECT `kidsID`, `name` from kids JOIN parents ON kids.parentID=parents.parentID JOIN user ON parents.userID=user.userID where user.userID=$userId";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
+
+                        echo $conn->error;
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -319,8 +327,8 @@
             var searchTxt = document.getElementById("searchTxt").value;
             $.ajax({
                 type: "POST",
-                url: "search.php",
-                data: {searchTxt: searchTxt, option: "kids"},
+                url: "search_parents.php",
+                data: {searchTxt: searchTxt},
                 success: function(result) {
                     if (result == "fail") {
                         $('#errorTxt').show();

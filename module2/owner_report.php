@@ -45,7 +45,11 @@
 
     </style>
 </head>
-
+<?php
+// Start the session
+session_start();
+$_SESSION["username"] = "owner";
+?>
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -132,7 +136,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Owner</a>
+                            <i class="fas fa-lock"></i><?php echo $_SESSION["username"] ?></a></a>
                         </nav>
                     </div>
                 </div>
@@ -244,8 +248,9 @@
                             $totalAge = $totalAge + (int)$kidAge[$i];
                         }
                         $avgAge = $totalAge / $i;
+                        $avg_pretty = number_format($avgAge, 2, '.', '');
                         $row = $result->fetch_row();
-                        echo "<td>" . $avgAge . "</td>";
+                        echo "<td>" . $avg_pretty . "</td>";
                     }
                     ?>
                 </tr>
