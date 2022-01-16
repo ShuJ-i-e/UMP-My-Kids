@@ -7,7 +7,7 @@
         $loginID= $_SESSION["user_id"];
     }
     else{
-        $_SESSION["username"] ="Staff";
+        $_SESSION["username"] ="Kevin Lee";
         $_SESSION["user_id"]= 4;
         
         $loginUsername= $_SESSION["username"];
@@ -62,10 +62,10 @@
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li>
-                        <a href="owner_index.php">List</a>
+                        <a href="#">List</a>
                         </li>
                         <li>
-                        <a href="owner_report.php">Report</a>
+                        <a href="#">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -96,10 +96,10 @@
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="module6/owner_schedule_list.php">List</a>
+                            <a href="module6/staff_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="module6/owner_schedule_report.php">Report</a>
+                            <a href="module6/staff_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>

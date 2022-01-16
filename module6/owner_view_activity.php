@@ -162,7 +162,6 @@
 
                 $sql = "SELECT * from kids join activity on kids.kidsID=activity.kidsID
                 WHERE activity.activityID=$activityID";
-                //$sql = "SELECT * FROM activity WHERE activityID = '$activityID';";
                 $result = $conn->query($sql);
                 $count = $result->num_rows;
                 if ($count >0) {
