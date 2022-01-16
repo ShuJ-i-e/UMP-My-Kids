@@ -189,17 +189,14 @@
             ?>
 
             <!-- Content Start -->
-            <div class="container-fluid py-2">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-12 text-center">
-                            <h1 class="mb-4">Activity Details</h1>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-header bg-secondary text-center p-4">
+                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_schedule_list.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+                    <h1 class="text-white m-0">Activity Details</h1>
             </div>
+            
+            <br/><br/>
 
-            <div class="container-fluid">
+            <div class="container-fluid ">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
