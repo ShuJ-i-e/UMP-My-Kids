@@ -2,6 +2,10 @@
 require "conn.php";
 $id = $_POST['id'];
 
+$payDay=date("Y")-$_POST["payDay"];
+$payStatus =  $_POST["payStatus"];
+$salary= $_POST["salary"];
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {

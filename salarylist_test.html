@@ -173,58 +173,7 @@
             </div>
 
  <!-- Content Start-->
- <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-            <h1 class="text-white m-0">Registered Kid</h1>
-        </div>
-        <div class="card-body text-center">
-            <h4 class="card-title">Parent's Information</h4>
-        </div>
-        <div class="card-footer bg-transparent py-4 px-5">
-            <div class="row border-bottom">
-                <div class="col-6 py-1 text-right border-right"><strong>Parent's Name</strong></div>
-        
-        <?php
 
-        require "conn.php";
-        $salaryID= $_GET['id'];
-        
-
-        if(isset($salaryID))
-        {
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            } else {
-                $sql = "SELECT * from salary join staff on salary.staffID=salary.staffID where salary.salaryID=$salaryID";
-                $result = $conn->query($sql);
-                $count = $result->num_rows;
-                $i = 0;
-                $row = mysqli_fetch_assoc($result);
-                if ($count > 0) {
-                    $age = date("Y") - $row['payDay'];
-                    echo "<div class='col-6 py-1'>".$row['username']."</div></div>" ;
-                    echo "<div class='row border-bottom'>";
-                    echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
-                    echo "<div class='col-6 py-1'>".$row['salary']."</div>";
-                    echo "</div>";
-                    echo "<div class='row border-bottom'>";
-                    echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
-                    echo "<div class='col-6 py-1'>".$row['payStatus']."</div>";
-                    echo "</div>";
-                }
-            }
-        }
-        else
-        {
-            echo"error!";
-        }
-                ?>
-            </div>
-        </div>
-    </div>
-</div>
   
 <!-- Content End-->
 
