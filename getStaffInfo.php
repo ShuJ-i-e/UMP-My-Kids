@@ -5,7 +5,7 @@ $id = $_POST['id'];
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {
-    $sql = "SELECT username, staffType, salary FROM staff WHERE staffID=$id";
+    $sql = "SELECT payDay, payStatus, salary FROM salary WHERE salaryID=$id";
     $result = mysqli_query($conn, $sql);
     $count = $result->num_rows;
     if ($count > 0) {
