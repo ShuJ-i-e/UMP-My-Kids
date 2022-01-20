@@ -188,8 +188,9 @@
         
         <?php
 
-        $salaryID= $_GET['id'];
         require "conn.php";
+        $salaryID= $_GET['id'];
+        
 
         if(isset($salaryID))
         {
