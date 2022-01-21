@@ -157,9 +157,8 @@
                                 <br>
                                 <input type='hidden' id='page' name='page' value='parent' />
                                 <div>
-                                    <a class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit" href="manpower_updated">Submit</a>
-                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="manpower_updated">Back</a>
-
+                                    <a class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit" href="manpower_dah update_FAKE.html">Submit</a>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="../module3/manpower_dah update_FAKE.html">Back</a>
                                 </div>
                             </div>
                         </div>

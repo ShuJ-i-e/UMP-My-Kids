@@ -25,7 +25,11 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 </head>
-
+<?php
+// Start the session
+session_start();
+$_SESSION["username"] = "parent";
+?>
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -77,7 +81,7 @@
                         <div class="p-2">
                             <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                                 <button type="button" id="logoutBtn" class="btn btn-info">
-                                    <i class="fas fa-lock"></i> Staff Owner</a>
+                                    <i class="fas fa-lock"></i><?php echo $_SESSION["username"] ?></a></a>
                             </nav>
                         </div>
                     </div>
@@ -106,48 +110,27 @@
 
                         <div class="card border-0">
                             <div class="card-header bg-secondary text-center p-4">
-                                <h1 class="text-white m-0">Add Manpower</h1>
+                                <h1 class="text-white m-0">Kid Registration</h1>
                             </div>
                             <div class="card-body rounded-bottom bg-primary p-5">
-                                <h3 class=" mb-4">Staff's Information</h3>
+                                <h3 class=" mb-4">Kid's Information</h3>
                                 <div class="form-group">
-                                    <input name="name" type="text" class="form-control border-0 p-4" placeholder="Staff's Name" required="required" />
+                                    <input name="name" type="text" class="form-control border-0 p-4" placeholder="Kid's Name" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <select name="StaffType" class="custom-select border-0 px-4" name="age" style="height: 47px;">
-                                        <option selected>Select Staff Type</option>
-                                        <option value="1">Worker</option>
-                                        <option value="2">Teacher</option>
-                                        <option value="3">Infant Caretaker</option>
+                                    <select name="age" class="custom-select border-0 px-4" name="age" style="height: 47px;">
+                                        <option selected>Select Age</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
-                                    <input name="phoneNo" type="text" class="form-control border-0 p-4" placeholder="Phone number" required="required" />
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea name="address" class="form-control border-0 p-4" rows="6" placeholder="Address" required="required"></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <select name="yearRegister" class="custom-select border-0 px-4" name="year register" style="height: 47px;">
-                                        <option selected>Select Year Register</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2015">2015</option>
-                                        <option value="2014">2014</option>
-                                        <option value="2013">2013</option>
-                                        <option value="2012">2012</option>
-                                        <option value="2011">2011</option>
-                                        <option value="2010">2010</option>
-                                        <option value="2009">2009</option>
-                                        <option value="2008">2008</option>
-                                        <option value="2007">2007</option>
+                                    <select name="gender" class="custom-select border-0 px-4" name="gender" style="height: 47px;">
+                                        <option selected>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
 
@@ -157,9 +140,8 @@
                                 <br>
                                 <input type='hidden' id='page' name='page' value='parent' />
                                 <div>
-                                    <a class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit" href="manpower_updated">Submit</a>
-                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="manpower_updated">Back</a>
-
+                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Submit</button>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="parent_index.php">Back</a>
                                 </div>
                             </div>
                         </div>
