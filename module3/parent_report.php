@@ -38,6 +38,7 @@
             background-color: #dddddd;
         }
     </style>
+
 </head>
 
 <body>
@@ -71,10 +72,10 @@
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="parent_view.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -126,7 +127,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Owner</a>
+                                <i class="fas fa-lock"></i> Parent</a>
                         </nav>
                     </div>
                 </div>
@@ -227,6 +228,35 @@
                     ?>
                 </tr>
             </table>
+
+            <head>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Staff Type', 'Numbers'],
+          ['Teacher',     4],
+          ['Infant Caretaker',      3],
+          ['Worker',  6]
+        ]);
+
+        var options = {
+          title: 'Manpower Distribution',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  </body>
+
             <!-- Content End -->
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
