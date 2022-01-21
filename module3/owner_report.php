@@ -198,11 +198,12 @@
                         WHERE staffType = 'Teacher'");
                         $row = $result->fetch_row();
                         echo "<td>".$row[0]."</td>";
+                        $numTeacher=$row[0];
                     }
                     ?>
                 </tr>
                 <tr>
-                    <th>Total number of Staff (Infant Caretaker</th>
+                    <th>Total number of Staff (Infant Caretaker)</th>
                     <?php
                     if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
@@ -211,6 +212,7 @@
                         WHERE staffType = 'Infant Caretaker'");
                         $row = $result->fetch_row();
                         echo "<td>".$row[0]."</td>";
+                        $numCaretaker=$row[0];
                     }
                     ?>
                 </tr>
@@ -224,6 +226,7 @@
                         WHERE staffType = 'Worker'");
                         $row = $result->fetch_row();
                         echo "<td>".$row[0]."</td>";
+                        $numWorker=$row[0];
                     }
                     ?>
                 </tr>
@@ -235,12 +238,13 @@
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
+
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Staff Type', 'Numbers'],
-          ['Teacher',     4],
-          ['Infant Caretaker',      3],
-          ['Worker',  6]
+          ['Teacher', <?php echo $numTeacher;?>],
+          ['Infant Caretaker', <?php echo $numCaretaker;?>],
+          ['Worker', <?php echo $numWorker;?>]
         ]);
 
         var options = {
