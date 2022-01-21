@@ -153,6 +153,7 @@
             <div class="card-header bg-secondary text-center p-4">
                 <h1 class="text-white m-0">Report</h1>
             </div>
+            <br>
             <table>
                 <tr>
                     <th>Staff ID</th>
