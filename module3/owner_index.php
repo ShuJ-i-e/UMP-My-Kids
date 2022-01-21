@@ -5,24 +5,19 @@
     <meta charset="utf-8">
     <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <!-- Favicon -->
+
     <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Flaticon Font -->
     <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
     <style>
         table {
@@ -60,7 +55,7 @@
                 <li class="active">
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Parents & Kids</a>
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
+        
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li class="active">
                             <a href="#">List</a>
@@ -73,7 +68,6 @@
                 <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Manpower</a>
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
@@ -87,7 +81,7 @@
                 <li>
                     <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Payment</a>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
+            
                     <ul class="collapse list-unstyled" id="paymentSubmenu">
                         <li>
                             <a href="#">List</a>
@@ -100,7 +94,7 @@
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Activity</a>
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                   
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
                             <a href="#">List</a>
@@ -181,7 +175,7 @@
                     <th>Actions</th>
                 </tr>
                 <?php
-                require "conn.php";
+                require "connect.php";
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 } else {
