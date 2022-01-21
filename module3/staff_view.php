@@ -5,25 +5,40 @@
     <meta charset="utf-8">
     <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <!-- Favicon -->
-    <link href="../img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
+    <link href="img/favicon.ico" rel="icon">
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Flaticon Font -->
     <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 150px;
+        }
+
+        tr:hover {
+            background-color: #dddddd;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -42,18 +57,51 @@
                     <a href="#">Home</a>
                 </li>
                 <li class="active">
-                    <a href="staff_index.php">Parents & Kids</a>
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
+                    <ul class="collapse list-unstyled" id="parentsSubmenu">
+                        <li>
+                            <a href="owner_index.php">List</a>
+                        </li>
+                        <li  class="active">
+                            <a href="owner_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Activity</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="owner_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="owner_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                <li>
-                    <a href="#">Manpower Registration</a>
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
+                    <ul class="collapse list-unstyled" id="paymentSubmenu">
+                        <li>
+                            <a href="#">List</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Salary</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="#">List</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul>
                 </li>
+
             </ul>
         </nav>
 
@@ -79,7 +127,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i>Staff</a>
+                                <i class="fas fa-lock"></i> Staff</a>
                         </nav>
                     </div>
                 </div>
@@ -100,152 +148,179 @@
                     </div>
                 </div>
             </div>
-            <!-- End Modal -->
-            <!-- Content Start-->
-            <div class="col-lg-12 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2">
-                    <div class="card-header bg-secondary text-center p-4">
-                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-                        <h1 class="text-white m-0">Registered Kid</h1>
-                    </div>
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Parent's Information</h4>
-                    </div>
-                    <div class="card-footer bg-transparent py-4 px-5">
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right"><strong>Parent's Name</strong></div>
-                            <?php
-                            $parentID = $_GET['id'];
-                            require "conn.php";
-                            if (isset($parentID)) {
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                } else {
+            <!-- Modal End -->
+            <!-- Content Start -->
+            <div class="card border-0">
+                <div class="card-header bg-secondary text-center p-4">
+                    <h1 class="text-white m-0">Manpower List</h1>
+                </div>
+                <br>
+            <table>
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Phone-number</th>
+                    <th>Address</th>
+                    <th>Year Register</th>
+                    <th>Status</th>
+                    <th>Staff Type</th>
+                    <th>Medication History</th>
+                </tr>
 
-                                    $parents_sql = "SELECT * from parents where parentID=$parentID";
-                                    $result = $conn->query($parents_sql);
-                                    $count = $result->num_rows;
-                                    $i = 0;
-                                    $parent_row = mysqli_fetch_assoc($result);
-                                    if ($count > 0) {
-                                        echo "<div class='col-6 py-1'>" . $parent_row['username'] . "</div></div>";
-                                        echo "<div class='row border-bottom'>";
-                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
-                                        echo "<div class='col-6 py-1'>" . $parent_row['phoneNumber'] . "</div>";
-                                        echo "</div>";
-                                        echo "<div class='row border-bottom'>";
-                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
-                                        echo "<div class='col-6 py-1'>" . $parent_row['address'] . "</div>";
-                                        echo "</div>";
-                                        echo "<div class='row'>";
-                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
-                                        echo "<div class='col-6 py-1' >" . $parent_row['yearRegister'] . "</div></div></div><hr>";
-                                        echo "<div class='card-body text-center'>";
-                                        echo "<h4 class='card-title'>Kid's Information</h4></div>";
-                                        echo "<div class='card-footer bg-transparent py-4 px-5'>";
-                                        $kids_sql = "SELECT * from parents join kids on parents.parentID=kids.parentID where parents.parentID=$parentID";
-                                        $result = $conn->query($kids_sql);
-                                        $count = $result->num_rows;
-                                        $i = 0;
-                                        if ($count > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $a[$i] = $row["name"];
-                                            $b[$i] = $row["yearOfBirth"];
-                                            $c[$i] = $row["gender"];
-                                            $d[$i] = $row["medicationHistory"];
-                                            $i++;
-                                        }
-                                        for ($i = 0; $i < $count; $i++) {
-                                            $age[$i] = date("Y") - $b[$i];
-                                            $k=$i+1;
-                                            echo "<h5 class='card-title' style=text-align:center;'>Kid".$k."</h5>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $age[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
-                                            echo " <div class='col-6 py-1'>" . $d[$i] . "</div></div><br>";
-                                        }
-                                    }
-                                    }
-                                }
-                            } else {
-                                echo "error!";
-                            }
+                <?php
+                require "connect.php";
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                } else {
+                    $sql = "SELECT `staffID`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
+                    $result = $conn->query($sql);
+                    $count = $result->num_rows;
+                    $i = 0;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $a[$i] = $row["staffID"];
+                            $b[$i] = $row["phoneNumber"];
+                            $c[$i] = $row["address"];
+                            $d[$i] = $row["yearRegister"];
+                            $e[$i] = $row["status"];
+                            $f[$i] = $row["staffType"];
+                            $g[$i] = $row["medicationHistory"];
+                            $i++;
+                        }
+                        for ($i = 0; $i < $count; $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $a[$i] . "</td>";
+                            echo "<td>" . $b[$i] . "</td>";
+                            echo "<td>" . $c[$i] . "</td>";
+                            echo "<td>" . $d[$i] . "</td>";
+                            echo "<td>" . $e[$i] . "</td>";
+                            echo "<td>" . $f[$i] . "</td>";
+                            echo "<td>" . $g[$i] . "</td>";
+                        }
+                    }
+                }
+                ?>
+            </table>
+            <br>
+            <div class="text-center">
+                <h4 class="card-title">Summary</h4>
+            </div>
+            <table>
+                <tr>
+                    <th>Total number of Staff (Teacher)</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Teacher'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numTeacher=$row[0];
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff (Infant Caretaker)</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Infant Caretaker'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numCaretaker=$row[0];
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff (Worker)</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Worker'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numWorker=$row[0];
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numStaff=$row[0];
+                    }
+                    ?>
+                </tr>
+            </table>
 
-                            ?>
-                        
-                    </div>
+            <!-- Content End -->
+            <!-- Footer Start -->
+            <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+
+                <div class="container-fluid pt-5">
+                    <p class="m-0 text-center text-white">
+                        &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
+                    </p>
                 </div>
             </div>
-            <!-- Content End-->
+            <!-- Footer End -->
 
-                <!-- Footer Start -->
-                <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
-
-                    <div class="container-fluid pt-5">
-                        <p class="m-0 text-center text-white">
-                            &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
-                        </p>
-                    </div>
-                </div>
-                <!-- Footer End -->
-
-            </div>
         </div>
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="../lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="../lib/lightbox/js/lightbox.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#sidebarCollapse').on('click', function() {
-                    $('#sidebar').toggleClass('active');
-                });
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
             });
+        });
 
-            // Get the modal
-            var modal = document.getElementById("myModal");
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-            // Get the button that opens the modal
-            var btn = document.getElementById("logoutBtn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("logoutBtn");
 
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-            // When the user clicks on the button, open the modal
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
 
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+    </script>
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-
-        <!-- Template Javascript -->
-        <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

@@ -127,7 +127,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Owner</a>
+                                <i class="fas fa-lock"></i>Parent</a>
                         </nav>
                     </div>
                 </div>

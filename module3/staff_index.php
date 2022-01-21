@@ -5,24 +5,19 @@
     <meta charset="utf-8">
     <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <!-- Favicon -->
-    <link href="../img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
+    <link href="img/favicon.ico" rel="icon">
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Flaticon Font -->
     <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
     <style>
         table {
@@ -39,7 +34,9 @@
             width: 150px;
         }
 
-        tr:hover {background-color: #dddddd;}
+        tr:hover {
+            background-color: #dddddd;
+        }
     </style>
 
 </head>
@@ -60,18 +57,51 @@
                     <a href="#">Home</a>
                 </li>
                 <li class="active">
-                    <a href="#">Parents & Kids</a>
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
+                    <ul class="collapse list-unstyled" id="parentsSubmenu">
+                        <li>
+                            <a href="owner_index.php">List</a>
+                        </li>
+                        <li  class="active">
+                            <a href="owner_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Activity</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="owner_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="owner_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                <li>
-                    <a href="#">Manpower Registration</a>
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
+                    <ul class="collapse list-unstyled" id="paymentSubmenu">
+                        <li>
+                            <a href="#">List</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Salary</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="#">List</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul>
                 </li>
+
             </ul>
         </nav>
 
@@ -118,133 +148,179 @@
                     </div>
                 </div>
             </div>
-            <!-- End Modal -->
-            <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
-            <!-- Content Start-->
+            <!-- Modal End -->
+            <!-- Content Start -->
+            <div class="card border-0">
+                <div class="card-header bg-secondary text-center p-4">
+                    <h1 class="text-white m-0">Manpower List</h1>
+                </div>
+                <br>
             <table>
                 <tr>
-                    <th>Parent's Name</th>
-                    <th>Actions</th>
+                    <th>Staff ID</th>
+                    <th>Phone-number</th>
+                    <th>Address</th>
+                    <th>Year Register</th>
+                    <th>Status</th>
+                    <th>Staff Type</th>
+                    <th>Medication History</th>
                 </tr>
+
                 <?php
-                require "conn.php";
+                require "connect.php";
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 } else {
-                    $sql = "SELECT username from parents";
+                    $sql = "SELECT `staffID`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
                     $result = $conn->query($sql);
                     $count = $result->num_rows;
                     $i = 0;
                     if ($count > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["username"];
+                            $a[$i] = $row["staffID"];
+                            $b[$i] = $row["phoneNumber"];
+                            $c[$i] = $row["address"];
+                            $d[$i] = $row["yearRegister"];
+                            $e[$i] = $row["status"];
+                            $f[$i] = $row["staffType"];
+                            $g[$i] = $row["medicationHistory"];
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
+                            echo "<td>" . $b[$i] . "</td>";
+                            echo "<td>" . $c[$i] . "</td>";
+                            echo "<td>" . $d[$i] . "</td>";
+                            echo "<td>" . $e[$i] . "</td>";
+                            echo "<td>" . $f[$i] . "</td>";
+                            echo "<td>" . $g[$i] . "</td>";
                         }
                     }
                 }
                 ?>
             </table>
             <br>
-            <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
+            <div class="text-center">
+                <h4 class="card-title">Summary</h4>
+            </div>
             <table>
                 <tr>
-                    <th>Kid's Name</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                require "conn.php";
-                if ($conn->connect_error) {
+                    <th>Total number of Staff (Teacher)</th>
+                    <?php
+                    if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT `name` from kids";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["name"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
-                        }
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Teacher'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numTeacher=$row[0];
                     }
-                }
-                ?>
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff (Infant Caretaker)</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Infant Caretaker'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numCaretaker=$row[0];
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff (Worker)</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Worker'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numWorker=$row[0];
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numStaff=$row[0];
+                    }
+                    ?>
+                </tr>
             </table>
 
-            <!-- Content End-->
-                <!-- Footer Start -->
-                <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+            <!-- Content End -->
+            <!-- Footer Start -->
+            <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
-                    <div class="container-fluid pt-5">
-                        <p class="m-0 text-center text-white">
-                            &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
-                        </p>
-                    </div>
+                <div class="container-fluid pt-5">
+                    <p class="m-0 text-center text-white">
+                        &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
+                    </p>
                 </div>
-                <!-- Footer End -->
-
             </div>
+            <!-- Footer End -->
+
         </div>
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="../lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="../lib/lightbox/js/lightbox.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#sidebarCollapse').on('click', function() {
-                    $('#sidebar').toggleClass('active');
-                });
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
             });
+        });
 
-            // Get the modal
-            var modal = document.getElementById("myModal");
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-            // Get the button that opens the modal
-            var btn = document.getElementById("logoutBtn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("logoutBtn");
 
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-            // When the user clicks on the button, open the modal
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
 
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+    </script>
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-
-        <!-- Template Javascript -->
-        <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>
