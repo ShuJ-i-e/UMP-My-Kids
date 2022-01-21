@@ -184,8 +184,8 @@
                 ?>
             </table>
             <br>
-            <div class="text-center">
-                <h4 class="card-title">Summary</h4>
+            <div class="card-header bg-secondary text-center p-4">
+                <h1 class="text-white m-0">Report</h1>
             </div>
             <table>
                 <tr>

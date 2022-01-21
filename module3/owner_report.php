@@ -150,8 +150,8 @@
             </div>
             <!-- Modal End -->
             <!-- Content Start -->
-            <div class="text-center">
-                <h4 class="card-title">Report</h4>
+            <div class="card-header bg-secondary text-center p-4">
+                <h1 class="text-white m-0">Report</h1>
             </div>
             <table>
                 <tr>

@@ -34,8 +34,11 @@
             width: 150px;
         }
 
-        tr:hover {background-color: #dddddd;}
+        tr:hover {
+            background-color: #dddddd;
+        }
     </style>
+
 </head>
 
 <body>
@@ -48,40 +51,36 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
+
             <ul class="list-unstyled components">
                 <li>
                     <a href="#">Home</a>
                 </li>
                 <li class="active">
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Parents & Kids</a>
-        
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li class="active">
-                            <a href="#">List</a>
-                        </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="owner_index.php">List</a>
+                        </li>
+                        <li  class="active">
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Manpower</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="owner_view.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Payment</a>
-            
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenu">
                         <li>
                             <a href="#">List</a>
@@ -92,9 +91,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Activity</a>
-                   
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
                             <a href="#">List</a>
@@ -107,6 +104,7 @@
 
             </ul>
         </nav>
+
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -119,8 +117,6 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
                         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
@@ -129,8 +125,6 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> Owner</a>
@@ -140,17 +134,6 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="close">&times;</span>
@@ -164,75 +147,122 @@
                         <button class="btn btn-light" style="margin: 10px;float:right">No</button>
                     </div>
                 </div>
-              </div>
             </div>
-
-            <h3 class=" mb-4" style="text-align: center">Parent's Information</h3>
-            <!-- Content Start-->
+            <!-- Modal End -->
+            <!-- Content Start -->
+            <div class="card border-0">
+            <div class="card-header bg-secondary text-center p-4">
+                 <h1 class="text-white m-0">Manpower List</h1>
+            </div>
+                <br>
             <table>
                 <tr>
-                    <th>Parent's Name</th>
-                    <th>Actions</th>
+                    <th>Staff ID</th>
+                    <th>Phone-number</th>
+                    <th>Address</th>
+                    <th>Year Register</th>
+                    <th>Status</th>
+                    <th>Staff Type</th>
+                    <th>Medication History</th>
                 </tr>
+
                 <?php
                 require "connect.php";
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 } else {
-                    $sql = "SELECT username from parents";
+                    $sql = "SELECT `staffID`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
                     $result = $conn->query($sql);
                     $count = $result->num_rows;
                     $i = 0;
                     if ($count > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["username"];
+                            $a[$i] = $row["staffID"];
+                            $b[$i] = $row["phoneNumber"];
+                            $c[$i] = $row["address"];
+                            $d[$i] = $row["yearRegister"];
+                            $e[$i] = $row["status"];
+                            $f[$i] = $row["staffType"];
+                            $g[$i] = $row["medicationHistory"];
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
+                            echo "<td>" . $b[$i] . "</td>";
+                            echo "<td>" . $c[$i] . "</td>";
+                            echo "<td>" . $d[$i] . "</td>";
+                            echo "<td>" . $e[$i] . "</td>";
+                            echo "<td>" . $f[$i] . "</td>";
+                            echo "<td>" . $g[$i] . "</td>";
                         }
                     }
                 }
                 ?>
             </table>
             <br>
-            <h3 class=" mb-4" style="text-align: center">Kid's Information</h3>
+            <div class="text-center">
+                <h4 class="card-title">Summary</h4>
+            </div>
             <table>
                 <tr>
-                    <th>Kid's Name</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                require "conn.php";
-                if ($conn->connect_error) {
+                    <th>Total number of Staff (Teacher)</th>
+                    <?php
+                    if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT `name` from kids";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["name"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td><a class='btn btn-info btn-sm action-btn' data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                            echo "<a class='btn btn-warning btn-sm action-btn' data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' id='delete'><i class='fa fa-times'></i></a></td></tr>";
-                        }
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Teacher'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numTeacher=$row[0];
                     }
-                }
-                ?>
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff (Infant Caretaker)</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Infant Caretaker'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numCaretaker=$row[0];
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff (Worker)</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Worker'");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numWorker=$row[0];
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Total number of Staff</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                        $numStaff=$row[0];
+                    }
+                    ?>
+                </tr>
             </table>
 
-            <!-- Content End-->
+            <!-- Content End -->
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
@@ -250,7 +280,6 @@
     <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
@@ -258,8 +287,6 @@
     <script src="../lib/isotope/isotope.pkgd.min.js"></script>
     <script src="../lib/lightbox/js/lightbox.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
@@ -276,19 +303,16 @@
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
         btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
         span.onclick = function() {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
@@ -296,7 +320,6 @@
         }
     </script>
 
-    <!-- Template Javascript -->
     <script src="../js/main.js"></script>
 </body>
 
