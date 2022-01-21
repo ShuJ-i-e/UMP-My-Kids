@@ -42,6 +42,47 @@
         tr:hover {
             background-color: #dddddd;
         }
+    /* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
     </style>
 </head>
 
@@ -173,6 +214,106 @@
             </div>
 
  <!-- Content Start-->
+ <div class="col-lg-12 mb-5">
+    <div class="card border-0 bg-light shadow-sm pb-2">
+        <div class="card-header bg-secondary text-center p-4">
+            <h1 class="text-white m-0">Pay Salary</h1>
+        </div>
+        <div class="card-body text-center">
+            <h4 class="card-title">Salary List</h4>
+        </div>
+    </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Sort</button>
+        <div class="dropdown-content">
+        <a href="salarylist_alphabet.html">Sort by Alphabet</a>
+          <a href="salarylist_status.html">Sort by Staff Type</a>
+          <a href="salarylist_pay.html">Sort by Pay Status Type</a>
+        </div>
+      </div>
+
+    <table style="width:100%">
+        <tr>
+            <th>Username</th>
+            <th>Staff Type</th>
+            <th>Salary</th>
+            <th>Pay Day</th>
+            <th>Pay Status</th>
+        </tr>
+        <tr>
+            <td>Najmuddin</td>
+            <td>Caretaker</td>
+            <td>3500</td>
+            <td>2022-01-01</td>
+            <td>Paid</td>
+        </tr>
+        <tr>
+            <td>Amirul</td>
+            <td>Teacher</td>
+            <td>4000</td>
+            <td>2022-01-01</td>
+            <td>Pending</td>
+        </tr>
+        <tr>
+            <td>Deena</td>
+            <td>Worker</td>
+            <td>3000</td>
+            <td>2022-01-01</td>
+            <td>Paid</td>
+        </tr>
+        <tr>
+            <td>Jenice</td>
+            <td>Teacher</td>
+            <td>4000</td>
+            <td>2022-01-01</td>
+            <td>Paid</td>
+        </tr>
+        <tr>
+            <td>Muthu</td>
+            <td>Worker</td>
+            <td>3000</td>
+            <td>2022-01-01</td>
+            <td>Paid</td>
+        </tr>
+        <tr>
+            <td>Chong</td>
+            <td>Caretaker</td>
+            <td>3500</td>
+            <td>2022-01-01</td>
+            <td>Pending</td>
+        </tr>
+        <tr>
+            <td>Lava</td>
+            <td>Caretaker</td>
+            <td>3500</td>
+            <td>2022-01-01</td>
+            <td>Paid</td>
+        </tr>
+        <tr>
+            <td>Asyraf</td>
+            <td>Teacher</td>
+            <td>4000</td>
+            <td>2022-01-01</td>
+            <td>Pending</td>
+        </tr>
+        <tr>
+            <td>Hanafi</td>
+            <td>Worker</td>
+            <td>3000</td>
+            <td>2022-01-01</td>
+            <td>Pending</td>
+        </tr>
+        <tr>
+            <td>Dong Mingyu</td>
+            <td>Teacher</td>
+            <td>4000</td>
+            <td>2022-01-01</td>
+            <td>Paid</td>
+        </tr>
+  </table>
+
 
   
 <!-- Content End-->
