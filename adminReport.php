@@ -114,7 +114,7 @@
                    
                 </div>
 
-                <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='addAdmin.php'"><i class='fa fa-plus'></i> addAdmin</button>
+                <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='addAdmin.html'"><i class='fa fa-plus'></i> addAdmin</button>
             <div id="adminInfoDiv">
 
                 <h3 class=" mb-4" style="text-align: center">Admin Report</h3>
