@@ -5,24 +5,19 @@
     <meta charset="utf-8">
     <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <!-- Favicon -->
+
     <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Flaticon Font -->
     <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
     <style>
         table {
@@ -159,38 +154,29 @@
             </div>
             <table>
                 <tr>
-                    <th>Parent's Name</th>
-                    <th>Kid's Name</th>
-                    <th>Age</th>
-                    <th>Status</th>
-                    <th>Phone Number</th>
+                    <th>Staff ID</th>
+                    <th>Staff Type</th>
                 </tr>
+
                 <?php
-                require "conn.php";
+                require "connect.php";
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 } else {
-                    $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID";
+                    $sql = "SELECT `staffID`, `staffType` from staff";
                     $result = $conn->query($sql);
                     $count = $result->num_rows;
                     $i = 0;
                     if ($count > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $age = date("Y") - $row["yearOfBirth"];
-                            $a[$i] = $row["username"];
-                            $b[$i] = $row["name"];
-                            $c[$i] = $age;
-                            $d[$i] = $row["status"];
-                            $e[$i] = $row["phoneNumber"];
+                            $a[$i] = $row["staffID"];
+                            $b[$i] = $row["staffType"];
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
                             echo "<tr>";
                             echo "<td>" . $a[$i] . "</td>";
                             echo "<td>" . $b[$i] . "</td>";
-                            echo "<td>" . $c[$i] . "</td>";
-                            echo "<td>" . $d[$i] . "</td>";
-                            echo "<td>" . $e[$i] . "</td>";
                         }
                     }
                 }
@@ -202,49 +188,41 @@
             </div>
             <table>
                 <tr>
-                    <th>Total number of parents</th>
+                    <th>Total number of Staff (Teacher)</th>
                     <?php
                     if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(parentID) FROM parents");
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Teacher'");
                         $row = $result->fetch_row();
                         echo "<td>".$row[0]."</td>";
                     }
                     ?>
                 </tr>
                 <tr>
-                    <th>Total number of kids</th>
+                    <th>Total number of Staff (Infant Caretaker</th>
                     <?php
                     if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(kidsID) FROM kids");
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Infant Caretaker'");
                         $row = $result->fetch_row();
                         echo "<td>".$row[0]."</td>";
                     }
                     ?>
                 </tr>
                 <tr>
-                    <th>Average age of kids</th>
+                    <th>Total number of Staff (Worker)</th>
                     <?php
                     if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $i=0;
-                        $result = mysqli_query($conn, "SELECT yearOfBirth FROM kids");
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $kidAge[$i] = date("Y") - $row["yearOfBirth"];
-                            $i++;
-                        }
-                        $totalAge=0;
-                        
-                        for ($i = 0; $i < $count; $i++) {
-                            $totalAge = $totalAge + (int)$kidAge[$i];
-                        }
-                        $avgAge = $totalAge/$i;
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
+                        WHERE staffType = 'Worker'");
                         $row = $result->fetch_row();
-                        echo "<td>".$avgAge."</td>";
+                        echo "<td>".$row[0]."</td>";
                     }
                     ?>
                 </tr>
@@ -267,7 +245,6 @@
     <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
@@ -308,7 +285,6 @@
         }
     </script>
 
-    <!-- Template Javascript -->
     <script src="../js/main.js"></script>
 </body>
 
