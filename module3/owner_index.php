@@ -132,6 +132,34 @@
                     </div>
                 </div>
             </div>
+            <div class="container">
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label for="search">Search (Staff ID)</label>
+                                <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: 200001">
+                                <p class="text-danger"></p>
+                                <select class="form-control" id="option">
+                                    <option value="parents">Teacher</option>
+                                    <option value="kids">Infant Caretaker</option>
+                                    <option value="kids">Worker</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <button name="SubmitButton" class="btn btn-primary float-right" onclick="search()"><i class="fas fa-search"></i> Search</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-2" style="display:none" id="clearSearchBtn">
+                            <div class="form-group">
+                                <button name="SubmitButton" class="btn btn-secondary float-right" onclick="clearSearch()">Clear Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
                 <div class="modal-content">
