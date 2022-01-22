@@ -8,7 +8,7 @@
     }
     //direct user back to main when no session
     else{
-        header("Location: ../owner_main.php"); 
+        header("Location: ../staff_main.php"); 
     }
 ?>
 
@@ -57,6 +57,11 @@
     tr:hover {
         background-color: #dddddd;
     }
+
+    #outputArea{
+        display:none;
+    }
+
 </style>
 
 <body>
@@ -72,7 +77,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../owner_main.php">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false"
@@ -115,11 +120,11 @@
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="owner_schedule_list.php">List</a>
+                        <li class="active">
+                            <a href="staff_schedule_list.php">List</a>
                         </li>
-                        <li  class="active">
-                            <a href="owner_schedule_report.php">Report</a>
+                        <li>
+                            <a href="staff_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -139,8 +144,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -148,8 +152,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
@@ -190,8 +193,39 @@
                 </div>
             </div>
             <!--End Delete Modal -->
-
+            
             <?php include 'conn.php';?>
+            <?php
+                $errorLbl="";
+                $noResultLbl= "";
+
+                
+                //get the staff id from username
+                $staffSql = "SELECT staffID FROM staff WHERE username = '$loginUsername';";
+                $result = $conn->query($staffSql);
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        $staffID=$row["staffID"];
+                    }
+                }
+
+                $sql = "SELECT * from kids join activity on kids.kidsID=activity.kidsID
+                WHERE activity.staffID=$staffID";
+                $result = $conn->query($sql);
+                $count = $result->num_rows;
+                $x= 0;
+                if ($count >0) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        $kidsName [$x]= $row['name'];
+                        $staffType [$x]= $row['staffType'];
+                        $startTimeTxt [$x]= $row['startTime'];
+                        $endTimeTxt [$x]= $row['endTime'];
+                        $statusRdb [$x]= $row['status'];
+                        $x++;
+                    }
+                }
+            ?>
 
             <?php 
                 //get current month in integer
@@ -212,83 +246,37 @@
                 </div>
             </div>
 
-            <table>
-                <tr>
-                    <th>Total number activity of infant caretakers</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity 
-                        WHERE staffType='Infrant'
-                        AND
-                        MONTH(endTime) = MONTH(CURRENT_DATE())
-                        AND 
-                        YEAR(endTime) = YEAR(CURRENT_DATE())");
-                        $row = $result->fetch_row();
-                        $numInfrantMonth= $row[0];
-                        echo "<td>".$row[0]."</td>";
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number activity of workers</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity 
-                        WHERE staffType='Worker'
-                        AND
-                        MONTH(endTime) = MONTH(CURRENT_DATE())
-                        AND 
-                        YEAR(endTime) = YEAR(CURRENT_DATE())");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numWorkerMonth= $row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number activity of teachers</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity 
-                        WHERE staffType='Teacher'
-                        AND
-                        MONTH(endTime) = MONTH(CURRENT_DATE())
-                        AND 
-                        YEAR(endTime) = YEAR(CURRENT_DATE())");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numTeacherMonth= $row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number activity on this month</th>
-                    <?php
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } 
-                    else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity 
-                        WHERE 
-                        MONTH(endTime) = MONTH(CURRENT_DATE())
-                        AND 
-                        YEAR(endTime) = YEAR(CURRENT_DATE())");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $TotalMonth= $row[0];
-                    }
-                    ?>
-                </tr>
-            </table>
-            <br/>
-            <div id="piechartMonth" style="width: 900px; height: 500px; margin-left:auto; margin-right:auto;" ></div>
-            <br/>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3">
+                        </div>
+                        <div class="col-lg-3 ">
+                                <label for="start">Staff name:</label>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <strong><label for="start"><?php echo $loginUsername?></label></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3">
+                        </div>
+                        <div class="col-lg-3 ">
+                                <label for="start">Total activities:</label>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <strong><label for="start"><?php echo $x ?></label></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="container-fluid py-2">
                 <div class="container">
@@ -300,65 +288,66 @@
                 </div>
             </div>
 
-            <table>
-                <tr>
-                    <th>Total number activity of infant caretakers</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity WHERE staffType='Infrant'");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numInfrant= $row[0];
+            <div class="container-fluid py-3" id="outputArea">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <h2 class="mb-4 text-left">Output</h2>
+                        </div>
+                        <div class="col-lg-4">
+                            <p class="mb-4 text-right" id="showingLbl">Showing 2 of </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php
+                
+                if($x > 0){
+                    //display in table
+                    echo '<table id="data">';
+                    echo '<thead>';
+                        echo "<tr>";
+                            echo "<th>No</th>";
+                            echo "<th>Kid name</th>";
+                            echo "<th>Staff name</th>";
+                            echo "<th>Staff type</th>";
+                            echo "<th>Time</th>";
+                            echo "<th>Status</th>";
+                        echo "</tr>";
+                    echo '</thead>';
+
+                    for ($i = 0; $i < $x; $i++) {
+                        echo "<tr>";
+                            echo "<td>" . $i+1 . "</td>";
+                            echo "<td>" . $kidsName [$i] . "</td>";
+                            echo "<td>" . $loginUsername . "</td>";
+                            echo "<td>" . $staffType [$i] . "</td>";
+                            echo "<td>" . $startTimeTxt [$i] . "<br /> to <br />" .$endTimeTxt [$i]."</td>";
+                            echo "<td>" . $statusRdb [$i] . "</td>";
+                        echo "</tr>";
                     }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number activity of workers</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity WHERE staffType='Worker'");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numWorker= $row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number activity of teachers</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity WHERE staffType='Teacher'");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numTeacher= $row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number activities </th>
-                    <?php
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } 
-                    else {
-                        $result = mysqli_query($conn, "SELECT COUNT(activityID) FROM activity");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $Total= $row[0];
-                    }
-                    ?>
-                </tr>
-            </table>
-            <br/>
-            <div id="piechartAll" style="width: 900px; height: 500px; margin-left:auto; margin-right:auto;" ></div>
-            <br/>
-            
+
+                    echo "</table>";
+                }
+                else{
+                    $noResultLbl= "No activities yet in this month!" ;
+                }
+                
+                $conn->close();
+            ?>
+
+            <!-- Display when no database result found -->
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12">
+                            <h2 class="mb-4 text-left text-danger text-center"><?php echo $noResultLbl ?></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
@@ -375,6 +364,7 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -389,10 +379,6 @@
             });
         });
 
-        setTimeout(function() {
-            jQuery('#message').fadeOut('slow');
-        }, 1500);
-
         var deleteDialog = document.getElementById("deleteBox");
 
         function deleteFunc(activityID, id) {
@@ -400,11 +386,11 @@
             //add id to deleteSpan
             $('#deleteSpan').html(id);
             $("#deleteBtn").click(function() {
-                window.location.href = "delete.php?id=" + activityID + "&page=owner";
+                window.location.href = "delete.php?id=" + activityID + "&page=staff";
             });
         }
         var closeDeleteBtn = document.getElementById("closeDeleteBtn");
-            closeDeleteBtn.onclick = function() {
+        closeDeleteBtn.onclick = function() {
             deleteDialog.style.display = "none";
         }
 
@@ -438,57 +424,53 @@
                 modal.style.display = "none";
             }
         }
-    </script>
 
-    <!-- google pie chart -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        
-        // Draw the monthly chart when Charts is loaded.
-        google.charts.setOnLoadCallback(drawMonthlyChart);
+        //pagination JS
+        $(document).ready(function(){
+            $('#data').after('<nav id="navHead"></nav>');
+            $('#navHead').append('<ul id="nav" class="pagination justify-content-end" style="margin: 20px">');
+            var rowsShown = 5;
+            var rowsTotal = $('#data tbody tr').length;
+            var numPages = rowsTotal/rowsShown;
+            for(i = 0;i < numPages;i++) {
+                var pageNum = i + 1;
+                $('#nav').append('<li class="page-item"><a class="page-link" href="#" rel="'+i+'">'+pageNum+'</a></li>');
+            }
 
-        // Draw the overall chart when Charts is loaded.
-        google.charts.setOnLoadCallback(drawAllChart);
+            //hide data 
+            $('#data tbody tr').hide();
+            //only show 4
+            $('#data tbody tr').slice(0, rowsShown).show();
+            $('#nav a:first').addClass('active');
+            
+            $('#nav a').bind('click', function(){
 
-        function drawMonthlyChart() {
+                $('#nav a').removeClass('active');
+                $(this).addClass('active');
+                var currPage = $(this).attr('rel');
+                var startItem = currPage * rowsShown;
+                var endItem = startItem + rowsShown;
+                $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+                css('display','table-row').animate({opacity:1}, 300);
+            });
 
-            var dataMonth = google.visualization.arrayToDataTable([
-            ['Staff TYpe', 'Number'],
-            ['Infrant',     <?php echo $numInfrantMonth;?>],
-            ['Worker',      <?php echo $numWorkerMonth;?>],
-            ['Teacher',  <?php echo $numTeacherMonth;?>],
-            ]);
+            
+            if(rowsTotal > 0){
 
-            var optionsMonth,chartMonth;
+                if(rowsTotal < 5){
+                    //change showing word
+                    document.getElementById("showingLbl").innerHTML = "Showing " +rowsTotal +  " of " +rowsTotal ;
+                }
+                else{
+                    //change showing word
+                    document.getElementById("showingLbl").innerHTML = "Showing 5 of " +rowsTotal;
+                }
 
-            optionsMonth = {
-                title: 'Monthly Graph'
-            };
-
-            chartMonth = new google.visualization.PieChart(document.getElementById('piechartMonth'));
-
-            chartMonth.draw(dataMonth, optionsMonth);
-        }
-
-        function drawAllChart() {
-
-            var dataYear = google.visualization.arrayToDataTable([
-            ['Staff TYpe', 'Number'],
-            ['Infrant',      <?php echo $numInfrant;?>],
-            ['Worker',  <?php echo $numWorker;?>],
-            ['Teacher', <?php echo $numTeacher;?>],
-            ]);
-
-            var optionsAll,chartAll;
-            optionsAll = {
-                title: 'Overall Graph'
-            };
-
-            chartAll = new google.visualization.PieChart(document.getElementById('piechartAll'));
-
-            chartAll.draw(dataYear, optionsAll);
-        }
+                //display output area
+                document.getElementById("outputArea").style.display = "block";
+            }
+            
+        });
     </script>
 
     <!-- Template Javascript -->
