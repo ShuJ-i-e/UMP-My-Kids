@@ -2,11 +2,15 @@
 
 require "connect.php";
 
-$name= $_POST["name"];
+$username= $_POST["username"]
+$staffID= $_POST["staffID"]
+$staffName= $_POST["staffName"];
+$phoneNumber=$_POST["phoneNumber"];
+$address=$_POST["address"];
+$yearRegister=date("Y")-$_POST["yearRegister"];
+$status=$_POST["status"];
+$staffType=$_POST["staffType"];
 $medicationHistory =  $_POST["medicationHistory"];
-$yob=date("Y")-$_POST["age"];
-$gender=$_POST["gender"];
-$parentID=$_POST["parentID"];
 $page=$_POST['page'];
 
 if ($conn->connect_error) 
@@ -15,8 +19,8 @@ if ($conn->connect_error)
 }
 else
 {
-    $sql="INSERT INTO kids ( `name`, medicationHistory, yearOfBirth, gender, parentID)
-    VALUES ('$name', '$medicationHistory', '$yob','$gender', '$parentID')";
+    $sql="INSERT INTO kids ( `staffID`, `staffName`, `phoneNumber`, `address`,`yearRegister`, `status`, `staffType`, `medicationHistory`)
+    VALUES ('$staffID', '$staffName', '$phoneNumber','$address', '$yearRegister', '$status', '$staffType', '$medicationHistory')";
      if ($conn->query($sql) === TRUE) 
      {
         if($page=="parents")

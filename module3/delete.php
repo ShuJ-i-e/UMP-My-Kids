@@ -1,6 +1,8 @@
 <?php
 require "connect.php";
-$staffID = $_GET['id'];
+
+$username= $_POST["username"]
+$staffID = $_GET['staffID'];
 $page = $_GET['page'];
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

@@ -1,5 +1,6 @@
 <?php
 require "connect.php";
+
 $searchTxt = $_POST['searchTxt'];
 $option = $_POST['option'];
 

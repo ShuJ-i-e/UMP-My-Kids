@@ -2,10 +2,15 @@
 
 require "connect.php";
 
-$name= $_POST["ParentName"];
-$phoneNumber =  $_POST["phoneNumber"];
+$username= $_POST["username"]
+$staffID= $_POST["staffID"]
+$staffName= $_POST["staffName"];
+$phoneNumber=$_POST["phoneNumber"];
 $address=$_POST["address"];
-$parentID=$_POST['parentID'];
+$yearRegister=date("Y")-$_POST["yearRegister"];
+$status=$_POST["status"];
+$staffType=$_POST["staffType"];
+$medicationHistory =  $_POST["medicationHistory"];
 $page=$_POST['page'];
 
 if ($conn->connect_error) 
@@ -14,7 +19,7 @@ if ($conn->connect_error)
 }
 else
 {
-    $sql="UPDATE parents SET `phoneNumber`='$phoneNumber', `address`='$address'WHERE `parentID`='$parentID'";
+    $sql="UPDATE staff SET `phoneNumber`='$phoneNumber', `address`='$address' WHERE `medicationHistory`='$medicationHistory'";
      if ($conn->query($sql)=== TRUE) 
      {
          if($page=="parents")
