@@ -176,11 +176,17 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <div class="form-group">
+                                <br>
                                 <button name="SubmitButton" class="btn btn-primary float-right" onclick="search()"><i class="fas fa-search"></i> Search</button>
+                                <br>
+                                <br>
+                                <br>
+                                <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='owner_insert.php'"><i class='fa fa-plus'></i> Insert Staff</button>
                             </div>
                         </div>
+                        <br>
                         <div class="col-lg-2" style="display:none" id="clearSearchBtn">
                             <div class="form-group">
                                 <button name="SubmitButton" class="btn btn-secondary float-right" onclick="clearSearch()">Clear Search</button>

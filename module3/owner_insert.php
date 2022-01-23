@@ -206,7 +206,7 @@ $_SESSION["username"] = "owner";
                                 <input type='hidden' id='page' name='page' value='owner'/>
                                 <div>
                                     <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Submit</button>
-                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="owner_view.php">Back</a>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="owner_index.php">Back</a>
                                 </div>
                             </div>
                         </div>
