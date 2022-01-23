@@ -56,26 +56,29 @@
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li>
                             <a href="owner_index.php">List</a>
                         </li>
-                        <li  class="active">
+                        <li>
                             <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="owner_view.php">List</a>
+                            <a href="staff_view.php">List</a>
                         </li>
                         <li>
-                            <a href="owner_report.php">Report</a>
+                            <a href="staff_index.php">Index</a>
+                        </li>
+                        <li class="active">
+                            <a href="staff_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -127,7 +130,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Owner</a>
+                                <i class="fas fa-lock"></i> Staff</a>
                         </nav>
                     </div>
                 </div>

@@ -169,9 +169,9 @@
                                 <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: Ali">
                                 <p class="text-danger"></p>
                                 <select class="form-control" id="option">
-                                    <option value="parents">Teacher</option>
-                                    <option value="kids">Infant Caretaker</option>
-                                    <option value="kids">Worker</option>
+                                    <option value="teacher">Teacher</option>
+                                    <option value="caretaker">Infant Caretaker</option>
+                                    <option value="worker">Worker</option>
                                 </select>
                             </div>
                         </div>
@@ -210,7 +210,7 @@
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                $a[$i] = $row["name"];
+                                $a[$i] = $row["staffName"];
                                 $b[$i] = $row["staffID"];
                                 $i++;
                             }

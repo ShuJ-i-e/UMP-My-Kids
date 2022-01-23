@@ -169,9 +169,9 @@
                                 <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: Ali">
                                 <p class="text-danger"></p>
                                 <select class="form-control" id="option">
-                                    <option value="parents">Teacher</option>
-                                    <option value="kids">Infant Caretaker</option>
-                                    <option value="kids">Worker</option>
+                                    <option value="teacher">Teacher</option>
+                                    <option value="caretaker">Infant Caretaker</option>
+                                    <option value="worker">Worker</option>
                                 </select>
                             </div>
                         </div>
@@ -210,13 +210,13 @@
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                $a[$i] = $row["name"];
+                                $a[$i] = $row["staffName"];
                                 $b[$i] = $row["staffID"];
                                 $i++;
                             }
                             for ($i = 0; $i < $count; $i++) {
-                                $view_url = "owner_view.php?id=" . $b[$i];
-                                $edit_url = "owner_edit.php?id=" . $b[$i];
+                                $view_url = "staff_view.php?id=" . $b[$i];
+                                $edit_url = "staff_edit.php?id=" . $b[$i];
                                 echo "<tr>";
                                 echo "<td>" . $a[$i] . "</td>";
                                 echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
