@@ -228,95 +228,56 @@
     <div class="dropdown">
         <button class="dropbtn">Sort</button>
         <div class="dropdown-content">
-        <a href="salarylist_alphabet.html">Sort by Alphabet</a>
-          <a href="salarylist_status.html">Sort by Staff Type</a>
-          <a href="salarylist_pay.html">Sort by Pay Status</a>
+        <a href="salarylist_username.php">Sort by Alphabet</a>
+          <a href="salarylist_staff.php">Sort by Staff Type</a>
+          <a href="salarylist_status.php">Sort by Pay Status Type</a>
         </div>
       </div>
+    
+      <table>
+            <tr>
+                <th>Name</th>
+                <th>Staff Type</th>
+                <th>Pay Status</th>
+                <th>Salary Details</th>
+            </tr>
+            <?php
+            require "conn.php";
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }else {
+                    $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
+                    INNER JOIN salary ON staff.staffID=salary.staffID" ;
+                    $result = $conn->query($sql);
 
-    <table style="width:100%">
-        <tr>
-            <th>Username</th>
-            <th>Staff Type</th>
-            <th>Salary</th>
-            <th>Pay Day</th>
-            <th>Pay Status</th>
-        </tr>
-        <tr>
-            <td>Najmuddin</td>
-            <td>Caretaker</td>
-            <td>3500</td>
-            <td>2022-01-01</td>
-            <td>Paid</td>
-        </tr>
-        <tr>
-            <td>Chong</td>
-            <td>Caretaker</td>
-            <td>3500</td>
-            <td>2022-01-01</td>
-            <td>Pending</td>
+                    if (!$result) {
+                        trigger_error('Invalid query: ' . $conn->error);
+                    }
 
-        </tr>
-        <tr>
-            <td>Lava</td>
-            <td>Caretaker</td>
-            <td>3500</td>
-            <td>2022-01-01</td>
-            <td>Paid</td>
+                    $count = $result->num_rows;
+                    $i = 0;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $a[$i] = $row["username"];
+                            $b[$i] = $row["staffType"];
+                            $c[$i] = $row["payStatus"];
+                            $d[$i] = $row["staffID"];
+                            $i++;
+                        }
+                        for ($i = 0; $i < $count; $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $a[$i] . "</td>";
+                            echo "<td>" . $b[$i] . "</td>";
+                            echo "<td>" . $c[$i] . "</td>";
 
-        </tr>
-        <tr>
-            <td>Jenice</td>
-            <td>Teacher</td>
-            <td>4000</td>
-            <td>2022-01-01</td>
-            <td>Paid</td>
-        </tr>
-        <tr>
-            <td>Dong Mingyu</td>
-            <td>Teacher</td>
-            <td>4000</td>
-            <td>2022-01-01</td>
-            <td>Paid</td>
-
-        </tr>
-        <tr>
-            <td>Amirul</td>
-            <td>Teacher</td>
-            <td>4000</td>
-            <td>2022-01-01</td>
-            <td>Pending</td>
-        </tr>
-        <tr>
-            <td>Asyraf</td>
-            <td>Teacher</td>
-            <td>4000</td>
-            <td>2022-01-01</td>
-            <td>Pending</td>
-
-        </tr>
-        <tr>
-            <td>Muthu</td>
-            <td>Worker</td>
-            <td>3000</td>
-            <td>2022-01-01</td>
-            <td>Paid</td>
-        </tr>
-        <tr>
-            <td>Hanafi</td>
-            <td>Worker</td>
-            <td>3000</td>
-            <td>2022-01-01</td>
-            <td>Pending</td>
-        </tr>
-        <tr>
-            <td>Deena</td>
-            <td>Worker</td>
-            <td>3000</td>
-            <td>2022-01-01</td>
-            <td>Paid</td>
-        </tr>
-  </table>
+                            $view_url = "salarydetail.php?id=" . $d[$i];
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td></tr>";
+                        }
+                    }
+                }
+                ?>
+    </table>
+  
 
 
   
