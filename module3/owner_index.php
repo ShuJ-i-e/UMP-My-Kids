@@ -56,23 +56,26 @@
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li>
                             <a href="owner_index.php">List</a>
                         </li>
-                        <li  class="active">
+                        <li>
                             <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
                             <a href="owner_view.php">List</a>
+                        </li>
+                        <li class="active">
+                            <a href="owner_index.php">Index</a>
                         </li>
                         <li>
                             <a href="owner_report.php">Report</a>
@@ -132,13 +135,38 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+        
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal End -->
+            <!-- Content Start -->
+            <div class="card border-0">
+            <div class="card-header bg-secondary text-center p-4">
+                 <h1 class="text-white m-0">Manpower Index</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="container">
                     <div class="row align-items-center">
 
                         <div class="col-lg-8">
                             <div class="form-group">
-                                <label for="search">Search (Staff ID)</label>
-                                <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: 200001">
+                                <br>
+                                <label for="search">Search (Name)</label>
+                                <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: Ali">
                                 <p class="text-danger"></p>
                                 <select class="form-control" id="option">
                                     <option value="parents">Teacher</option>
@@ -160,135 +188,65 @@
                         </div>
                     </div>
                 </div>
-            <!-- The Modal -->
-            <div class="modal" id="myModal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="close">&times;</span>
-                        <h2>UMP MY-KIDS</h2>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to logout?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+            </div>
+            
+            <div id="staffInfoDiv">
+
+                <br><br>
+                <h3 class=" mb-4" style="text-align: center">Staff's Information</h3>
+                <table>
+                    <tr>
+                        <th>Staff's Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php
+                    require "connect.php";
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $sql = "SELECT `staffID`, `staffName` from staff";
+                        $result = $conn->query($sql);
+                        $count = $result->num_rows;
+                        $i = 0;
+                        if ($count > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $a[$i] = $row["name"];
+                                $b[$i] = $row["staffID"];
+                                $i++;
+                            }
+                            for ($i = 0; $i < $count; $i++) {
+                                $view_url = "owner_view.php?id=" . $b[$i];
+                                $edit_url = "owner_edit.php?id=" . $b[$i];
+                                echo "<tr>";
+                                echo "<td>" . $a[$i] . "</td>";
+                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
+                            }
+                        }
+                    }
+                    ?>
+                </table>
+                <table id="staffInformationDynamic" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Staff's Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="container-fluid py-5" style="display:none;" id="staffErrorTxt">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <h2 class="mb-4 text-left text-danger text-center">No Result Matches.</h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Modal End -->
-            <!-- Content Start -->
-            <div class="card border-0">
-            <div class="card-header bg-secondary text-center p-4">
-                 <h1 class="text-white m-0">Manpower List</h1>
-            </div>
-                <br>
-            <table>
-                <tr>
-                    <th>Staff ID</th>
-                    <th>Phone-number</th>
-                    <th>Address</th>
-                    <th>Year Register</th>
-                    <th>Status</th>
-                    <th>Staff Type</th>
-                    <th>Medication History</th>
-                </tr>
-
-                <?php
-                require "connect.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT `staffID`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["staffID"];
-                            $b[$i] = $row["phoneNumber"];
-                            $c[$i] = $row["address"];
-                            $d[$i] = $row["yearRegister"];
-                            $e[$i] = $row["status"];
-                            $f[$i] = $row["staffType"];
-                            $g[$i] = $row["medicationHistory"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td>" . $b[$i] . "</td>";
-                            echo "<td>" . $c[$i] . "</td>";
-                            echo "<td>" . $d[$i] . "</td>";
-                            echo "<td>" . $e[$i] . "</td>";
-                            echo "<td>" . $f[$i] . "</td>";
-                            echo "<td>" . $g[$i] . "</td>";
-                        }
-                    }
-                }
-                ?>
-            </table>
             <br>
-            <div class="text-center">
-                <h4 class="card-title">Summary</h4>
-            </div>
-            <table>
-                <tr>
-                    <th>Total number of Staff (Teacher)</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
-                        WHERE staffType = 'Teacher'");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numTeacher=$row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number of Staff (Infant Caretaker)</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
-                        WHERE staffType = 'Infant Caretaker'");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numCaretaker=$row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number of Staff (Worker)</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
-                        WHERE staffType = 'Worker'");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numWorker=$row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number of Staff</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numStaff=$row[0];
-                    }
-                    ?>
-                </tr>
-            </table>
+            <br>
 
             <!-- Content End -->
             <!-- Footer Start -->
