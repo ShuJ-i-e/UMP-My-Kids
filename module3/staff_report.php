@@ -115,7 +115,7 @@
                     <div class="p-2">
                         <nav class="d-flex navbar navbar-expand-lg" style=" float:left; margin-top: 50px">
                             <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
+                                <i class="fas fa-align-left"></i>
                             </button>
                         </nav>
                     </div>

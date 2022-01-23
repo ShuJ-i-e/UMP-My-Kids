@@ -115,7 +115,7 @@
                     <div class="p-2">
                         <nav class="d-flex navbar navbar-expand-lg" style=" float:left; margin-top: 50px">
                             <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
+                                <i class="fas fa-align-left"></i>
                             </button>
                         </nav>
                     </div>
@@ -176,14 +176,10 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <div class="form-group">
-                                <br>
                                 <button name="SubmitButton" class="btn btn-primary float-right" onclick="search()"><i class="fas fa-search"></i> Search</button>
                             </div>
-                            <br>
-                            <br>
-                            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='owner_insert.php'"><i class='fa fa-plus'></i> Insert Staff</button>
                         </div>
                         <div class="col-lg-2" style="display:none" id="clearSearchBtn">
                             <div class="form-group">
