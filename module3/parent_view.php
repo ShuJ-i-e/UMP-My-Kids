@@ -62,7 +62,7 @@
                         <li>
                             <a href="owner_index.php">List</a>
                         </li>
-                        <li  class="active">
+                        <li>
                             <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
@@ -71,11 +71,13 @@
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
-                        <li>
-                            <a href="owner_view.php">List</a>
+                        <li class="active">
+                            <a href="parent_view.php">List</a>
                         </li>
                         <li>
-                            <a href="owner_report.php">Report</a>
+                            <a href="parent_index.php">Index</a>
+                        <li>
+                            <a href="parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -158,6 +160,7 @@
             <table>
                 <tr>
                     <th>Staff ID</th>
+                    <th>Name</th>
                     <th>Phone-number</th>
                     <th>Address</th>
                     <th>Year Register</th>
@@ -171,19 +174,20 @@
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 } else {
-                    $sql = "SELECT `staffID`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
+                    $sql = "SELECT `staffID`, `staffName`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
                     $result = $conn->query($sql);
                     $count = $result->num_rows;
                     $i = 0;
                     if ($count > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $a[$i] = $row["staffID"];
-                            $b[$i] = $row["phoneNumber"];
-                            $c[$i] = $row["address"];
-                            $d[$i] = $row["yearRegister"];
-                            $e[$i] = $row["status"];
-                            $f[$i] = $row["staffType"];
-                            $g[$i] = $row["medicationHistory"];
+                            $b[$i] = $row["staffName"];
+                            $c[$i] = $row["phoneNumber"];
+                            $d[$i] = $row["address"];
+                            $e[$i] = $row["yearRegister"];
+                            $f[$i] = $row["status"];
+                            $g[$i] = $row["staffType"];
+                            $h[$i] = $row["medicationHistory"];
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
@@ -194,6 +198,7 @@
                             echo "<td>" . $d[$i] . "</td>";
                             echo "<td>" . $e[$i] . "</td>";
                             echo "<td>" . $f[$i] . "</td>";
+                            echo "<td>" . $g[$i] . "</td>";
                             echo "<td>" . $g[$i] . "</td>";
                         }
                     }
