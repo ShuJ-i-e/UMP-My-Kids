@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>KidKinder - Kindergarten Website Template</title>
+    <title>Salary List - UMP MYKIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -24,6 +24,67 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 150px;
+        }
+
+        tr:hover {
+            background-color: #dddddd;
+        }
+
+    /* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+    </style>
 </head>
 
 <body>
@@ -81,12 +142,13 @@
                 <li>
                     <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Salary</a>
-                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="salarylist.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="report_test.html">Report</a>
+                        </li>
                         </li>
                     </ul>
                 </li>
@@ -151,53 +213,90 @@
                 </div>
               </div>
             </div>
+
  <!-- Content Start-->
+
  <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-            <h1 class="text-white m-0">Registered Kid</h1>
-        </div>
-        <div class="card-body text-center">
-            <h4 class="card-title">Salary List</h4>
-        </div>
-        <div class="card-footer bg-transparent py-4 px-5">
-            <div class="row border-bottom">
-                <div class="col-6 py-1 text-right border-right"><strong>Staff Name</strong></div>
-                <?php
-                $staffID = $_GET['id'];
-                require "conn.php";
-                if (isset($staffID)) {
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
+                <div class="card border-0 bg-light shadow-sm pb-2">
+                    <div class="card-header bg-secondary text-center p-4">
+                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+                        <h1 class="text-white m-0">Salary</h1>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Staff Detail</h4>
+                    </div>
+                    <div class="card-footer bg-transparent py-4 px-5">
+                        <div class="row border-bottom">
+                            <div class="col-6 py-1 text-right border-right"><strong>Staff's Name</strong></div>
+                            <?php
+                            $staffID = $_GET['id'];
+                            require "conn.php";
+                            if (isset($staffID)) {
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } else {
 
-                        $staff_sql = "SELECT * from staff where staffID=$staffID";
-                        $result = $conn->query($staff_sql);
-                        $count = $result->num_rows;
-                        $i = 0;
-                        $staff_row = mysqli_fetch_assoc($result);
-                        if ($count > 0) {
-                            echo "<div class='col-6 py-1'>" . $staff_row['username'] . "</div></div>";
-                            echo "<div class='row border-bottom'>";
-                            echo "<div class='col-6 py-1 text-right border-right'><strong>Staff Type</strong></div>";
-                            echo "<div class='col-6 py-1'>" . $staff_row['staffType'] . "</div>";
-                            echo "</div>";
-                            echo "<div class='row border-bottom'>";
-                            echo "<div class='col-6 py-1 text-right border-right'><strong>Salary</strong></div>";
-                            echo "<div class='col-6 py-1'>" . $staff_row['salary'] . "</div>";
-                            echo "</div>";
-                        }
-                    }
-                } else {
-                    echo "error!";
-                }
+                                    $staff_sql = "SELECT * from staff where staffID=$staffID";
+                                    $result = $conn->query($staff_sql);
+                                    $count = $result->num_rows;
+                                    $i = 0;
+                                    $staff_row = mysqli_fetch_assoc($result);
+                                    if ($count > 0) {
+                                        echo "<div class='col-6 py-1'>" . $staff_row['username'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['phoneNumber'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['address'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['yearRegister'] . "</div></div></div><hr>";
+                                        echo "<div class='card-body text-center'>";
+                                        echo "<h4 class='card-title'>Salary</h4></div>";
+                                        echo "<div class='card-footer bg-transparent py-4 px-5'>";
 
-                ?>
-            
-        </div>
-    </div>
-</div>
+                                        $salary_sql = "SELECT * from staff join salary ON staff.staffID=salary.staffID where staff.staffID=$staffID";
+                                        $result = $conn->query($salary_sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        if ($count > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $a[$i] = $row["amount"];
+                                            $b[$i] = $row["payStatus"];
+                                            $c[$i] = $row["payDay"];
+                                            $i++;
+                                        }
+                                        for ($i = 0; $i < $count; $i++) {
+                                            $c[$i] = date("d.m.Y");
+
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Salary Amount</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Status</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $b[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Date</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div><br>";
+                                    
+                                        }
+                                    }
+                                    }
+                                }
+                            } else {
+                                echo "error!";
+                            }
+
+                            ?>
+                        
+                    </div>
+                </div>
+            </div>
+
+  
 <!-- Content End-->
 
 <!-- Footer Start -->

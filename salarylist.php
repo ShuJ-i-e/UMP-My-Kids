@@ -143,7 +143,7 @@
                         class="dropdown-toggle">Salary</a>
                     <ul class="collapse list-unstyled" id="salarySubmenu">
                         <li>
-                            <a href="salarylist_test.html">List</a>
+                            <a href="salarylist.php">List</a>
                         </li>
                         <li>
                             <a href="report_test.html">Report</a>
@@ -217,22 +217,14 @@
  <div class="col-lg-12 mb-5">
     <div class="card border-0 bg-light shadow-sm pb-2">
         <div class="card-header bg-secondary text-center p-4">
-            <h1 class="text-white m-0">Pay Salary</h1>
+            <h1 class="text-white m-0">Salary</h1>
         </div>
         <div class="card-body text-center">
-            <h4 class="card-title">Salary List</h4>
+            <h3 class="card-title">Salary List</h3>
         </div>
     </div>
-    </div>
+</div>
 
-    <div class="dropdown">
-        <button class="dropbtn">Sort</button>
-        <div class="dropdown-content">
-        <a href="salarylist_username.php">Sort by Alphabet</a>
-          <a href="salarylist_staff.php">Sort by Staff Type</a>
-          <a href="salarylist_status.php">Sort by Pay Status Type</a>
-        </div>
-      </div>
     
       <table>
             <tr>
