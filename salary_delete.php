@@ -15,11 +15,11 @@ if(isset($_POST['salary_delete_multiple_btn']))
 
     if($query_run)
     {
-        header("Location: salary_deleteList.php");
+        header("Location: salarylist.php?msg=Record updated successfully!");
     }
     else
     {
-        header("Location: salary_deleteList.php");
+        header("Location: salarylist.php?msg=Record not updated!");
     }
 }
 ?>

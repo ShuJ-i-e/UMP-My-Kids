@@ -255,7 +255,7 @@
                                         echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
                                         echo "<div class='col-6 py-1'>" . $staff_row['yearRegister'] . "</div></div></div><hr>";
                                         echo "<div class='card-body text-center'>";
-                                        echo "<h4 class='card-title'>Salary</h4></div>";
+                                        echo "<h4 class='card-title'>Salary Details</h4></div>";
                                         echo "<div class='card-footer bg-transparent py-4 px-5'>";
 
                                         $salary_sql = "SELECT * from staff join salary ON staff.staffID=salary.staffID where staff.staffID=$staffID";

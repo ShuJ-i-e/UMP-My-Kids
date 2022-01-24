@@ -218,14 +218,15 @@
  <div class="col-lg-12 mb-5">
     <div class="card border-0 bg-light shadow-sm pb-2">
         <div class="card-header bg-secondary text-center p-4">
+        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
             <h1 class="text-white m-0">Salary</h1>
         </div>
         <div class="card-body text-center">
             <h3 class="card-title">Salary List</h3>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
             <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_deleteList.php'"><i class='fa fa-plus'></i> Delete Staff</button>
-
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_updateList.php'"><i class='fa fa-plus'></i> Update Staff</button>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
         </div>
     </div>
 </div>
@@ -263,8 +264,6 @@
                             </thead>
                             <tbody>
                                 <?php
-                                
-                                
                                     require "conn.php";
 
                                     if(isset($_GET['search']))
@@ -291,9 +290,7 @@
                                                 echo "<td>" . $c[$i] . "</td>";
                     
                                                 $view_url = "salary_detail.php?id=" . $d[$i];
-                                                $edit_url = "salary_updateList.php?id=" . $d[$i];
-                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td>";
                                             }
                                         }
                 
@@ -301,6 +298,7 @@
                                 ?>
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>

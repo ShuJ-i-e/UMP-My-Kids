@@ -216,16 +216,11 @@
             <!-- End Modal -->
 
  <!-- Content Start-->
- <?php
-            if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
-                echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
-            }
-?>
-
  <table>
  <div class="col-lg-12 mb-5">
     <div class="card border-0 bg-light shadow-sm pb-2">
         <div class="card-header bg-secondary text-center p-4">
+        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
             <h1 class="text-white m-0">Salary</h1>
         </div>
         <div class="card-body text-center">
