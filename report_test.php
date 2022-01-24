@@ -146,7 +146,7 @@
                             <a href="salarylist.php">List</a>
                         </li>
                         <li>
-                            <a href="report_test.html">Report</a>
+                            <a href="report_test.php">Report</a>
                         </li>
                         </li>
                     </ul>
@@ -217,49 +217,34 @@
 
 
  <!-- Content Start-->
- <table>
- <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-            <h1 class="text-white m-0">Salary</h1>
-        </div>
-        <div class="card-body text-center">
-            <h3 class="card-title">Salary List</h3>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_deleteList.php'"><i class='fa fa-plus'></i> Delete Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_updateList.php'"><i class='fa fa-plus'></i> Update Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
-        </div>
-    </div>
-</div>
-
-            <tr>
-                <th>Name</th>
-                <th>Staff Type</th>
-                <th>Pay Status</th>
-                <th>Salary Details</th>
-            </tr>
-            <?php
-            require "conn.php";
+ <div class="text-center">
+                <h4 class="card-title">Report</h4>
+            </div>
+            <table>
+                <tr>
+                    <th>Staff Name</th>
+                    <th>Staff Type</th>
+                    <th>Salary Amount</th>
+                    <th>Payment Status</th>
+                    <th>Payment Day</th>
+                </tr>
+                <?php
+                require "conn.php";
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
-                }else {
-                    $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
+                } else {
+                    $sql = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
                     INNER JOIN salary ON staff.staffID=salary.staffID" ;
                     $result = $conn->query($sql);
-
-                    if (!$result) {
-                        trigger_error('Invalid query: ' . $conn->error);
-                    }
-
                     $count = $result->num_rows;
                     $i = 0;
                     if ($count > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $a[$i] = $row["username"];
                             $b[$i] = $row["staffType"];
-                            $c[$i] = $row["payStatus"];
-                            $d[$i] = $row["staffID"];
+                            $c[$i] = $row["amount"];
+                            $d[$i] = $row["payStatus"];
+                            $e[$i] = $row["payDay"];
                             $i++;
                         }
                         for ($i = 0; $i < $count; $i++) {
@@ -267,14 +252,54 @@
                             echo "<td>" . $a[$i] . "</td>";
                             echo "<td>" . $b[$i] . "</td>";
                             echo "<td>" . $c[$i] . "</td>";
-
-                            $view_url = "salary_detail.php?id=" . $d[$i];
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td>";
+                            echo "<td>" . $d[$i] . "</td>";
+                            echo "<td>" . $e[$i] . "</td>";
                         }
                     }
                 }
                 ?>
-    </table>
+            </table>
+            <br>
+            <div class="text-center">
+                <h4 class="card-title">Summary</h4>
+            </div>
+            <table>
+                <tr>
+                    <th>Total number of Salary</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(salaryID) FROM salary");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Average Amount of Salary</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $i=0;
+                        $result = mysqli_query($conn, "SELECT amount FROM staff");
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $salaryAmount[$i] = $row["amount"];
+                            $i++;
+                        }
+                        $totalAmount=0;
+                        
+                        for ($i = 0; $i < $count; $i++) {
+                            $totalAmount = $totalAmount + (int)$salaryAmount[$i];
+                        }
+                        $avgAmount = $totalAmount/$i;
+                        $row = $result->fetch_row();
+                        echo "<td>".$avgAmount."</td>";
+                    }
+                    ?>
+                </tr>
+            </table>
 <!-- Content End-->
 
 <!-- Footer Start -->

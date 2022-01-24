@@ -146,7 +146,7 @@
                             <a href="salarylist.php">List</a>
                         </li>
                         <li>
-                            <a href="report_test.html">Report</a>
+                            <a href="report_test.php">Report</a>
                         </li>
                         </li>
                     </ul>
