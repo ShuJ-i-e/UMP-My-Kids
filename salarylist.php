@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>KidKinder - Kindergarten Website Template</title>
+    <title>Salary- UMP MY KIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -196,6 +196,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- The Modal -->
             <div class="modal" id="myModal">
             <div class="modal-content">
@@ -212,13 +213,16 @@
                 </div>
               </div>
             </div>
+            <!-- End Modal -->
+
 
  <!-- Content Start-->
  <?php
             if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
                 echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
             }
-            ?>
+?>
+
  <table>
  <div class="col-lg-12 mb-5">
     <div class="card border-0 bg-light shadow-sm pb-2">
@@ -227,8 +231,9 @@
         </div>
         <div class="card-body text-center">
             <h3 class="card-title">Salary List</h3>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insert.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
             <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
+            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_deleteList.php'"><i class='fa fa-plus'></i> Delete Staff</button>
         </div>
     </div>
 </div>
@@ -268,8 +273,10 @@
                             echo "<td>" . $b[$i] . "</td>";
                             echo "<td>" . $c[$i] . "</td>";
 
-                            $view_url = "salarydetail.php?id=" . $d[$i];
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td></tr>";
+                            $view_url = "salary_detail.php?id=" . $d[$i];
+                            $edit_url = "salary_updateList.php?id=" . $d[$i];
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                         }
                     }
                 }
@@ -307,6 +314,7 @@ $('#sidebarCollapse').on('click', function() {
     $('#sidebar').toggleClass('active');
 });
 });
+
 
 // Get the modal
 var modal = document.getElementById("myModal");

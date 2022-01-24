@@ -196,6 +196,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- The Modal -->
             <div class="modal" id="myModal">
             <div class="modal-content">
@@ -212,8 +213,15 @@
                 </div>
               </div>
             </div>
+            <!-- End Modal -->
 
  <!-- Content Start-->
+ <?php
+            if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
+                echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
+            }
+?>
+
  <table>
  <div class="col-lg-12 mb-5">
     <div class="card border-0 bg-light shadow-sm pb-2">
@@ -221,93 +229,73 @@
             <h1 class="text-white m-0">Salary</h1>
         </div>
         <div class="card-body text-center">
-            <h3 class="card-title">Salary List</h3>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_deleteList.php'"><i class='fa fa-plus'></i> Delete Staff</button>
+            <h3 class="card-title">Delete List</h3>
 
         </div>
     </div>
 </div>
-<div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card mt-4">
+
+<div class="card mt-4">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <form action="" method="GET">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                    </div>
-                                </form>
+                        <form action="salary_delete.php" method="POST">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <button type="submit" name="salary_delete_multiple_btn" class="btn btn-danger">Delete</button>
+                                        </th>
+                                            
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Staff Type</th>
+                                        <th>Pay Status</th>
+                                        <th>Payment Date</th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <?php
+                                        require "conn.php";
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                        $query = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
+                                        INNER JOIN salary ON staff.staffID=salary.staffID";
+                                        $query_run  = mysqli_query($conn, $query);
 
-            <div class="col-md-12">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Staff Type</th>
-                                    <th>Pay Status</th>
-                                <th>Salary Details</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                
-                                
-                                    require "conn.php";
-
-                                    if(isset($_GET['search']))
-                                    {
-                                        $filtervalues = $_GET['search'];
-                                        $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
-                                        INNER JOIN salary ON staff.staffID=salary.staffID  WHERE CONCAT(username,staffType, payStatus) LIKE '%$filtervalues%' ";
-                                        $query_run = mysqli_query($conn, $sql);
-
-                                        $count = $query_run->num_rows;
-                                        $i = 0;
-                                        if ($count > 0) {
-                                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                                $a[$i] = $row["username"];
-                                                $b[$i] = $row["staffType"];
-                                                $c[$i] = $row["payStatus"];
-                                                $d[$i] = $row["staffID"];
-                                                $i++;
-                                            }
-                                            for ($i = 0; $i < $count; $i++) {
-                                                echo "<tr>";
-                                                echo "<td>" . $a[$i] . "</td>";
-                                                echo "<td>" . $b[$i] . "</td>";
-                                                echo "<td>" . $c[$i] . "</td>";
-                    
-                                                $view_url = "salary_detail.php?id=" . $d[$i];
-                                                $edit_url = "salary_updateList.php?id=" . $d[$i];
-                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                        if(mysqli_num_rows($query_run) > 0)
+                                        {
+                                            foreach($query_run as $row)
+                                            {
+                                                ?>
+                                                <tr>
+                                                    <td style="width:10px; text-align: center;">
+                                                        <input type="checkbox" name="salary_delete_id[]" value="<?= $row['salaryID']; ?>">
+                                                    </td>
+                                                    <td><?= $row['salaryID']; ?></td>
+                                                    <td><?= $row['username']; ?></td>
+                                                    <td><?= $row['staffType']; ?></td>
+                                                    <td><?= $row['payStatus']; ?></td>
+                                                    <td><?= $row['payDay']; ?></td>
+                                                </tr>
+                                                <?php
                                             }
                                         }
-                
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
+                                        else
+                                        {
+                                            ?>
+                                                <tr>
+                                                    <td colspan="5">No Record Found</td>
+                                                </tr>
+                                            <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
-
-    </table>
 <!-- Content End-->
 
 <!-- Footer Start -->
@@ -340,6 +328,7 @@ $('#sidebarCollapse').on('click', function() {
     $('#sidebar').toggleClass('active');
 });
 });
+
 
 // Get the modal
 var modal = document.getElementById("myModal");

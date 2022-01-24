@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Salary- UMP MY KIDS</title>
+    <title>Salary List - UMP MYKIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -42,6 +42,7 @@
         tr:hover {
             background-color: #dddddd;
         }
+
     /* Dropdown Button */
 .dropbtn {
   background-color: #04AA6D;
@@ -214,100 +215,80 @@
             </div>
 
  <!-- Content Start-->
- <table>
- <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-            <h1 class="text-white m-0">Salary</h1>
-        </div>
-        <div class="card-body text-center">
-            <h3 class="card-title">Salary List</h3>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_deleteList.php'"><i class='fa fa-plus'></i> Delete Staff</button>
 
-        </div>
-    </div>
-</div>
-<div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <form action="" method="GET">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
-                                        <button type="submit" class="btn btn-primary">Search</button>
+ <form name="form1" method="POST" action="salary_insert.php">
+                <div class="center">
+                    <div class="col-lg-10-m2">
+
+                        <div class="card border-0">
+                            <div class="card-header bg-secondary text-center p-4">
+                                <h1 class="text-white m-0">Insert Salary Detail</h1>
+                            </div>
+                            <div class="card-body rounded-bottom bg-primary p-5">
+                                <h3 class=" mb-4">Staff's Detail</h3>
+                                <div class="form-group">
+                                    <select name="staffID" id="staffID" class="custom-select border-0 px-4" onchange="displayStaffInfo()">
+                                        <option selected>Staff's Name</option>
+                                        <?php
+                                        require "conn.php";
+                                        if ($conn->connect_error) {
+                                            die("Connection failed: " . $conn->connect_error);
+                                        } else {
+                                            $sql = "SELECT staffID, username FROM staff ";
+                                            $result = $conn->query($sql);
+                                            $count = $result->num_rows;
+                                            if ($count >= 1) {
+                                                $i = 1;
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                    $menu[$i] = "<option value=" . $row['staffID'] . ">" . $row['username'] . "</option>";
+                                                    echo $menu[$i];
+                                                    $i++;
+                                                }
+                                            } else {
+                                                $menu = "<option disabled='disabled'> No staff registered yet </option>";
+                                                echo $menu;
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div id="staffInfo" style="display: none">
+                                    <div class="form-group">
+                                        <input type="text" id="phoneNumber" class="form-control border-0 p-4" placeholder="Phone Number" disabled />
                                     </div>
-                                </form>
+                                    <div class="form-group">
+                                        <input type="text" id="address" class="form-control border-0 p-4" placeholder="Address" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" id="yearRegister" class="form-control border-0 p-4" placeholder="Year Registered" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" id="amount" class="form-control border-0 p-4" placeholder="Amount" disabled />
+                                    </div>
+                                </div>
+                                <hr>
 
+                                <h3 class=" mb-4">Salary Detail</h3>
+                                <div class="form-group">
+                                    <select name="payStatus" class="custom-select border-0 px-4" style="height: 47px;">
+                                        <option selected>Select Payment Status</option>
+                                        <option value="Paid">Paid</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Overdue">Overdue</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" name="paymentDay" class="form-control border-0 p-4" placeholder="Payment Date">
+                                </div>
+                                <div>
+                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Submit</button>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="salarylist.php">Back</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Staff Type</th>
-                                    <th>Pay Status</th>
-                                <th>Salary Details</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                
-                                
-                                    require "conn.php";
-
-                                    if(isset($_GET['search']))
-                                    {
-                                        $filtervalues = $_GET['search'];
-                                        $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
-                                        INNER JOIN salary ON staff.staffID=salary.staffID  WHERE CONCAT(username,staffType, payStatus) LIKE '%$filtervalues%' ";
-                                        $query_run = mysqli_query($conn, $sql);
-
-                                        $count = $query_run->num_rows;
-                                        $i = 0;
-                                        if ($count > 0) {
-                                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                                $a[$i] = $row["username"];
-                                                $b[$i] = $row["staffType"];
-                                                $c[$i] = $row["payStatus"];
-                                                $d[$i] = $row["staffID"];
-                                                $i++;
-                                            }
-                                            for ($i = 0; $i < $count; $i++) {
-                                                echo "<tr>";
-                                                echo "<td>" . $a[$i] . "</td>";
-                                                echo "<td>" . $b[$i] . "</td>";
-                                                echo "<td>" . $c[$i] . "</td>";
-                    
-                                                $view_url = "salary_detail.php?id=" . $d[$i];
-                                                $edit_url = "salary_updateList.php?id=" . $d[$i];
-                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                                            }
-                                        }
-                
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    </table>
+            </form>
+  
 <!-- Content End-->
 
 <!-- Footer Start -->
@@ -366,6 +347,30 @@ if (event.target == modal) {
     modal.style.display = "none";
 }
 }
+
+function displayStaffInfo() {
+            var div = document.getElementById("staffInfo");
+            div.style.display = 'block';
+            var StaffID = document.getElementById("staffID");
+            var selectedStaffID = StaffID.value;
+                $.ajax({
+                    type: "POST",
+                    url: "getStaffInfo.php",
+                    data: "id=" + selectedStaffID,
+                    success: function(result) {
+                        console.log(result);
+                        staff_info = JSON.parse(result);
+                        $('#phoneNumber').val(staff_info[0].phoneNumber);
+                        $('#address').val(staff_info[0].address);
+                        $('#yearRegister').val(staff_info[0].yearRegister);
+                        $('#amount').val(staff_info[0].amount);
+                    },
+                    fail: function(xhr, textStatus, errorThrown) {
+                        console.log('request failed');
+                    }
+                });
+            
+        }
 </script>
 
     <!-- Template Javascript -->

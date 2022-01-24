@@ -216,85 +216,89 @@
 
  <!-- Content Start-->
 
- <div class="col-lg-12 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2">
-                    <div class="card-header bg-secondary text-center p-4">
-                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-                        <h1 class="text-white m-0">Salary</h1>
-                    </div>
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Staff Detail</h4>
-                    </div>
-                    <div class="card-footer bg-transparent py-4 px-5">
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right"><strong>Staff's Name</strong></div>
-                            <?php
-                            $staffID = $_GET['id'];
-                            require "conn.php";
-                            if (isset($staffID)) {
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                } else {
+ <div class="center">
+<div class="col-lg-10-m2">
 
-                                    $staff_sql = "SELECT * from staff where staffID=$staffID";
-                                    $result = $conn->query($staff_sql);
-                                    $count = $result->num_rows;
-                                    $i = 0;
-                                    $staff_row = mysqli_fetch_assoc($result);
-                                    if ($count > 0) {
-                                        echo "<div class='col-6 py-1'>" . $staff_row['username'] . "</div></div>";
-                                        echo "<div class='row border-bottom'>";
-                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
-                                        echo "<div class='col-6 py-1'>" . $staff_row['phoneNumber'] . "</div>";
-                                        echo "</div>";
-                                        echo "<div class='row border-bottom'>";
-                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
-                                        echo "<div class='col-6 py-1'>" . $staff_row['address'] . "</div>";
-                                        echo "</div>";
-                                        echo "<div class='row'>";
-                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
-                                        echo "<div class='col-6 py-1'>" . $staff_row['yearRegister'] . "</div></div></div><hr>";
-                                        echo "<div class='card-body text-center'>";
-                                        echo "<h4 class='card-title'>Salary</h4></div>";
-                                        echo "<div class='card-footer bg-transparent py-4 px-5'>";
+    <div class="card border-0">
+        <div class="card-header bg-secondary text-center p-4">
+            <h1 class="text-white m-0">Update Salary Details</h1>
+        </div>
+        <div class="card-body rounded-bottom bg-primary p-5">
+            <h3 class=" mb-4">Staff Details</h3>
+            <form name="form1" method="POST" action="salary_update.php">
+                <div class="center">
+                    <div class="col-lg-10-m2">
 
-                                        $salary_sql = "SELECT * from staff join salary ON staff.staffID=salary.staffID where staff.staffID=$staffID";
-                                        $result = $conn->query($salary_sql);
-                                        $count = $result->num_rows;
-                                        $i = 0;
-                                        if ($count > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $a[$i] = $row["amount"];
-                                            $b[$i] = $row["payStatus"];
-                                            $c[$i] = $row["payDay"];
-                                            $i++;
+                        <div class="card border-0">
+                            <div class="card-header bg-secondary text-center p-4">
+                                <h1 class="text-white m-0">Insert Salary Detail</h1>
+                            </div>
+                            <div class="card-body rounded-bottom bg-primary p-5">
+                                <h3 class=" mb-4">Staff's Detail</h3>
+                                <div class="form-group">
+                                    <select name="staffID" id="staffID" class="custom-select border-0 px-4" onchange="displayStaffInfo()">
+                                        <option selected>Staff's Name</option>
+                                        <?php
+                                        require "conn.php";
+                                        if ($conn->connect_error) {
+                                            die("Connection failed: " . $conn->connect_error);
+                                        } else {
+                                            $sql = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
+                                            INNER JOIN salary ON staff.staffID=salary.staffID" ;
+                                            $result = $conn->query($sql);
+                                            $count = $result->num_rows;
+                                            if ($count >= 1) {
+                                                $i = 1;
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                    $menu[$i] = "<option value=" . $row['staffID'] . ">" . $row['username'] . "</option>";
+                                                    echo $menu[$i];
+                                                    $i++;
+                                                }
+                                            } else {
+                                                $menu = "<option disabled='disabled'> No staff registered yet </option>";
+                                                echo $menu;
+                                            }
                                         }
-                                        for ($i = 0; $i < $count; $i++) {
-                                            $c[$i] = date("d.m.Y");
+                                        ?>
+                                    </select>
+                                </div>
+                                <div id="staffInfo" style="display: none">
+                                    <div class="form-group">
+                                        <input type="text" id="phoneNumber" class="form-control border-0 p-4" placeholder="Phone Number" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="address" class="form-control border-0 p-4" placeholder="Address" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" id="yearRegister" class="form-control border-0 p-4" placeholder="Year Registered" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" id="amount" class="form-control border-0 p-4" placeholder="Amount" disabled />
+                                    </div>
+                                </div>
+                                <hr>
 
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Salary Amount</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Status</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $b[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Date</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div><br>";
-                                    
-                                        }
-                                    }
-                                    }
-                                }
-                            } else {
-                                echo "error!";
-                            }
-
-                            ?>
-                        
+                                <h3 class=" mb-4">Salary Detail</h3>
+                                <div class="form-group">
+                                    <select name="payStatus" class="custom-select border-0 px-4" style="height: 47px;">
+                                        <option selected>Select Payment Status</option>
+                                        <option value="Paid">Paid</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Overdue">Overdue</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" name="paymentDay" class="form-control border-0 p-4" placeholder="Payment Date">
+                                </div>
+                                <div>
+                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="salarylist.php">Back</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+            </form>
+
 
   
 <!-- Content End-->
@@ -355,6 +359,30 @@ if (event.target == modal) {
     modal.style.display = "none";
 }
 }
+
+function displayStaffInfo() {
+            var div = document.getElementById("staffInfo");
+            div.style.display = 'block';
+            var StaffID = document.getElementById("staffID");
+            var selectedStaffID = StaffID.value;
+                $.ajax({
+                    type: "POST",
+                    url: "getStaffInfo.php",
+                    data: "id=" + selectedStaffID,
+                    success: function(result) {
+                        console.log(result);
+                        staff_info = JSON.parse(result);
+                        $('#phoneNumber').val(staff_info[0].phoneNumber);
+                        $('#address').val(staff_info[0].address);
+                        $('#yearRegister').val(staff_info[0].yearRegister);
+                        $('#amount').val(staff_info[0].amount);
+                    },
+                    fail: function(xhr, textStatus, errorThrown) {
+                        console.log('request failed');
+                    }
+                });
+            
+        }
 </script>
 
     <!-- Template Javascript -->
