@@ -219,6 +219,8 @@
                 echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
             }
             ?>
+
+
  <table>
  <div class="col-lg-12 mb-5">
     <div class="card border-0 bg-light shadow-sm pb-2">
@@ -228,52 +230,85 @@
         <div class="card-body text-center">
             <h3 class="card-title">Salary List</h3>
             <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insert.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
         </div>
     </div>
 </div>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <form action="" method="GET">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
 
-            <tr>
-                <th>Name</th>
-                <th>Staff Type</th>
-                <th>Pay Status</th>
-                <th>Salary Details</th>
-            </tr>
-            <?php
-            require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }else {
-                    $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
-                    INNER JOIN salary ON staff.staffID=salary.staffID" ;
-                    $result = $conn->query($sql);
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    if (!$result) {
-                        trigger_error('Invalid query: ' . $conn->error);
-                    }
+            <div class="col-md-12">
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Staff Type</th>
+                                    <th>Pay Status</th>
+                                <th>Salary Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                
+                                
+                                    require "conn.php";
 
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["username"];
-                            $b[$i] = $row["staffType"];
-                            $c[$i] = $row["payStatus"];
-                            $d[$i] = $row["staffID"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td>" . $b[$i] . "</td>";
-                            echo "<td>" . $c[$i] . "</td>";
+                                    if(isset($_GET['search']))
+                                    {
+                                        $filtervalues = $_GET['search'];
+                                        $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
+                                        INNER JOIN salary ON staff.staffID=salary.staffID  WHERE CONCAT(username,staffType, payStatus) LIKE '%$filtervalues%' ";
+                                        $query_run = mysqli_query($conn, $sql);
 
-                            $view_url = "salarydetail.php?id=" . $d[$i];
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td></tr>";
-                        }
-                    }
-                }
-                ?>
+                                        $count = $query_run->num_rows;
+                                        $i = 0;
+                                        if ($count > 0) {
+                                            while ($row = mysqli_fetch_assoc($query_run)) {
+                                                $a[$i] = $row["username"];
+                                                $b[$i] = $row["staffType"];
+                                                $c[$i] = $row["payStatus"];
+                                                $d[$i] = $row["staffID"];
+                                                $i++;
+                                            }
+                                            for ($i = 0; $i < $count; $i++) {
+                                                echo "<tr>";
+                                                echo "<td>" . $a[$i] . "</td>";
+                                                echo "<td>" . $b[$i] . "</td>";
+                                                echo "<td>" . $c[$i] . "</td>";
+                    
+                                                $view_url = "salarydetail.php?id=" . $d[$i];
+                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td></tr>";
+                                            }
+                                        }
+                
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </table>
 <!-- Content End-->
 
