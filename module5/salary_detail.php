@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Salary- UMP MY KIDS</title>
+    <title>Salary - UMP MYKIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -16,14 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <style>
         table {
             font-family: arial, sans-serif;
@@ -42,6 +42,7 @@
         tr:hover {
             background-color: #dddddd;
         }
+
     /* Dropdown Button */
 .dropbtn {
   background-color: #04AA6D;
@@ -196,7 +197,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- The Modal -->
             <div class="modal" id="myModal">
             <div class="modal-content">
@@ -213,84 +213,88 @@
                 </div>
               </div>
             </div>
-            <!-- End Modal -->
 
  <!-- Content Start-->
- <table>
+
  <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-            <h1 class="text-white m-0">Salary</h1>
-        </div>
-        <div class="card-body text-center">
-            <h3 class="card-title">Delete List</h3>
+                <div class="card border-0 bg-light shadow-sm pb-2">
+                    <div class="card-header bg-secondary text-center p-4">
+                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+                        <h1 class="text-white m-0">Salary</h1>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Staff Detail</h4>
+                    </div>
+                    <div class="card-footer bg-transparent py-4 px-5">
+                        <div class="row border-bottom">
+                            <div class="col-6 py-1 text-right border-right"><strong>Staff's Name</strong></div>
+                            <?php
+                            $staffID = $_GET['id'];
+                            require "conn.php";
+                            if (isset($staffID)) {
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } else {
 
-        </div>
-    </div>
-</div>
+                                    $staff_sql = "SELECT * from staff where staffID=$staffID";
+                                    $result = $conn->query($staff_sql);
+                                    $count = $result->num_rows;
+                                    $i = 0;
+                                    $staff_row = mysqli_fetch_assoc($result);
+                                    if ($count > 0) {
+                                        echo "<div class='col-6 py-1'>" . $staff_row['username'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['phoneNumber'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['address'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['yearRegister'] . "</div></div></div><hr>";
+                                        echo "<div class='card-body text-center'>";
+                                        echo "<h4 class='card-title'>Salary Details</h4></div>";
+                                        echo "<div class='card-footer bg-transparent py-4 px-5'>";
 
-<div class="card mt-4">
-                    <div class="card-body">
-                        <form action="salary_delete.php" method="POST">
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            <button type="submit" name="salary_delete_multiple_btn" class="btn btn-danger">Delete</button>
-                                        </th>
-                                            
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Staff Type</th>
-                                        <th>Pay Status</th>
-                                        <th>Payment Date</th>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <?php
-                                        require "conn.php";
-
-                                        $query = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
-                                        INNER JOIN salary ON staff.staffID=salary.staffID";
-                                        $query_run  = mysqli_query($conn, $query);
-
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $row)
-                                            {
-                                                ?>
-                                                <tr>
-                                                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" name="salary_delete_id[]" value="<?= $row['salaryID']; ?>">
-                                                    </td>
-                                                    <td><?= $row['salaryID']; ?></td>
-                                                    <td><?= $row['username']; ?></td>
-                                                    <td><?= $row['staffType']; ?></td>
-                                                    <td><?= $row['payStatus']; ?></td>
-                                                    <td><?= $row['payDay']; ?></td>
-                                                </tr>
-                                                <?php
-                                            }
+                                        $salary_sql = "SELECT * from staff join salary ON staff.staffID=salary.staffID where staff.staffID=$staffID";
+                                        $result = $conn->query($salary_sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        if ($count > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $a[$i] = $row["amount"];
+                                            $b[$i] = $row["payStatus"];
+                                            $c[$i] = $row["payDay"];
+                                            $i++;
                                         }
-                                        else
-                                        {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="5">No Record Found</td>
-                                                </tr>
-                                            <?php
+                                        for ($i = 0; $i < $count; $i++) {
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Salary Amount</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Status</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $b[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Date</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div><br>";
+                                    
                                         }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </form>
+                                    }
+                                    }
+                                }
+                            } else {
+                                echo "error!";
+                            }
+
+                            ?>
+                        
                     </div>
                 </div>
             </div>
-            
-        </div>
-    </div>
+
+  
 <!-- Content End-->
 
 <!-- Footer Start -->
@@ -324,7 +328,6 @@ $('#sidebarCollapse').on('click', function() {
 });
 });
 
-
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -353,7 +356,7 @@ if (event.target == modal) {
 </script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

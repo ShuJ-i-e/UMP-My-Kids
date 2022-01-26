@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Salary List - UMP MYKIDS</title>
+    <title>Salary- UMP MY KIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -16,14 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <style>
         table {
             font-family: arial, sans-serif;
@@ -42,7 +42,6 @@
         tr:hover {
             background-color: #dddddd;
         }
-
     /* Dropdown Button */
 .dropbtn {
   background-color: #04AA6D;
@@ -197,6 +196,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- The Modal -->
             <div class="modal" id="myModal">
             <div class="modal-content">
@@ -213,94 +213,84 @@
                 </div>
               </div>
             </div>
+            <!-- End Modal -->
 
  <!-- Content Start-->
-
- <div class="center">
-<div class="col-lg-10-m2">
-
-    <div class="card border-0">
+ <table>
+ <div class="col-lg-12 mb-5">
+    <div class="card border-0 bg-light shadow-sm pb-2">
         <div class="card-header bg-secondary text-center p-4">
-            <h1 class="text-white m-0">Update Salary Details</h1>
+        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+            <h1 class="text-white m-0">Salary</h1>
         </div>
-        <div class="card-body rounded-bottom bg-primary p-5">
-            <h3 class=" mb-4">Staff Details</h3>
-            <form name="form1" method="POST" action="salary_update.php">
-                <div class="center">
-                    <div class="col-lg-10-m2">
+        <div class="card-body text-center">
+            <h3 class="card-title">Delete List</h3>
 
-                        <div class="card border-0">
-                            <div class="card-header bg-secondary text-center p-4">
-                                <h1 class="text-white m-0">Insert Salary Detail</h1>
-                            </div>
-                            <div class="card-body rounded-bottom bg-primary p-5">
-                                <h3 class=" mb-4">Staff's Detail</h3>
-                                <div class="form-group">
-                                    <select name="staffID" id="staffID" class="custom-select border-0 px-4" onchange="displayStaffInfo()">
-                                        <option selected>Staff's Name</option>
-                                        <?php
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+                    <div class="card-body">
+                        <form action="salary_delete.php" method="POST">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <button type="submit" name="salary_delete_multiple_btn" class="btn btn-danger">Delete</button>
+                                        </th>
+                                            
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Staff Type</th>
+                                        <th>Pay Status</th>
+                                        <th>Payment Date</th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <?php
                                         require "conn.php";
-                                        if ($conn->connect_error) {
-                                            die("Connection failed: " . $conn->connect_error);
-                                        } else {
-                                            $sql = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
-                                            INNER JOIN salary ON staff.staffID=salary.staffID" ;
-                                            $result = $conn->query($sql);
-                                            $count = $result->num_rows;
-                                            if ($count >= 1) {
-                                                $i = 1;
-                                                while ($row = mysqli_fetch_array($result)) {
-                                                    $menu[$i] = "<option value=" . $row['staffID'] . ">" . $row['username'] . "</option>";
-                                                    echo $menu[$i];
-                                                    $i++;
-                                                }
-                                            } else {
-                                                $menu = "<option disabled='disabled'> No staff registered yet </option>";
-                                                echo $menu;
+
+                                        $query = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
+                                        INNER JOIN salary ON staff.staffID=salary.staffID";
+                                        $query_run  = mysqli_query($conn, $query);
+
+                                        if(mysqli_num_rows($query_run) > 0)
+                                        {
+                                            foreach($query_run as $row)
+                                            {
+                                                ?>
+                                                <tr>
+                                                    <td style="width:10px; text-align: center;">
+                                                        <input type="checkbox" name="salary_delete_id[]" value="<?= $row['salaryID']; ?>">
+                                                    </td>
+                                                    <td><?= $row['salaryID']; ?></td>
+                                                    <td><?= $row['username']; ?></td>
+                                                    <td><?= $row['staffType']; ?></td>
+                                                    <td><?= $row['payStatus']; ?></td>
+                                                    <td><?= $row['payDay']; ?></td>
+                                                </tr>
+                                                <?php
                                             }
                                         }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div id="staffInfo" style="display: none">
-                                    <div class="form-group">
-                                        <input type="text" id="phoneNumber" class="form-control border-0 p-4" placeholder="Phone Number" disabled />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="address" class="form-control border-0 p-4" placeholder="Address" disabled />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="number" id="yearRegister" class="form-control border-0 p-4" placeholder="Year Registered" disabled />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="number" id="amount" class="form-control border-0 p-4" placeholder="Amount" disabled />
-                                    </div>
-                                </div>
-                                <hr>
-
-                                <h3 class=" mb-4">Salary Detail</h3>
-                                <div class="form-group">
-                                    <select name="payStatus" class="custom-select border-0 px-4" style="height: 47px;">
-                                        <option selected>Select Payment Status</option>
-                                        <option value="Paid">Paid</option>
-                                        <option value="Pending">Pending</option>
-                                        <option value="Overdue">Overdue</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" name="paymentDay" class="form-control border-0 p-4" placeholder="Payment Date">
-                                </div>
-                                <div>
-                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
-                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="salarylist.php">Back</a>
-                                </div>
-                            </div>
-                        </div>
+                                        else
+                                        {
+                                            ?>
+                                                <tr>
+                                                    <td colspan="5">No Record Found</td>
+                                                </tr>
+                                            <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
-            </form>
-
-
-  
+                </div>
+            </div>
+            
+        </div>
+    </div>
 <!-- Content End-->
 
 <!-- Footer Start -->
@@ -334,6 +324,7 @@ $('#sidebarCollapse').on('click', function() {
 });
 });
 
+
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -359,34 +350,10 @@ if (event.target == modal) {
     modal.style.display = "none";
 }
 }
-
-function displayStaffInfo() {
-            var div = document.getElementById("staffInfo");
-            div.style.display = 'block';
-            var StaffID = document.getElementById("staffID");
-            var selectedStaffID = StaffID.value;
-                $.ajax({
-                    type: "POST",
-                    url: "getStaffInfo.php",
-                    data: "id=" + selectedStaffID,
-                    success: function(result) {
-                        console.log(result);
-                        staff_info = JSON.parse(result);
-                        $('#phoneNumber').val(staff_info[0].phoneNumber);
-                        $('#address').val(staff_info[0].address);
-                        $('#yearRegister').val(staff_info[0].yearRegister);
-                        $('#amount').val(staff_info[0].amount);
-                    },
-                    fail: function(xhr, textStatus, errorThrown) {
-                        console.log('request failed');
-                    }
-                });
-            
-        }
 </script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

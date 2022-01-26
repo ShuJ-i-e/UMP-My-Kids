@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Salary- UMP MY KIDS</title>
+    <title>Salary List - UMP MYKIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -16,14 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <style>
         table {
             font-family: arial, sans-serif;
@@ -42,6 +42,7 @@
         tr:hover {
             background-color: #dddddd;
         }
+
     /* Dropdown Button */
 .dropbtn {
   background-color: #04AA6D;
@@ -196,7 +197,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- The Modal -->
             <div class="modal" id="myModal">
             <div class="modal-content">
@@ -213,93 +213,94 @@
                 </div>
               </div>
             </div>
-            <!-- End Modal -->
-
 
  <!-- Content Start-->
- <div class="text-center">
-                <h4 class="card-title">Report</h4>
-            </div>
-            <table>
-                <tr>
-                    <th>Staff Name</th>
-                    <th>Staff Type</th>
-                    <th>Salary Amount</th>
-                    <th>Payment Status</th>
-                    <th>Payment Day</th>
-                </tr>
-                <?php
-                require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
-                    INNER JOIN salary ON staff.staffID=salary.staffID" ;
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["username"];
-                            $b[$i] = $row["staffType"];
-                            $c[$i] = $row["amount"];
-                            $d[$i] = $row["payStatus"];
-                            $e[$i] = $row["payDay"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td>" . $b[$i] . "</td>";
-                            echo "<td>" . $c[$i] . "</td>";
-                            echo "<td>" . $d[$i] . "</td>";
-                            echo "<td>" . $e[$i] . "</td>";
-                        }
-                    }
-                }
-                ?>
-            </table>
-            <br>
-            <div class="text-center">
-                <h4 class="card-title">Summary</h4>
-            </div>
-            <table>
-                <tr>
-                    <th>Total number of Salary</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(salaryID) FROM salary");
-                        $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Average Amount of Salary</th>
-                    <?php
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $i=0;
-                        $result = mysqli_query($conn, "SELECT amount FROM staff");
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $salaryAmount[$i] = $row["amount"];
-                            $i++;
-                        }
-                        $totalAmount=0;
-                        
-                        for ($i = 0; $i < $count; $i++) {
-                            $totalAmount = $totalAmount + (int)$salaryAmount[$i];
-                        }
-                        $avgAmount = $totalAmount/$i;
-                        $row = $result->fetch_row();
-                        echo "<td>".$avgAmount."</td>";
-                    }
-                    ?>
-                </tr>
-            </table>
+
+ <div class="center">
+<div class="col-lg-10-m2">
+
+    <div class="card border-0">
+        <div class="card-header bg-secondary text-center p-4">
+            <h1 class="text-white m-0">Update Salary Details</h1>
+        </div>
+        <div class="card-body rounded-bottom bg-primary p-5">
+            <h3 class=" mb-4">Staff Details</h3>
+            <form name="form1" method="POST" action="salary_update.php">
+                <div class="center">
+                    <div class="col-lg-10-m2">
+
+                        <div class="card border-0">
+                            <div class="card-header bg-secondary text-center p-4">
+                                <h1 class="text-white m-0">Insert Salary Detail</h1>
+                            </div>
+                            <div class="card-body rounded-bottom bg-primary p-5">
+                                <h3 class=" mb-4">Staff's Detail</h3>
+                                <div class="form-group">
+                                    <select name="staffID" id="staffID" class="custom-select border-0 px-4" onchange="displayStaffInfo()">
+                                        <option selected>Staff's Name</option>
+                                        <?php
+                                        require "conn.php";
+                                        if ($conn->connect_error) {
+                                            die("Connection failed: " . $conn->connect_error);
+                                        } else {
+                                            $sql = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
+                                            INNER JOIN salary ON staff.staffID=salary.staffID" ;
+                                            $result = $conn->query($sql);
+                                            $count = $result->num_rows;
+                                            if ($count >= 1) {
+                                                $i = 1;
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                    $menu[$i] = "<option value=" . $row['staffID'] . ">" . $row['username'] . "</option>";
+                                                    echo $menu[$i];
+                                                    $i++;
+                                                }
+                                            } else {
+                                                $menu = "<option disabled='disabled'> No staff registered yet </option>";
+                                                echo $menu;
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div id="staffInfo" style="display: none">
+                                    <div class="form-group">
+                                        <input type="text" id="phoneNumber" class="form-control border-0 p-4" placeholder="Phone Number" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="address" class="form-control border-0 p-4" placeholder="Address" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" id="yearRegister" class="form-control border-0 p-4" placeholder="Year Registered" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" id="amount" class="form-control border-0 p-4" placeholder="Amount" disabled />
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <h3 class=" mb-4">Salary Detail</h3>
+                                <div class="form-group">
+                                    <select name="payStatus" class="custom-select border-0 px-4" style="height: 47px;">
+                                        <option selected>Select Payment Status</option>
+                                        <option value="Paid">Paid</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Overdue">Overdue</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" name="paymentDay" class="form-control border-0 p-4" placeholder="Payment Date">
+                                </div>
+                                <div>
+                                    <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
+                                    <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="salarylist.php">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+
+  
 <!-- Content End-->
 
 <!-- Footer Start -->
@@ -333,7 +334,6 @@ $('#sidebarCollapse').on('click', function() {
 });
 });
 
-
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -359,10 +359,34 @@ if (event.target == modal) {
     modal.style.display = "none";
 }
 }
+
+function displayStaffInfo() {
+            var div = document.getElementById("staffInfo");
+            div.style.display = 'block';
+            var StaffID = document.getElementById("staffID");
+            var selectedStaffID = StaffID.value;
+                $.ajax({
+                    type: "POST",
+                    url: "getStaffInfo.php",
+                    data: "id=" + selectedStaffID,
+                    success: function(result) {
+                        console.log(result);
+                        staff_info = JSON.parse(result);
+                        $('#phoneNumber').val(staff_info[0].phoneNumber);
+                        $('#address').val(staff_info[0].address);
+                        $('#yearRegister').val(staff_info[0].yearRegister);
+                        $('#amount').val(staff_info[0].amount);
+                    },
+                    fail: function(xhr, textStatus, errorThrown) {
+                        console.log('request failed');
+                    }
+                });
+            
+        }
 </script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

@@ -16,14 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href=../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href=../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href=../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <style>
         table {
             font-family: arial, sans-serif;
@@ -196,6 +196,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- The Modal -->
             <div class="modal" id="myModal">
             <div class="modal-content">
@@ -212,100 +213,93 @@
                 </div>
               </div>
             </div>
+            <!-- End Modal -->
+
 
  <!-- Content Start-->
- <table>
- <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-            <h1 class="text-white m-0">Salary</h1>
-        </div>
-        <div class="card-body text-center">
-            <h3 class="card-title">Salary List</h3>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_deleteList.php'"><i class='fa fa-plus'></i> Delete Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_updateList.php'"><i class='fa fa-plus'></i> Update Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
-        </div>
-    </div>
-</div>
-<div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <form action="" method="GET">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+ <div class="text-center">
+                <h4 class="card-title">Report</h4>
             </div>
-
-            <div class="col-md-12">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Staff Type</th>
-                                    <th>Pay Status</th>
-                                <th>Salary Details</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    require "conn.php";
-
-                                    if(isset($_GET['search']))
-                                    {
-                                        $filtervalues = $_GET['search'];
-                                        $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
-                                        INNER JOIN salary ON staff.staffID=salary.staffID  WHERE CONCAT(username,staffType, payStatus) LIKE '%$filtervalues%' ";
-                                        $query_run = mysqli_query($conn, $sql);
-
-                                        $count = $query_run->num_rows;
-                                        $i = 0;
-                                        if ($count > 0) {
-                                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                                $a[$i] = $row["username"];
-                                                $b[$i] = $row["staffType"];
-                                                $c[$i] = $row["payStatus"];
-                                                $d[$i] = $row["staffID"];
-                                                $i++;
-                                            }
-                                            for ($i = 0; $i < $count; $i++) {
-                                                echo "<tr>";
-                                                echo "<td>" . $a[$i] . "</td>";
-                                                echo "<td>" . $b[$i] . "</td>";
-                                                echo "<td>" . $c[$i] . "</td>";
-                    
-                                                $view_url = "salary_detail.php?id=" . $d[$i];
-                                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td>";
-                                            }
-                                        }
-                
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
+            <table>
+                <tr>
+                    <th>Staff Name</th>
+                    <th>Staff Type</th>
+                    <th>Salary Amount</th>
+                    <th>Payment Status</th>
+                    <th>Payment Day</th>
+                </tr>
+                <?php
+                require "conn.php";
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                } else {
+                    $sql = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
+                    INNER JOIN salary ON staff.staffID=salary.staffID" ;
+                    $result = $conn->query($sql);
+                    $count = $result->num_rows;
+                    $i = 0;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $a[$i] = $row["username"];
+                            $b[$i] = $row["staffType"];
+                            $c[$i] = $row["amount"];
+                            $d[$i] = $row["payStatus"];
+                            $e[$i] = $row["payDay"];
+                            $i++;
+                        }
+                        for ($i = 0; $i < $count; $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $a[$i] . "</td>";
+                            echo "<td>" . $b[$i] . "</td>";
+                            echo "<td>" . $c[$i] . "</td>";
+                            echo "<td>" . $d[$i] . "</td>";
+                            echo "<td>" . $e[$i] . "</td>";
+                        }
+                    }
+                }
+                ?>
+            </table>
+            <br>
+            <div class="text-center">
+                <h4 class="card-title">Summary</h4>
+            </div>
+            <table>
+                <tr>
+                    <th>Total number of Salary</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $result = mysqli_query($conn, "SELECT COUNT(salaryID) FROM salary");
+                        $row = $result->fetch_row();
+                        echo "<td>".$row[0]."</td>";
+                    }
+                    ?>
+                </tr>
+                <tr>
+                    <th>Average Amount of Salary</th>
+                    <?php
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $i=0;
+                        $result = mysqli_query($conn, "SELECT amount FROM staff");
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $salaryAmount[$i] = $row["amount"];
+                            $i++;
+                        }
+                        $totalAmount=0;
                         
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    </table>
+                        for ($i = 0; $i < $count; $i++) {
+                            $totalAmount = $totalAmount + (int)$salaryAmount[$i];
+                        }
+                        $avgAmount = $totalAmount/$i;
+                        $row = $result->fetch_row();
+                        echo "<td>".$avgAmount."</td>";
+                    }
+                    ?>
+                </tr>
+            </table>
 <!-- Content End-->
 
 <!-- Footer Start -->
@@ -339,6 +333,7 @@ $('#sidebarCollapse').on('click', function() {
 });
 });
 
+
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -367,7 +362,7 @@ if (event.target == modal) {
 </script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>
