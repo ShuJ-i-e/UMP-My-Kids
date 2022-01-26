@@ -38,7 +38,7 @@ $_SESSION["username"] = "owner";
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../owner_main.php">Home</a>
                 </li>
                 <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>

@@ -53,19 +53,18 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="#">Home</a>
+                    <a href="../owner_main.php">Home</a>
                 </li>
                 <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li>
-                        <a href="owner_index.php">List</a>
+                            <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
-                        <a href="owner_report.php">Report</a>
+                            <a href="../module2/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -74,10 +73,10 @@
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -96,17 +95,16 @@
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="module6/owner_schedule_list.php">List</a>
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="module6/owner_schedule_report.php">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">

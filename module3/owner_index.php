@@ -53,7 +53,7 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../owner_main.php">Home</a>
                 </li>
                 <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
@@ -66,7 +66,7 @@
                         </li>
                     </ul>
                 </li>
-                <li  class="active">
+                <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>

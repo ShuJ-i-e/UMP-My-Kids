@@ -62,7 +62,7 @@ $_SESSION["username"] = "owner";
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../owner_main.php">Home</a>
                 </li>
                 <li class="active">
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
@@ -101,7 +101,7 @@ $_SESSION["username"] = "owner";
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                    <li>
+                        <li>
                             <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
