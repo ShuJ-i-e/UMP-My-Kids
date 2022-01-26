@@ -77,14 +77,14 @@ else {
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li class="active">
-                            <a href="owner_index.php">List</a>
+                        <li>
+                            <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="owner_report.php">Report</a>
+                            <a href="../module2/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
