@@ -1,15 +1,15 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    //direct user back to main when no session
-    else{
-        header("Location: ../owner_main.php"); 
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
+//direct user back to main when no session
+else {
+    header("Location: ../owner_main.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +58,9 @@
         background-color: #dddddd;
     }
 
-    #outputArea{
-        display:none;
+    #outputArea {
+        display: none;
     }
-
 </style>
 
 <body>
@@ -74,39 +73,35 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../owner_main.php">Home</a>
+                    <a href="#">Home</a>
                 </li>
-                <li>
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Parents & Kids</a>
+                <li class="active">
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
-                            <a href="#">List</a>
+                        <li class="active">
+                            <a href="owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Manpower</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Payment</a>
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenu">
                         <li>
                             <a href="#">List</a>
@@ -116,22 +111,20 @@
                         </li>
                     </ul>
                 </li>
-                <li class="active">
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Activity</a>
+                <li>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li class="active">
-                            <a href="owner_schedule_list.php">List</a>
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="owner_schedule_report.php">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -161,19 +154,19 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
-                </div>
-              </div>
             </div>
             <!-- End Modal -->
             <!-- Delete Modal -->
@@ -194,58 +187,59 @@
             </div>
             <!--End Delete Modal -->
             <?php
-                if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
-                    echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
-                }
+            if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
+                echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
+            }
             ?>
-            
-            <?php include 'conn.php';?>
+
+            <?php include 'conn.php'; ?>
             <?php
-                $errorLbl="";
-                $noResultLbl= "";
-            ?>
-
-            <?php 
-                function findKidsName($dbConn, $passName)
-                {
-                    //get the kids name form ID
-                    $kidsSql = "SELECT name FROM kids WHERE kidsID = '$passName';";
-                    $kidsResult = $dbConn->query($kidsSql);
-                    if ($kidsResult->num_rows > 0) {
-                        // output data of each row
-                        while($row = $kidsResult->fetch_assoc()) {
-                            $NewKidsName=$row["name"];
-                            return $NewKidsName;
-                        }
-                    }
-                }
-
-                function findStaffName($dbConn, $passUsername){
-                    //get the staff name form ID
-                    $staffSql = "SELECT username FROM staff WHERE staffID = '$passUsername';";
-                    $staffResult = $dbConn->query($staffSql);
-                    if ($staffResult->num_rows > 0) {
-                        // output data of each row
-                        while($row = $staffResult->fetch_assoc()) {
-                            $NewStaffName=$row["username"];
-                            return $NewStaffName;
-                        }
-                    }
-                }
+            $errorLbl = "";
+            $noResultLbl = "";
             ?>
 
             <?php
-                //check if form was submitted
-                if(isset($_POST['SubmitButton'])){
-                    
-                    $errorLbl="";
-                    $noResultLbl= "";
-                    
-                    //all empty
-                    if(empty($_POST["startTimeTxt"]) && empty($_POST["endTimeTxt"]) && empty($_POST["searchTxt"])){
-                        $errorLbl= "Please at least fill in one text box!";  
+            function findKidsName($dbConn, $passName)
+            {
+                //get the kids name form ID
+                $kidsSql = "SELECT name FROM kids WHERE kidsID = '$passName';";
+                $kidsResult = $dbConn->query($kidsSql);
+                if ($kidsResult->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $kidsResult->fetch_assoc()) {
+                        $NewKidsName = $row["name"];
+                        return $NewKidsName;
                     }
                 }
+            }
+
+            function findStaffName($dbConn, $passUsername)
+            {
+                //get the staff name form ID
+                $staffSql = "SELECT username FROM staff WHERE staffID = '$passUsername';";
+                $staffResult = $dbConn->query($staffSql);
+                if ($staffResult->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $staffResult->fetch_assoc()) {
+                        $NewStaffName = $row["username"];
+                        return $NewStaffName;
+                    }
+                }
+            }
+            ?>
+
+            <?php
+            //check if form was submitted
+            if (isset($_POST['SubmitButton'])) {
+
+                $errorLbl = "";
+                $noResultLbl = "";
+
+                //all empty
+                if (empty($_POST["startTimeTxt"]) && empty($_POST["endTimeTxt"]) && empty($_POST["searchTxt"])) {
+                    $errorLbl = "Please at least fill in one text box!";
+                }
+            }
             ?>
 
             <!--Content here -->
@@ -267,14 +261,14 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="start">Start</label>
-                                    <input type="datetime-local" id="startTimeTxt" name="startTimeTxt" class="form-control" >
+                                    <input type="datetime-local" id="startTimeTxt" name="startTimeTxt" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="end">End</label>
-                                    <input type="datetime-local" id="endTimeTxt" name="endTimeTxt" class="form-control" >
+                                    <input type="datetime-local" id="endTimeTxt" name="endTimeTxt" class="form-control">
                                 </div>
                             </div>
 
@@ -311,365 +305,353 @@
             </div>
 
             <?php
-                //check if form was submitted
-                if(isset($_POST['SubmitButton'])){
-                    
-                    //input some is filled 
-                    if(!empty($_POST["startTimeTxt"]) || !empty($_POST["endTimeTxt"]) || !empty($_POST["searchTxt"])){
-                        
-                        if(!empty($_POST["startTimeTxt"])){
-                            $startTimeTxt = $_POST["startTimeTxt"];
-                        }
-                        if(!empty($_POST["endTimeTxt"])){
-                            $endTimeTxt = $_POST["endTimeTxt"];
-                        }
+            //check if form was submitted
+            if (isset($_POST['SubmitButton'])) {
 
-                        if(!empty($_POST["searchTxt"])){
-                            $searchTxt = $_POST["searchTxt"];
+                //input some is filled 
+                if (!empty($_POST["startTimeTxt"]) || !empty($_POST["endTimeTxt"]) || !empty($_POST["searchTxt"])) {
 
-                            //get the kids name like search text
-                            $kidsSql = "SELECT kidsID,name FROM `kids` WHERE `name` LIKE '%{$searchTxt}%' ";
-                            $result = $conn->query($kidsSql);
-                            $i = 0;
-                            if ($result->num_rows > 0) {
-                                // output data of each row
-                                while($row = $result->fetch_assoc()) {
-                                    $kidsID[$i]=$row["kidsID"];
-                                    $kidsName[$i]=$row["name"];
-                                    $i++;
-                                }
-                            }
+                    if (!empty($_POST["startTimeTxt"])) {
+                        $startTimeTxt = $_POST["startTimeTxt"];
+                    }
+                    if (!empty($_POST["endTimeTxt"])) {
+                        $endTimeTxt = $_POST["endTimeTxt"];
+                    }
 
-                            //get the staff name like search text
-                            $staffSql = "SELECT staffID, username FROM `staff` WHERE `username` LIKE '%{$searchTxt}%'";
-                            $result = $conn->query($staffSql);
-                            $j = 0;
-                            if ($result->num_rows > 0) {
-                                // output data of each row
-                                while($row = $result->fetch_assoc()) {
-                                    $staffID[$j]=$row["staffID"];
-                                    $staffName[$j]=$row["username"];
-                                    $j++;
-                                }
+                    if (!empty($_POST["searchTxt"])) {
+                        $searchTxt = $_POST["searchTxt"];
+
+                        //get the kids name like search text
+                        $kidsSql = "SELECT kidsID,name FROM `kids` WHERE `name` LIKE '%{$searchTxt}%' ";
+                        $result = $conn->query($kidsSql);
+                        $i = 0;
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                $kidsID[$i] = $row["kidsID"];
+                                $kidsName[$i] = $row["name"];
+                                $i++;
                             }
                         }
 
-                        //get the activity
-                        $count = 0;
-                        $found= false;
-
-                        //if got alike name & got time
-                        if(isset($kidsName) || isset($staffName) && (!empty($startTimeTxt) || !empty($endTimeTxt))){
-
-                            //set the start date to lowest date  
-                            if(empty($startTimeTxt)){
-                                $startTimeTxt=  "2000-01-01";
+                        //get the staff name like search text
+                        $staffSql = "SELECT staffID, username FROM `staff` WHERE `username` LIKE '%{$searchTxt}%'";
+                        $result = $conn->query($staffSql);
+                        $j = 0;
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                $staffID[$j] = $row["staffID"];
+                                $staffName[$j] = $row["username"];
+                                $j++;
                             }
+                        }
+                    }
 
-                            //set the start date to highest date  
-                            if(empty($endTimeTxt)){
-                                $endTimeTxt=  "9000-01-01";
-                            }
+                    //get the activity
+                    $count = 0;
+                    $found = false;
 
-                            //if no kids name list
-                            if(!isset($kidsName)){
-                                $tempKids= 0;
-                            }
-                            else{
-                                $tempKids=sizeof($kidsName);
-                            }
+                    //if got alike name & got time
+                    if (isset($kidsName) || isset($staffName) && (!empty($startTimeTxt) || !empty($endTimeTxt))) {
 
-                            //if no staff name list
-                            if(!isset($staffName)){
-                                $tempStaffs= 0;
-                            }
-                            else{
-                                $tempStaffs= sizeof($staffName);
-                            }
+                        //set the start date to lowest date  
+                        if (empty($startTimeTxt)) {
+                            $startTimeTxt =  "2000-01-01";
+                        }
 
-                            for ($i=0 ; $i <$tempKids or $i < $tempStaffs; $i++){
-                                if(isset($kidsName) && isset($staffName)){
-                                    if(sizeof($kidsName) >$i && sizeof($staffName)> $i ){
-                                        $sql = "SELECT *
+                        //set the start date to highest date  
+                        if (empty($endTimeTxt)) {
+                            $endTimeTxt =  "9000-01-01";
+                        }
+
+                        //if no kids name list
+                        if (!isset($kidsName)) {
+                            $tempKids = 0;
+                        } else {
+                            $tempKids = sizeof($kidsName);
+                        }
+
+                        //if no staff name list
+                        if (!isset($staffName)) {
+                            $tempStaffs = 0;
+                        } else {
+                            $tempStaffs = sizeof($staffName);
+                        }
+
+                        for ($i = 0; $i < $tempKids or $i < $tempStaffs; $i++) {
+                            if (isset($kidsName) && isset($staffName)) {
+                                if (sizeof($kidsName) > $i && sizeof($staffName) > $i) {
+                                    $sql = "SELECT *
                                         FROM activity
                                         WHERE (startTime >= '$startTimeTxt') 
                                         AND ( endTime <= '$endTimeTxt') 
                                         AND (kidsID = '$kidsID[$i]'
-                                        OR staffID= '$staffID[$i]') ;"; 
-                                    }
-                                    
-                                    //if kids list is less than staff list
-                                    if(sizeof($kidsName) <= $i ){
-                                        $sql = "SELECT *
-                                        FROM activity
-                                        WHERE startTime >= '$startTimeTxt' 
-                                        AND endTime <= '$endTimeTxt' 
-                                        AND  staffID= '$staffID[$i]' ;"; 
-                                    }
-
-                                    //if staff list is less than kids list
-                                    if(sizeof($staffName) <= $i ){
-                                        $sql = "SELECT *
-                                        FROM activity
-                                        WHERE startTime >= '$startTimeTxt' 
-                                        AND endTime <= '$endTimeTxt' 
-                                        AND kidsID = '$kidsID[$i]' ;"; 
-                                    }
+                                        OR staffID= '$staffID[$i]') ;";
                                 }
 
-                                //if no kids name list
-                                if(!isset($kidsName)){
+                                //if kids list is less than staff list
+                                if (sizeof($kidsName) <= $i) {
                                     $sql = "SELECT *
                                         FROM activity
                                         WHERE startTime >= '$startTimeTxt' 
                                         AND endTime <= '$endTimeTxt' 
-                                        AND  staffID= '$staffID[$i]' ;"; 
+                                        AND  staffID= '$staffID[$i]' ;";
                                 }
 
-                                //if no staff name list
-                                if(!isset($staffName)){
+                                //if staff list is less than kids list
+                                if (sizeof($staffName) <= $i) {
                                     $sql = "SELECT *
+                                        FROM activity
+                                        WHERE startTime >= '$startTimeTxt' 
+                                        AND endTime <= '$endTimeTxt' 
+                                        AND kidsID = '$kidsID[$i]' ;";
+                                }
+                            }
+
+                            //if no kids name list
+                            if (!isset($kidsName)) {
+                                $sql = "SELECT *
+                                        FROM activity
+                                        WHERE startTime >= '$startTimeTxt' 
+                                        AND endTime <= '$endTimeTxt' 
+                                        AND  staffID= '$staffID[$i]' ;";
+                            }
+
+                            //if no staff name list
+                            if (!isset($staffName)) {
+                                $sql = "SELECT *
                                     FROM activity
                                     WHERE startTime >= '$startTimeTxt' 
                                     AND endTime <= '$endTimeTxt' 
-                                    AND kidsID = '$kidsID[$i]' ;"; 
-                                }
-                                
-                            
-                                $result = $conn->query($sql);
-                                            
-                                if ($result->num_rows > 0) {
-                                    $found= true;
-                                    
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        $NewsActivityID[$count]=$row["activityID"];
-                                        
-                                        if(isset($kidsID)){
-                                            if($row["kidsID"] == $kidsID[$i]){
-                                                $NewKidsName[$count]=$kidsName[$i];
-                                            }
-                                            else{
-                                                $NewKidsID[$count]=$row["kidsID"];
-                                                $NewKidsName[$count]= findKidsName($conn, $NewKidsID[$count]);
-                                            }
-                                        }
-                                        else{
-                                            $NewKidsID[$count]=$row["kidsID"];
-                                            $NewKidsName[$count]= findKidsName($conn, $NewKidsID[$count]);
-                                        }
-                                        
-                                        if(isset($staffID)){
-                                            if($row["staffID"] == $staffID[$i]){
-                                                $NewStaffName[$count]=$staffName[$i];
-                                            }
-                                            else{
-                                                $NewStaffID[$count]=$row["staffID"];
-                                                $NewStaffName[$count]= findStaffName($conn, $NewStaffID[$count]);
-                                            }
-                                        }
-                                        else{
-                                            $NewStaffID[$count]=$row["staffID"];
-                                            $NewStaffName[$count]= findStaffName($conn, $NewStaffID[$count]);
-                                        }
-
-                                        $NewStaffType[$count]=$row["staffType"];
-                                        $NewStartTime[$count]=$row["startTime"];
-                                        $NewEndTime[$count]=$row["endTime"];
-                                        $NewStatus[$count]=$row["status"];
-                                        $count++;
-                                    }
-                                }
-                            }
-                        }
-
-                        //if no name & got time
-                        if(empty($searchTxt) && (!empty($startTimeTxt) || !empty($endTimeTxt))){
-
-                            //set the start date to lowest date  
-                            if(empty($startTimeTxt)){
-                                $startTimeTxt=  "2000-01-01";
+                                    AND kidsID = '$kidsID[$i]' ;";
                             }
 
-                            //set the start date to highest date  
-                            if(empty($endTimeTxt)){
-                                $endTimeTxt=  "9000-01-01";
-                            }
-
-                            $sql = "SELECT *
-                                FROM activity
-                                WHERE startTime >= '$startTimeTxt' 
-                                AND endTime <= '$endTimeTxt' ;"; 
 
                             $result = $conn->query($sql);
-                                                                            
+
                             if ($result->num_rows > 0) {
-                                $found= true;
+                                $found = true;
+
                                 // output data of each row
-                                while($row = $result->fetch_assoc()) {
-                                    $NewsActivityID[$count]=$row["activityID"];
+                                while ($row = $result->fetch_assoc()) {
+                                    $NewsActivityID[$count] = $row["activityID"];
 
-                                    $NewKidsID[$count]=$row["kidsID"];
-                                    $NewKidsName[$count]= findKidsName($conn, $NewKidsID[$count]);
+                                    if (isset($kidsID)) {
+                                        if ($row["kidsID"] == $kidsID[$i]) {
+                                            $NewKidsName[$count] = $kidsName[$i];
+                                        } else {
+                                            $NewKidsID[$count] = $row["kidsID"];
+                                            $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count]);
+                                        }
+                                    } else {
+                                        $NewKidsID[$count] = $row["kidsID"];
+                                        $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count]);
+                                    }
 
-                                    $NewStaffID[$count]=$row["staffID"];
-                                    $NewStaffName[$count]= findStaffName($conn, $NewStaffID[$count]);
+                                    if (isset($staffID)) {
+                                        if ($row["staffID"] == $staffID[$i]) {
+                                            $NewStaffName[$count] = $staffName[$i];
+                                        } else {
+                                            $NewStaffID[$count] = $row["staffID"];
+                                            $NewStaffName[$count] = findStaffName($conn, $NewStaffID[$count]);
+                                        }
+                                    } else {
+                                        $NewStaffID[$count] = $row["staffID"];
+                                        $NewStaffName[$count] = findStaffName($conn, $NewStaffID[$count]);
+                                    }
 
-                                    $NewStaffType[$count]=$row["staffType"];
-                                    $NewStartTime[$count]=$row["startTime"];
-                                    $NewEndTime[$count]=$row["endTime"];
-                                    $NewStatus[$count]=$row["status"];
+                                    $NewStaffType[$count] = $row["staffType"];
+                                    $NewStartTime[$count] = $row["startTime"];
+                                    $NewEndTime[$count] = $row["endTime"];
+                                    $NewStatus[$count] = $row["status"];
                                     $count++;
                                 }
                             }
                         }
+                    }
 
-                        //if got alike name & no time
-                        if((isset($kidsName) || isset($staffName)) && (empty($startTimeTxt) && empty($endTimeTxt))){
+                    //if no name & got time
+                    if (empty($searchTxt) && (!empty($startTimeTxt) || !empty($endTimeTxt))) {
 
-                            //if no kids name list
-                            if(!isset($kidsName)){
-                                $tempKids= 0;
-                            }
-                            else{
-                                $tempKids=sizeof($kidsName);
-                            }
-
-                            //if no staff name list
-                            if(!isset($staffName)){
-                                $tempStaffs= 0;
-                            }
-                            else{
-                                $tempStaffs= sizeof($staffName);
-                            }
-
-                            for ($i=0 ; $i <$tempKids or $i < $tempStaffs; $i++){
-                                if(isset($kidsName) && isset($staffName)){
-                                    if(sizeof($kidsName) > $i && sizeof($staffName) > $i ){
-                                        $sql = "SELECT *
-                                        FROM activity
-                                        WHERE kidsID = '$kidsID[$i]'
-                                        OR staffID= '$staffID[$i]' ;"; 
-                                    }
-
-                                    //if kids list is less than staff list
-                                    if(sizeof($kidsName) <= $i){
-                                        $sql = "SELECT *
-                                        FROM activity
-                                        WHERE staffID= '$staffID[$i]' ;"; 
-                                    }
-
-                                    //if staff list is less than kids list
-                                    if(sizeof($staffName) <= $i ){
-                                        $sql = "SELECT *
-                                        FROM activity
-                                        WHERE kidsID = '$kidsID[$i]' ;"; 
-                                    }
-                                }
-                                //if no kids name list
-                                else if(!isset($kidsName)){
-                                    $sql = "SELECT *
-                                        FROM activity
-                                        WHERE staffID= '$staffID[$i]' ;"; 
-                                }
-                                //if no staff name list
-                                else{
-                                    $sql = "SELECT *
-                                    FROM activity
-                                    WHERE kidsID = '$kidsID[$i]' ;"; 
-                                }
-                            
-                                $result = $conn->query($sql);
-                                            
-                                if ($result->num_rows > 0) {
-                                    $found= true;
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        $NewsActivityID[$count]=$row["activityID"];
-
-                                        if(isset($kidsID)){
-                                            if($row["kidsID"] == $kidsID[$i]){
-                                                $NewKidsName[$count]=$kidsName[$i];
-                                            }
-                                            else{
-                                                $NewKidsID[$count]=$row["kidsID"];
-                                                $NewKidsName[$count]= findKidsName($conn, $NewKidsID[$count]);
-                                            }
-                                        }
-                                        else{
-                                            $NewKidsID[$count]=$row["kidsID"];
-                                            $NewKidsName[$count]= findKidsName($conn, $NewKidsID[$count]);
-                                        }
-                                        
-                                        if(isset($staffID)){
-                                            if($row["staffID"] == $staffID[$i]){
-                                                $NewStaffName[$count]=$staffName[$i];
-                                            }
-                                            else{
-                                                $NewStaffID[$count]=$row["staffID"];
-                                                $NewStaffName[$count]= findStaffName($conn, $NewStaffID[$count]);
-                                            }
-                                        }
-                                        else{
-                                            $NewStaffID[$count]=$row["staffID"];
-                                            $NewStaffName[$count]= findStaffName($conn, $NewStaffID[$count]);
-                                        }
-                                        
-
-                                        $NewStaffType[$count]=$row["staffType"];
-                                        $NewStartTime[$count]=$row["startTime"];
-                                        $NewEndTime[$count]=$row["endTime"];
-                                        $NewStatus[$count]=$row["status"];
-                                        $count++;
-                                    }
-                                }
-                            }
+                        //set the start date to lowest date  
+                        if (empty($startTimeTxt)) {
+                            $startTimeTxt =  "2000-01-01";
                         }
 
-                        //if no result searched same
-                        if(!$found){
-                            $noResultLbl= "No Matches found, try insert again" ;
+                        //set the start date to highest date  
+                        if (empty($endTimeTxt)) {
+                            $endTimeTxt =  "9000-01-01";
                         }
-                        //display activity in table
-                        else{
-                            //order the activity by start date
-                            
-                            //display in table
-                            
-                            echo '<table id="data">';
-                            echo '<thead>';
-                                echo "<tr>";
-                                    echo "<th>No</th>";
-                                    echo "<th>Kid name</th>";
-                                    echo "<th>Staff name</th>";
-                                    echo "<th>Staff type</th>";
-                                    echo "<th>Time</th>";
-                                    echo "<th>Status</th>";
-                                    echo "<th>Action</th>";
-                                echo "</tr>";
-                            echo '</thead>';
 
-                            for ($i = 0; $i < $count; $i++) {
-                                $view_url = "owner_view_activity.php?id=" . $NewsActivityID[$i];
-                                $edit_url = "owner_edit_activity.php?id=" . $NewsActivityID[$i];
-                                echo "<tr>";
-                                echo "<td>" . $i+1 . "</td>";
-                                echo "<td>" . $NewKidsName[$i] . "</td>";
-                                echo "<td>" . $NewStaffName[$i] . "</td>";
-                                echo "<td>" . $NewStaffType[$i] . "</td>";
-                                echo "<td>" . $NewStartTime[$i] . "<br /> to <br />" .$NewEndTime[$i]."</td>";
-                                echo "<td>" . $NewStatus[$i] . "</td>";
-                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
-                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc($NewsActivityID[$i],$i+1)'><i class='fa fa-times'></i></a></td></tr>";
+                        $sql = "SELECT *
+                                FROM activity
+                                WHERE startTime >= '$startTimeTxt' 
+                                AND endTime <= '$endTimeTxt' ;";
+
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            $found = true;
+                            // output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                $NewsActivityID[$count] = $row["activityID"];
+
+                                $NewKidsID[$count] = $row["kidsID"];
+                                $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count]);
+
+                                $NewStaffID[$count] = $row["staffID"];
+                                $NewStaffName[$count] = findStaffName($conn, $NewStaffID[$count]);
+
+                                $NewStaffType[$count] = $row["staffType"];
+                                $NewStartTime[$count] = $row["startTime"];
+                                $NewEndTime[$count] = $row["endTime"];
+                                $NewStatus[$count] = $row["status"];
+                                $count++;
                             }
-
-                            echo "</table>";
                         }
                     }
 
-                    $conn->close();
+                    //if got alike name & no time
+                    if ((isset($kidsName) || isset($staffName)) && (empty($startTimeTxt) && empty($endTimeTxt))) {
+
+                        //if no kids name list
+                        if (!isset($kidsName)) {
+                            $tempKids = 0;
+                        } else {
+                            $tempKids = sizeof($kidsName);
+                        }
+
+                        //if no staff name list
+                        if (!isset($staffName)) {
+                            $tempStaffs = 0;
+                        } else {
+                            $tempStaffs = sizeof($staffName);
+                        }
+
+                        for ($i = 0; $i < $tempKids or $i < $tempStaffs; $i++) {
+                            if (isset($kidsName) && isset($staffName)) {
+                                if (sizeof($kidsName) > $i && sizeof($staffName) > $i) {
+                                    $sql = "SELECT *
+                                        FROM activity
+                                        WHERE kidsID = '$kidsID[$i]'
+                                        OR staffID= '$staffID[$i]' ;";
+                                }
+
+                                //if kids list is less than staff list
+                                if (sizeof($kidsName) <= $i) {
+                                    $sql = "SELECT *
+                                        FROM activity
+                                        WHERE staffID= '$staffID[$i]' ;";
+                                }
+
+                                //if staff list is less than kids list
+                                if (sizeof($staffName) <= $i) {
+                                    $sql = "SELECT *
+                                        FROM activity
+                                        WHERE kidsID = '$kidsID[$i]' ;";
+                                }
+                            }
+                            //if no kids name list
+                            else if (!isset($kidsName)) {
+                                $sql = "SELECT *
+                                        FROM activity
+                                        WHERE staffID= '$staffID[$i]' ;";
+                            }
+                            //if no staff name list
+                            else {
+                                $sql = "SELECT *
+                                    FROM activity
+                                    WHERE kidsID = '$kidsID[$i]' ;";
+                            }
+
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                $found = true;
+                                // output data of each row
+                                while ($row = $result->fetch_assoc()) {
+                                    $NewsActivityID[$count] = $row["activityID"];
+
+                                    if (isset($kidsID)) {
+                                        if ($row["kidsID"] == $kidsID[$i]) {
+                                            $NewKidsName[$count] = $kidsName[$i];
+                                        } else {
+                                            $NewKidsID[$count] = $row["kidsID"];
+                                            $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count]);
+                                        }
+                                    } else {
+                                        $NewKidsID[$count] = $row["kidsID"];
+                                        $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count]);
+                                    }
+
+                                    if (isset($staffID)) {
+                                        if ($row["staffID"] == $staffID[$i]) {
+                                            $NewStaffName[$count] = $staffName[$i];
+                                        } else {
+                                            $NewStaffID[$count] = $row["staffID"];
+                                            $NewStaffName[$count] = findStaffName($conn, $NewStaffID[$count]);
+                                        }
+                                    } else {
+                                        $NewStaffID[$count] = $row["staffID"];
+                                        $NewStaffName[$count] = findStaffName($conn, $NewStaffID[$count]);
+                                    }
+
+
+                                    $NewStaffType[$count] = $row["staffType"];
+                                    $NewStartTime[$count] = $row["startTime"];
+                                    $NewEndTime[$count] = $row["endTime"];
+                                    $NewStatus[$count] = $row["status"];
+                                    $count++;
+                                }
+                            }
+                        }
+                    }
+
+                    //if no result searched same
+                    if (!$found) {
+                        $noResultLbl = "No Matches found, try insert again";
+                    }
+                    //display activity in table
+                    else {
+                        //order the activity by start date
+
+                        //display in table
+
+                        echo '<table id="data">';
+                        echo '<thead>';
+                        echo "<tr>";
+                        echo "<th>No</th>";
+                        echo "<th>Kid name</th>";
+                        echo "<th>Staff name</th>";
+                        echo "<th>Staff type</th>";
+                        echo "<th>Time</th>";
+                        echo "<th>Status</th>";
+                        echo "<th>Action</th>";
+                        echo "</tr>";
+                        echo '</thead>';
+
+                        for ($i = 0; $i < $count; $i++) {
+                            $view_url = "owner_view_activity.php?id=" . $NewsActivityID[$i];
+                            $edit_url = "owner_edit_activity.php?id=" . $NewsActivityID[$i];
+                            echo "<tr>";
+                            echo "<td>" . $i + 1 . "</td>";
+                            echo "<td>" . $NewKidsName[$i] . "</td>";
+                            echo "<td>" . $NewStaffName[$i] . "</td>";
+                            echo "<td>" . $NewStaffType[$i] . "</td>";
+                            echo "<td>" . $NewStartTime[$i] . "<br /> to <br />" . $NewEndTime[$i] . "</td>";
+                            echo "<td>" . $NewStatus[$i] . "</td>";
+                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                            echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                            echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc($NewsActivityID[$i],$i+1)'><i class='fa fa-times'></i></a></td></tr>";
+                        }
+
+                        echo "</table>";
+                    }
                 }
+
+                $conn->close();
+            }
             ?>
 
             <!-- Display when no database result found -->
@@ -765,15 +747,15 @@
         }
 
         //pagination JS
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#data').after('<nav id="navHead"></nav>');
             $('#navHead').append('<ul id="nav" class="pagination justify-content-end" style="margin: 20px">');
             var rowsShown = 5;
             var rowsTotal = $('#data tbody tr').length;
-            var numPages = rowsTotal/rowsShown;
-            for(i = 0;i < numPages;i++) {
+            var numPages = rowsTotal / rowsShown;
+            for (i = 0; i < numPages; i++) {
                 var pageNum = i + 1;
-                $('#nav').append('<li class="page-item"><a class="page-link" href="#" rel="'+i+'">'+pageNum+'</a></li>');
+                $('#nav').append('<li class="page-item"><a class="page-link" href="#" rel="' + i + '">' + pageNum + '</a></li>');
             }
 
             //hide data 
@@ -781,34 +763,35 @@
             //only show 4
             $('#data tbody tr').slice(0, rowsShown).show();
             $('#nav a:first').addClass('active');
-            
-            $('#nav a').bind('click', function(){
+
+            $('#nav a').bind('click', function() {
 
                 $('#nav a').removeClass('active');
                 $(this).addClass('active');
                 var currPage = $(this).attr('rel');
                 var startItem = currPage * rowsShown;
                 var endItem = startItem + rowsShown;
-                $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
-                css('display','table-row').animate({opacity:1}, 300);
+                $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+                css('display', 'table-row').animate({
+                    opacity: 1
+                }, 300);
             });
 
-            
-            if(rowsTotal > 0){
 
-                if(rowsTotal < 5){
+            if (rowsTotal > 0) {
+
+                if (rowsTotal < 5) {
                     //change showing word
-                    document.getElementById("showingLbl").innerHTML = "Showing " +rowsTotal +  " of " +rowsTotal ;
-                }
-                else{
+                    document.getElementById("showingLbl").innerHTML = "Showing " + rowsTotal + " of " + rowsTotal;
+                } else {
                     //change showing word
-                    document.getElementById("showingLbl").innerHTML = "Showing 5 of " +rowsTotal;
+                    document.getElementById("showingLbl").innerHTML = "Showing 5 of " + rowsTotal;
                 }
 
                 //display output area
                 document.getElementById("outputArea").style.display = "block";
             }
-            
+
         });
     </script>
 

@@ -30,6 +30,7 @@
 session_start();
 $_SESSION["username"] = "owner";
 ?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -48,10 +49,10 @@ $_SESSION["username"] = "owner";
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li class="active">
-                        <a href="owner_index.php">List</a>
+                            <a href="owner_index.php">List</a>
                         </li>
                         <li>
-                        <a href="owner_report.php">Report</a>
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -60,10 +61,10 @@ $_SESSION["username"] = "owner";
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -81,11 +82,11 @@ $_SESSION["username"] = "owner";
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="#">List</a>
+                        <li class="active">
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -114,7 +115,7 @@ $_SESSION["username"] = "owner";
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                            <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
+                                <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
                         </nav>
                     </div>
                 </div>
@@ -140,7 +141,7 @@ $_SESSION["username"] = "owner";
             <div class="col-lg-12 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
                     <div class="card-header bg-secondary text-center p-4">
-                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
                         <h1 class="text-white m-0">Registered Kid</h1>
                     </div>
                     <div class="card-body text-center">
@@ -183,31 +184,31 @@ $_SESSION["username"] = "owner";
                                         $count = $result->num_rows;
                                         $i = 0;
                                         if ($count > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $a[$i] = $row["name"];
-                                            $b[$i] = $row["yearOfBirth"];
-                                            $c[$i] = $row["gender"];
-                                            $d[$i] = $row["medicationHistory"];
-                                            $i++;
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $a[$i] = $row["name"];
+                                                $b[$i] = $row["yearOfBirth"];
+                                                $c[$i] = $row["gender"];
+                                                $d[$i] = $row["medicationHistory"];
+                                                $i++;
+                                            }
+                                            for ($i = 0; $i < $count; $i++) {
+                                                $age[$i] = date("Y") - $b[$i];
+                                                $k = $i + 1;
+                                                echo "<h5 class='card-title' style=text-align:center;'>Kid" . $k . "</h5>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
+                                                echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
+                                                echo "<div class='col-6 py-1'>" . $age[$i] . "</div></div>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
+                                                echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
+                                                echo " <div class='col-6 py-1'>" . $d[$i] . "</div></div><br>";
+                                            }
                                         }
-                                        for ($i = 0; $i < $count; $i++) {
-                                            $age[$i] = date("Y") - $b[$i];
-                                            $k=$i+1;
-                                            echo "<h5 class='card-title' style=text-align:center;'>Kid".$k."</h5>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $age[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
-                                            echo " <div class='col-6 py-1'>" . $d[$i] . "</div></div><br>";
-                                        }
-                                    }
                                     }
                                 }
                             } else {
@@ -215,72 +216,72 @@ $_SESSION["username"] = "owner";
                             }
 
                             ?>
-                        
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Content End-->
+                <!-- Content End-->
 
-            <!-- Footer Start -->
-            <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+                <!-- Footer Start -->
+                <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
-                <div class="container-fluid pt-5">
-                    <p class="m-0 text-center text-white">
-                        &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
-                    </p>
+                    <div class="container-fluid pt-5">
+                        <p class="m-0 text-center text-white">
+                            &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
+                        </p>
+                    </div>
                 </div>
+                <!-- Footer End -->
+
             </div>
-            <!-- Footer End -->
-
         </div>
-    </div>
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="../lib/easing/easing.min.js"></script>
-    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="../lib/lightbox/js/lightbox.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="../lib/easing/easing.min.js"></script>
+        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="../lib/lightbox/js/lightbox.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#sidebarCollapse').on('click', function() {
+                    $('#sidebar').toggleClass('active');
+                });
             });
-        });
 
-        // Get the modal
-        var modal = document.getElementById("myModal");
+            // Get the modal
+            var modal = document.getElementById("myModal");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("logoutBtn");
+            // Get the button that opens the modal
+            var btn = document.getElementById("logoutBtn");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
+            // When the user clicks on the button, open the modal
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
                 modal.style.display = "none";
             }
-        }
-    </script>
 
-    <!-- Template Javascript -->
-    <script src="../js/main.js"></script>
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+        <!-- Template Javascript -->
+        <script src="../js/main.js"></script>
 </body>
 
 </html>

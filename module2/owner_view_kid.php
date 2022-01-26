@@ -30,6 +30,7 @@
 session_start();
 $_SESSION["username"] = "owner";
 ?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -57,12 +58,13 @@ $_SESSION["username"] = "owner";
                 </li>
                 <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -80,11 +82,11 @@ $_SESSION["username"] = "owner";
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="#">List</a>
+                        <li class="active">
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -113,7 +115,7 @@ $_SESSION["username"] = "owner";
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                            <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
+                                <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
                         </nav>
                     </div>
                 </div>
@@ -139,7 +141,7 @@ $_SESSION["username"] = "owner";
                 <div class="card border-0 bg-light shadow-sm pb-2">
 
                     <div class="card-header bg-secondary text-center p-4">
-                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
                         <h1 class="text-white m-0">Registered Kid</h1>
                     </div>
                     <div class="card-body text-center">

@@ -36,34 +36,30 @@ $_SESSION["username"] = "owner";
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
-                        <a href="owner_index.php">List</a>
+                        <li class="active">
+                            <a href="owner_index.php">List</a>
                         </li>
                         <li>
-                        <a href="owner_report.php">Report</a>
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="owner_view.php">List</a>
-                        </li>
-                        <li class="active">
-                            <a href="owner_index.php">Index</a>
+                            <a href="../module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="owner_report.php">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -81,18 +77,17 @@ $_SESSION["username"] = "owner";
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="#">List</a>
+                        <li class="active">
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">

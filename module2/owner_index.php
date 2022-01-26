@@ -80,10 +80,10 @@ $_SESSION["username"] = "owner";
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -101,11 +101,11 @@ $_SESSION["username"] = "owner";
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="#">List</a>
+                        <li class="active">
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -410,6 +410,7 @@ $_SESSION["username"] = "owner";
                 modal.style.display = "none";
             }
         }
+
         function search() {
             var searchTxt = document.getElementById("searchTxt").value;
             var select = document.getElementById("option").value;

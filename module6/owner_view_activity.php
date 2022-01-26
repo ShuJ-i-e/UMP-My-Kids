@@ -1,15 +1,15 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    //direct user back to main when no session
-    else{
-        header("Location: ../owner_main.php"); 
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
+//direct user back to main when no session
+else {
+    header("Location: ../owner_main.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,39 +50,35 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../owner_main.php">Home</a>
+                    <a href="#">Home</a>
                 </li>
-                <li>
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Parents & Kids</a>
+                <li class="active">
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
-                            <a href="#">List</a>
+                        <li class="active">
+                            <a href="owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Manpower</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Payment</a>
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenu">
                         <li>
                             <a href="#">List</a>
@@ -92,22 +88,20 @@
                         </li>
                     </ul>
                 </li>
-                <li class="active">
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Activity</a>
+                <li>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li class="active">
-                            <a href="owner_schedule_list.php">List</a>
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="owner_schedule_report.php">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -120,8 +114,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -129,8 +122,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
@@ -139,61 +131,61 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
-                </div>
-              </div>
             </div>
             <!-- End Modal -->
             <!-- Delete Modal -->
 
-            <?php include 'conn.php';?>
-            <?php 
-                $activityID = $_GET['id'];
+            <?php include 'conn.php'; ?>
+            <?php
+            $activityID = $_GET['id'];
 
-                $sql = "SELECT * from kids join activity on kids.kidsID=activity.kidsID
+            $sql = "SELECT * from kids join activity on kids.kidsID=activity.kidsID
                 WHERE activity.activityID=$activityID";
-                $result = $conn->query($sql);
-                $count = $result->num_rows;
-                if ($count >0) {
-                    while ($row = mysqli_fetch_array($result)) {
-                        $kidsID= $row['kidsID'];
-                        $staffID= $row['staffID'];
-                        $staffType= $row['staffType'];
-                        $startTimeTxt= $row['startTime'];
-                        $endTimeTxt= $row['endTime'];
-                        $statusRdb= $row['status'];
-                        $kidsName= $row['name'];
-                    }
+            $result = $conn->query($sql);
+            $count = $result->num_rows;
+            if ($count > 0) {
+                while ($row = mysqli_fetch_array($result)) {
+                    $kidsID = $row['kidsID'];
+                    $staffID = $row['staffID'];
+                    $staffType = $row['staffType'];
+                    $startTimeTxt = $row['startTime'];
+                    $endTimeTxt = $row['endTime'];
+                    $statusRdb = $row['status'];
+                    $kidsName = $row['name'];
                 }
+            }
 
-                $sql = "SELECT username from staff WHERE staffID= $staffID";
-                $result = $conn->query($sql);
-                $count = $result->num_rows;
-                if ($count >0) {
-                    while ($row = mysqli_fetch_array($result)) {
-                        $staffName= $row['username'];
-                    }
+            $sql = "SELECT username from staff WHERE staffID= $staffID";
+            $result = $conn->query($sql);
+            $count = $result->num_rows;
+            if ($count > 0) {
+                while ($row = mysqli_fetch_array($result)) {
+                    $staffName = $row['username'];
                 }
+            }
 
             ?>
 
             <!-- Content Start -->
             <div class="card-header bg-secondary text-center p-4">
-                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_schedule_list.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-                    <h1 class="text-white m-0">Activity Details</h1>
+                <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_schedule_list.php'"><i class='fa fa-chevron-left'></i> Back</button>
+                <h1 class="text-white m-0">Activity Details</h1>
             </div>
-            
-            <br/><br/>
+
+            <br /><br />
 
             <div class="container-fluid ">
                 <div class="container">
@@ -201,7 +193,7 @@
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-3">
-                                <label for="start">Kid's name</label>
+                            <label for="start">Kid's name</label>
                         </div>
 
                         <div class="col-lg-6">
@@ -211,14 +203,14 @@
                 </div>
             </div>
 
-            
+
             <div class="container-fluid">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-3 ">
-                                <label for="start">Staff name:</label>
+                            <label for="start">Staff name:</label>
                         </div>
 
                         <div class="col-lg-6">
@@ -227,14 +219,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container-fluid">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-3">
-                                <label for="start">Start Time: </label>
+                            <label for="start">Start Time: </label>
                         </div>
 
                         <div class="col-lg-6">
@@ -250,7 +242,7 @@
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-3">
-                                <label for="start">End Time: </label>
+                            <label for="start">End Time: </label>
                         </div>
 
                         <div class="col-lg-6">
@@ -260,14 +252,14 @@
                 </div>
             </div>
 
-            
+
             <div class="container-fluid">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-3">
-                                <label for="start">Status: </label>
+                            <label for="start">Status: </label>
                         </div>
 
                         <div class="col-lg-6">
@@ -276,14 +268,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container-fluid">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-3">
-                                <label for="start">Staff type:</label>
+                            <label for="start">Staff type:</label>
                         </div>
 
                         <div class="col-lg-6">
@@ -317,16 +309,16 @@
     <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../lib/isotope/isotope.pkgd.min.js"></script>
     <script src="../lib/lightbox/js/lightbox.min.js"></script>
-    
+
     <script type="text/javascript">
-         $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
-         
-         // Get the modal
-         var modal = document.getElementById("myModal");
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
         // Get the button that opens the modal
         var btn = document.getElementById("logoutBtn");
@@ -335,17 +327,17 @@
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }

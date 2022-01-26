@@ -2,8 +2,8 @@
 
 require "connect.php";
 
-$username= $_POST["username"]
-$staffID= $_POST["staffID"]
+$username= $_POST["username"];
+$staffID= $_POST["staffID"];
 $staffName= $_POST["staffName"];
 $phoneNumber=$_POST["phoneNumber"];
 $address=$_POST["address"];
