@@ -107,7 +107,7 @@
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
@@ -137,7 +137,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li  class="active">
                     <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
                     <ul class="collapse list-unstyled" id="salarySubmenu">
                         <li>

@@ -63,7 +63,7 @@
                     <li>
                         <a href="#">Home</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="../module2/staff_index.php">Parents & Kids</a>
                     </li>
                     <li>
@@ -78,14 +78,14 @@
                         </ul>
                     </li>
                     <li>
-                    <li>
+                    <li  class="active">
                         <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                         <ul class="collapse list-unstyled" id="manpowerSubmenu">
                             <li>
                                 <a href="../module3/parent_view.php">List</a>
                             </li>
-                            <li>
+                            <li  class="active">
                                 <a href="../module3/parent_index.php">Index</a>
                             </li>
                             <li>

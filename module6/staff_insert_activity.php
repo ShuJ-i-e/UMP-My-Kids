@@ -54,10 +54,10 @@
                 <li>
                     <a href="#">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
-                <li>
+                <li  class="active">
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
