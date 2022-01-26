@@ -105,7 +105,7 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
                     <a href="../module2/staff_index.php">Parents & Kids</a>
@@ -137,7 +137,7 @@
                         </li>
                     </ul>
                 </li>
-                <li  class="active">
+                <li class="active">
                     <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
                     <ul class="collapse list-unstyled" id="salarySubmenu">
                         <li>

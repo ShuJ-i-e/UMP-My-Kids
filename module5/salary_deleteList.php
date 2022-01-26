@@ -42,47 +42,54 @@
         tr:hover {
             background-color: #dddddd;
         }
-    /* Dropdown Button */
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+        /* Dropdown Button */
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
 
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
     </style>
 </head>
 
@@ -98,7 +105,7 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
                     <a href="../module2/staff_index.php">Parents & Kids</a>
@@ -130,9 +137,8 @@
                         </li>
                     </ul>
                 </li>
-                <li  class="active">
-                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Salary</a>
+                <li class="active">
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
                     <ul class="collapse list-unstyled" id="salarySubmenu">
                         <li>
                             <a href="../module5/salarylist.php">List</a>
@@ -140,9 +146,9 @@
                         <li>
                             <a href="../module5/report_test.php">Report</a>
                         </li>
-                        </li>
-                    </ul>
                 </li>
+            </ul>
+            </li>
             </ul>
         </nav>
         <!-- Page Content  -->
@@ -157,8 +163,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -166,8 +171,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> Username</a>
                         </nav>
@@ -177,38 +181,38 @@
 
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
-                </div>
-              </div>
             </div>
             <!-- End Modal -->
 
- <!-- Content Start-->
- <table>
- <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-            <h1 class="text-white m-0">Salary</h1>
-        </div>
-        <div class="card-body text-center">
-            <h3 class="card-title">Delete List</h3>
+            <!-- Content Start-->
+            <table>
+                <div class="col-lg-12 mb-5">
+                    <div class="card border-0 bg-light shadow-sm pb-2">
+                        <div class="card-header bg-secondary text-center p-4">
+                            <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='salarylist.php'"><i class='fa fa-chevron-left'></i> Back</button>
+                            <h1 class="text-white m-0">Salary</h1>
+                        </div>
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Delete List</h3>
 
-        </div>
-    </div>
-</div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="card mt-4">
+                <div class="card mt-4">
                     <div class="card-body">
                         <form action="salary_delete.php" method="POST">
                             <table class="table table-bordered table-striped">
@@ -217,7 +221,7 @@
                                         <th>
                                             <button type="submit" name="salary_delete_multiple_btn" class="btn btn-danger">Delete</button>
                                         </th>
-                                            
+
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Staff Type</th>
@@ -227,108 +231,104 @@
                                 </tbody>
                                 <tbody>
                                     <?php
-                                        require "conn.php";
+                                    require "conn.php";
 
-                                        $query = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
+                                    $query = "SELECT salary.salaryID, staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus, salary.payDay FROM staff
                                         INNER JOIN salary ON staff.staffID=salary.staffID";
-                                        $query_run  = mysqli_query($conn, $query);
+                                    $query_run  = mysqli_query($conn, $query);
 
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $row)
-                                            {
-                                                ?>
-                                                <tr>
-                                                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" name="salary_delete_id[]" value="<?= $row['salaryID']; ?>">
-                                                    </td>
-                                                    <td><?= $row['salaryID']; ?></td>
-                                                    <td><?= $row['username']; ?></td>
-                                                    <td><?= $row['staffType']; ?></td>
-                                                    <td><?= $row['payStatus']; ?></td>
-                                                    <td><?= $row['payDay']; ?></td>
-                                                </tr>
-                                                <?php
-                                            }
+                                    if (mysqli_num_rows($query_run) > 0) {
+                                        foreach ($query_run as $row) {
+                                    ?>
+                                            <tr>
+                                                <td style="width:10px; text-align: center;">
+                                                    <input type="checkbox" name="salary_delete_id[]" value="<?= $row['salaryID']; ?>">
+                                                </td>
+                                                <td><?= $row['salaryID']; ?></td>
+                                                <td><?= $row['username']; ?></td>
+                                                <td><?= $row['staffType']; ?></td>
+                                                <td><?= $row['payStatus']; ?></td>
+                                                <td><?= $row['payDay']; ?></td>
+                                            </tr>
+                                        <?php
                                         }
-                                        else
-                                        {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="5">No Record Found</td>
-                                                </tr>
-                                            <?php
-                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="5">No Record Found</td>
+                                        </tr>
+                                    <?php
+                                    }
                                     ?>
                                 </tbody>
                             </table>
                         </form>
                     </div>
                 </div>
-            </div>
-            
+        </div>
+
+    </div>
+    </div>
+    <!-- Content End-->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+
+        <div class="container-fluid pt-5">
+            <p class="m-0 text-center text-white">
+                &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
+            </p>
         </div>
     </div>
-<!-- Content End-->
+    <!-- Footer End -->
 
-<!-- Footer Start -->
-<div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
-
-    <div class="container-fluid pt-5">
-        <p class="m-0 text-center text-white">
-            &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
-        </p>
     </div>
-</div>
-<!-- Footer End -->
-
-</div>
-</div>
-<!-- Back to Top -->
-<a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="../lib/easing/easing.min.js"></script>
-<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="../lib/isotope/isotope.pkgd.min.js"></script>
-<script src="../lib/lightbox/js/lightbox.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-$('#sidebarCollapse').on('click', function() {
-    $('#sidebar').toggleClass('active');
-});
-});
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
+        });
 
 
-// Get the modal
-var modal = document.getElementById("myModal");
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("logoutBtn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("logoutBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-modal.style.display = "block";
-}
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-modal.style.display = "none";
-}
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-if (event.target == modal) {
-    modal.style.display = "none";
-}
-}
-</script>
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>

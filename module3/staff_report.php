@@ -53,7 +53,7 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li class="active">
                     <a href="../module2/staff_index.php">Parents & Kids</a>
@@ -70,7 +70,7 @@
                     </ul>
                 </li>
                 <li>
-                <li  class="active">
+                <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
@@ -80,7 +80,7 @@
                         <li>
                             <a href="../module3/parent_index.php">Index</a>
                         </li>
-                        <li  class="active">
+                        <li class="active">
                             <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>

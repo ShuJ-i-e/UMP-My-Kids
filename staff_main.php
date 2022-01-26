@@ -53,60 +53,55 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#">Home</a>
+                <li  class="active">
+                <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
-                    <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
-                        <a href="#">List</a>
-                        </li>
-                        <li>
-                        <a href="#">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
-                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
-                        <li>
-                            <a href="#">List</a>
-                        </li>
-                        <li>
-                            <a href="#">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
-                    <ul class="collapse list-unstyled" id="paymentSubmenu">
-                        <li>
-                            <a href="#">List</a>
-                        </li>
-                        <li>
-                            <a href="#">Report</a>
-                        </li>
-                    </ul>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="module6/staff_schedule_list.php">List</a>
+                            <a href="../module6/staff_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="module6/staff_schedule_report.php">Report</a>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
+                <li>
+                <li>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/parent_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
