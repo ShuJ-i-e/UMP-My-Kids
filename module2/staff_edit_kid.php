@@ -30,6 +30,7 @@
 session_start();
 $_SESSION["username"] = "parent";
 ?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -42,7 +43,7 @@ $_SESSION["username"] = "parent";
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li class="active">
                     <a href="../module2/staff_index.php">Parents & Kids</a>
@@ -75,8 +76,7 @@ $_SESSION["username"] = "parent";
                     </ul>
                 </li>
                 <li>
-                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Salary</a>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
                     <ul class="collapse list-unstyled" id="salarySubmenu">
                         <li>
                             <a href="../module5/salarylist.php">List</a>
@@ -84,9 +84,9 @@ $_SESSION["username"] = "parent";
                         <li>
                             <a href="../module5/report_test.php">Report</a>
                         </li>
-                        </li>
-                    </ul>
                 </li>
+            </ul>
+            </li>
             </ul>
         </nav>
         <!-- Page Content  -->
@@ -101,8 +101,7 @@ $_SESSION["username"] = "parent";
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -110,8 +109,7 @@ $_SESSION["username"] = "parent";
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
                         </nav>
@@ -146,93 +144,79 @@ $_SESSION["username"] = "parent";
                         <div class="card-body rounded-bottom bg-primary p-5">
                             <h3 class=" mb-4">Parent's Information</h3>
                             <?php
-                        $kidsID= $_GET['id'];
-                        require "conn.php";
-                        if(isset($kidsID))
-                        {
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
+                            $kidsID = $_GET['id'];
+                            require "conn.php";
+                            if (isset($kidsID)) {
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } else {
+                                    $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID where kids.kidsID=$kidsID";
+                                    $result = $conn->query($sql);
+                                    $count = $result->num_rows;
+                                    $i = 0;
+                                    $row = mysqli_fetch_assoc($result);
+                                    if ($count > 0) {
+                                        $age = date("Y") - $row['yearOfBirth'];
+                                        echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Parent's Name' disabled value='" . $row['username'] . "'></div>";
+                                        echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Phone Number' disabled value='" . $row['phoneNumber'] . "'></div>";
+                                        echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Address' disabled value='" . $row['address'] . "'></div>";
+                                        echo "<div class='form-group'><input type='number' class='form-control border-0 p-4' placeholder='Year Register' disabled value='" . $row['yearRegister'] . "'></div>";
+                                        echo "<hr>";
+                                        echo "<h3 class=' mb-4'>Kid's Information</h3>";
+                                        echo "<form action='edit_kid.php' method='POST' id='form1' name='form1'>";
+                                        echo "<div class='form-group'><input type='text' name='name' class='form-control border-0 p-4' placeholder='Kid's Name' required='required' value='" . $row['name'] . "'></div>";
+                                        echo "<div class='form-group'>";
+                                        echo "<select class='custom-select border-0 px-4' name='age' style='height: 47px;'>";
+                                        echo "<option>Select Age</option>";
+                                        if ($age == 3) {
+                                            echo "<option value='3' selected>3</option>";
+                                            echo "<option value='4'>4</option>";
+                                            echo "<option value='5'>5</option>";
+                                            echo "<option value='6'>6</option>";
+                                        } else if ($age == 4) {
+                                            echo "<option value='3'>3</option>";
+                                            echo "<option value='4' selected>4</option>";
+                                            echo "<option value='5'>5</option>";
+                                            echo "<option value='6'>6</option>";
+                                        } else if ($age == 5) {
+                                            echo "<option value='3'>3</option>";
+                                            echo "<option value='4'>4</option>";
+                                            echo "<option value='5' selected>5</option>";
+                                            echo "<option value='6'>6</option>";
+                                        } else {
+                                            echo "<option value='3'>3</option>";
+                                            echo "<option value='4'>4</option>";
+                                            echo "<option value='5'>5</option>";
+                                            echo "<option value='6' selected>6</option>";
+                                        }
+                                        echo "</select></div>";
+                                        echo "<div class='form-group'><select class='custom-select border-0 px-4' name='gender' style='height: 47px;'>";
+                                        echo "<option>Select Gender</option>";
+                                        if ($row['gender'] == "Male") {
+                                            echo "<option value='Male' selected>Male</option>";
+                                            echo "<option value='Female'>Female</option>";
+                                        } else {
+                                            echo "<option value='Male'>Male</option>";
+                                            echo "<option value='Female'selected>Female</option>";
+                                        }
+                                        echo "</select>";
+                                        echo "</div>";
+                                        echo "<div class='form-group'>";
+                                        echo "<textarea name='medicationHistory' class='form-control border-0 p-4' rows='6' placeholder='Medication History' required='required'>" . $row['medicationHistory'] . "</textarea>";
+                                        echo "</div>";
+                                        echo "<input type='hidden' id='kidsID' name='kidsID' value='" . $row['kidsID'] . "'/>";
+                                        echo "<input type='hidden' id='page' name='page' value='staff'/>";
+                                    }
+                                }
                             } else {
-                                $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID where kids.kidsID=$kidsID";
-                                $result = $conn->query($sql);
-                                $count = $result->num_rows;
-                                $i = 0;
-                                $row = mysqli_fetch_assoc($result);
-                                if ($count > 0) {
-                                    $age = date("Y") - $row['yearOfBirth'];
-                                    echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Parent's Name' disabled value='". $row['username']. "'></div>";
-                                    echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Phone Number' disabled value='". $row['phoneNumber']. "'></div>";
-                                    echo "<div class='form-group'><input type='text' class='form-control border-0 p-4' placeholder='Address' disabled value='". $row['address']. "'></div>";
-                                    echo "<div class='form-group'><input type='number' class='form-control border-0 p-4' placeholder='Year Register' disabled value='". $row['yearRegister']. "'></div>";
-                                    echo "<hr>";
-                                    echo "<h3 class=' mb-4'>Kid's Information</h3>";
-                                    echo "<form action='edit_kid.php' method='POST' id='form1' name='form1'>";
-                                    echo "<div class='form-group'><input type='text' name='name' class='form-control border-0 p-4' placeholder='Kid's Name' required='required' value='". $row['name']. "'></div>";
-                                    echo "<div class='form-group'>";
-                                    echo "<select class='custom-select border-0 px-4' name='age' style='height: 47px;'>";
-                                    echo "<option>Select Age</option>";
-                                    if($age==3)
-                                    {
-                                        echo "<option value='3' selected>3</option>";
-                                        echo "<option value='4'>4</option>";
-                                        echo "<option value='5'>5</option>";
-                                        echo "<option value='6'>6</option>";
-                                    }
-                                    else if($age==4)
-                                {
-                                    echo "<option value='3'>3</option>";
-                                    echo "<option value='4' selected>4</option>";
-                                    echo "<option value='5'>5</option>";
-                                    echo "<option value='6'>6</option>";
-                                }
-                                    else if ($age==5)
-                                    {
-                                        echo "<option value='3'>3</option>";
-                                        echo "<option value='4'>4</option>";
-                                        echo "<option value='5' selected>5</option>";
-                                        echo "<option value='6'>6</option>";
-                                    }
-                                    else
-                                    {
-                                        echo "<option value='3'>3</option>";
-                                        echo "<option value='4'>4</option>";
-                                        echo "<option value='5'>5</option>";
-                                        echo "<option value='6' selected>6</option>";
-                                    }
-                                    echo "</select></div>"; 
-                                    echo "<div class='form-group'><select class='custom-select border-0 px-4' name='gender' style='height: 47px;'>";
-                                    echo "<option>Select Gender</option>";
-                                    if($row['gender']=="Male")
-                                    {
-                                        echo "<option value='Male' selected>Male</option>";
-                                        echo "<option value='Female'>Female</option>";
-                                    }
-                                    else
-                                    {
-                                        echo "<option value='Male'>Male</option>";
-                                        echo "<option value='Female'selected>Female</option>";
-                                    }
-                                    echo "</select>";
-                                    echo "</div>";
-                                    echo "<div class='form-group'>";
-                                    echo "<textarea name='medicationHistory' class='form-control border-0 p-4' rows='6' placeholder='Medication History' required='required'>". $row['medicationHistory']. "</textarea>";
-                                    echo "</div>";
-                                    echo "<input type='hidden' id='kidsID' name='kidsID' value='". $row['kidsID']. "'/>";
-                                    echo "<input type='hidden' id='page' name='page' value='staff'/>";
-                                }
+                                echo "error!";
                             }
-                        }
-                        else
-                        {
-                            echo"error!";
-                        }
-                                ?>
+                            ?>
 
                             <br>
                             <div>
-                                <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="staff_index.php" >Back</a>
-                                <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right"
-                                    type="submit">Update</button>
+                                <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="staff_index.php">Back</a>
+                                <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Update</button>
                             </div>
                             </form>
                         </div>
@@ -264,37 +248,37 @@ $_SESSION["username"] = "parent";
         <script src="../lib/isotope/isotope.pkgd.min.js"></script>
         <script src="../lib/lightbox/js/lightbox.min.js"></script>
         <script type="text/javascript">
-        $(document).ready(function() {
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
+            $(document).ready(function() {
+                $('#sidebarCollapse').on('click', function() {
+                    $('#sidebar').toggleClass('active');
+                });
             });
-        });
 
-        // Get the modal
-        var modal = document.getElementById("myModal");
+            // Get the modal
+            var modal = document.getElementById("myModal");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("logoutBtn");
+            // Get the button that opens the modal
+            var btn = document.getElementById("logoutBtn");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
+            // When the user clicks on the button, open the modal
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
                 modal.style.display = "none";
             }
-        }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
         </script>
 
         <!-- Template Javascript -->

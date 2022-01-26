@@ -43,7 +43,7 @@ $_SESSION["username"] = "parent";
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                <a href="../staff_main.php">Home</a>
                 </li>
                 <li class="active">
                     <a href="../module2/staff_index.php">Parents & Kids</a>
