@@ -65,7 +65,7 @@ $_SESSION["username"] = "parent";
                         <li>
                             <a href="../module3/parent_index.php">Index</a>
                         </li>
-                        <>
+                        
                             <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>
