@@ -77,10 +77,10 @@ else {
                 <li>
                     <a href="../user_main.php">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="../module2/parent_index.php">Parents & Kids</a>
                 </li>
-                <li>
+                <li  class="active">
                     <a href="../module6/user_schedule_list.php">Kid's Activity</a>
                 </li>
                 <li>
