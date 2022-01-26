@@ -95,16 +95,15 @@
                 <li>
                 <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="../module3/parent_view.php">List</a>
+                            <a href="../module3/staff_view.php">List</a>
                         </li>
                         <li>
-                            <a href="../module3/parent_index.php">Index</a>
+                            <a href="../module3/staff_index.php">Index</a>
                         </li>
                         <li>
-                            <a href="../module3/parent_report.php">Report</a>
+                            <a href="../module3/staff_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
