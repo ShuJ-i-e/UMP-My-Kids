@@ -111,7 +111,7 @@ else {
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li class="active">

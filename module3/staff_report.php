@@ -55,7 +55,7 @@
                 <li>
                     <a href="../staff_main.php">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
