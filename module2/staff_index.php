@@ -49,6 +49,7 @@
 session_start();
 $_SESSION["username"] = "parent";
 ?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -59,27 +60,54 @@ $_SESSION["username"] = "parent";
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
                     <a href="#">Home</a>
                 </li>
                 <li class="active">
-                    <a href="staff_index.php">Parents & Kids</a>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#">Activity</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="../module6/staff_schedule_list.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                 <li>
-                    <a href="#">Manpower Registration</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/parent_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Salary</a>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                 </li>
             </ul>
+            </li>
+            </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">

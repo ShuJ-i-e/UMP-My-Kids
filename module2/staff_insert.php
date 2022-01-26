@@ -30,6 +30,7 @@
 session_start();
 $_SESSION["username"] = "parent";
 ?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -40,27 +41,54 @@ $_SESSION["username"] = "parent";
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
                     <a href="#">Home</a>
                 </li>
                 <li class="active">
-                <a href="staff_index.php">Parents & Kids</a>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#">Activity</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="../module6/staff_schedule_list.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                 <li>
-                    <a href="#">Manpower Registration</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/parent_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Salary</a>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                 </li>
             </ul>
+            </li>
+            </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -179,7 +207,7 @@ $_SESSION["username"] = "parent";
                                 <div class="form-group">
                                     <textarea name="medicationHistory" class="form-control border-0 p-4" rows="6" placeholder="Medication History" required="required"></textarea>
                                 </div>
-                                <input type='hidden' id='page' name='page' value='staff'/>
+                                <input type='hidden' id='page' name='page' value='staff' />
                                 <div>
                                     <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Submit</button>
                                     <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="parent_index.php">Back</a>
@@ -251,22 +279,22 @@ $_SESSION["username"] = "parent";
             div.style.display = 'block';
             var ParentId = document.getElementById("parentID");
             var selectedParentID = ParentId.value;
-                $.ajax({
-                    type: "POST",
-                    url: "getParentInfo.php",
-                    data: "id=" + selectedParentID,
-                    success: function(result) {
-                        console.log(result);
-                        parent_info = JSON.parse(result);
-                        $('#phoneNumber').val(parent_info[0].phoneNumber);
-                        $('#address').val(parent_info[0].address);
-                        $('#yearRegister').val(parent_info[0].yearRegister);
-                    },
-                    fail: function(xhr, textStatus, errorThrown) {
-                        console.log('request failed');
-                    }
-                });
-            
+            $.ajax({
+                type: "POST",
+                url: "getParentInfo.php",
+                data: "id=" + selectedParentID,
+                success: function(result) {
+                    console.log(result);
+                    parent_info = JSON.parse(result);
+                    $('#phoneNumber').val(parent_info[0].phoneNumber);
+                    $('#address').val(parent_info[0].address);
+                    $('#yearRegister').val(parent_info[0].yearRegister);
+                },
+                fail: function(xhr, textStatus, errorThrown) {
+                    console.log('request failed');
+                }
+            });
+
         }
     </script>
 

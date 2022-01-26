@@ -50,60 +50,55 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../staff_main.php">Home</a>
+                    <a href="#">Home</a>
+                </li>
+                <li class="active">
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
-                    <ul class="collapse list-unstyled" id="parentsSubmenu">
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                        <a href="#">List</a>
+                            <a href="../module6/staff_schedule_list.php">List</a>
                         </li>
                         <li>
-                        <a href="#">Report</a>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
+                <li>
                 <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module3/parent_view.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
-                    <ul class="collapse list-unstyled" id="paymentSubmenu">
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module5/salarylist.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                         </li>
                     </ul>
                 </li>
-                <li class="active">
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
-                    <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li class="active">
-                            <a href="staff_schedule_list.php">List</a>
-                        </li>
-                        <li>
-                            <a href="staff_schedule_report.php">Report</a>
-                        </li>
-                    </ul>
-                </li>
-
             </ul>
         </nav>
-
         <?php include 'conn.php';?>
         <?php 
             $activityID = $_GET['id'];

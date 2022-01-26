@@ -30,6 +30,7 @@
 session_start();
 $_SESSION["username"] = "parent";
 ?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -40,27 +41,54 @@ $_SESSION["username"] = "parent";
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
                     <a href="#">Home</a>
                 </li>
                 <li class="active">
-                    <a href="staff_index.php">Parents & Kids</a>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#">Activity</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="../module6/staff_schedule_list.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                 <li>
-                    <a href="#">Manpower Registration</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/parent_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Salary</a>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                 </li>
             </ul>
+            </li>
+            </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -107,132 +135,129 @@ $_SESSION["username"] = "parent";
             <!-- End Modal -->
             <!-- Content Start-->
             <div class="col-lg-12 mb-5">
-                    <div class="card border-0 bg-light shadow-sm pb-2">
-                        <div class="card-header bg-secondary text-center p-4">
-                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
-                            <h1 class="text-white m-0">Registered Kid</h1>
-                        </div>
-                        <div class="card-body text-center">
-                            <h4 class="card-title">Parent's Information</h4>
-                        </div>
-                        <div class="card-footer bg-transparent py-4 px-5">
-                            <div class="row border-bottom">
-                                <div class="col-6 py-1 text-right border-right"><strong>Parent's Name</strong></div>
-                                <?php
-                        $kidsID= $_GET['id'];
-                        require "conn.php";
-                        if(isset($kidsID))
-                        {
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            } else {
-                                $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID where kids.kidsID=$kidsID";
-                                $result = $conn->query($sql);
-                                $count = $result->num_rows;
-                                $i = 0;
-                                $row = mysqli_fetch_assoc($result);
-                                if ($count > 0) {
-                                    $age = date("Y") - $row['yearOfBirth'];
-                                    echo "<div class='col-6 py-1'>".$row['username']."</div></div>" ;
-                                    echo "<div class='row border-bottom'>";
-                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
-                                    echo "<div class='col-6 py-1'>".$row['phoneNumber']."</div>";
-                                    echo "</div>";
-                                    echo "<div class='row border-bottom'>";
-                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
-                                    echo "<div class='col-6 py-1'>".$row['address']."</div>";
-                                    echo "</div>";
-                                    echo "<div class='row'>";
-                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
-                                    echo "<div class='col-6 py-1'>".$row['yearRegister']."</div></div></div><hr>";
-                                    echo "<div class='card-body text-center'>";
-                                    echo "<h4 class='card-title'>Kid's Information</h4></div>";
-                                    echo "<div class='card-footer bg-transparent py-4 px-5'>";
-                                    echo "<div class='row border-bottom'>";
-                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
-                                    echo "<div class='col-6 py-1'>".$row['name']."</div></div>";
-                                    echo "<div class='row border-bottom'>";
-                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
-                                    echo "<div class='col-6 py-1'>".$age."</div></div>";
-                                    echo "<div class='row border-bottom'>";
-                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
-                                    echo "<div class='col-6 py-1'>".$row['gender']."</div></div>";
-                                    echo "<div class='row'>";
-                                    echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
-                                    echo " <div class='col-6 py-1'>".$row['medicationHistory']."</div>";
+                <div class="card border-0 bg-light shadow-sm pb-2">
+                    <div class="card-header bg-secondary text-center p-4">
+                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
+                        <h1 class="text-white m-0">Registered Kid</h1>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Parent's Information</h4>
+                    </div>
+                    <div class="card-footer bg-transparent py-4 px-5">
+                        <div class="row border-bottom">
+                            <div class="col-6 py-1 text-right border-right"><strong>Parent's Name</strong></div>
+                            <?php
+                            $kidsID = $_GET['id'];
+                            require "conn.php";
+                            if (isset($kidsID)) {
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } else {
+                                    $sql = "SELECT * from kids join parents on kids.parentID=parents.parentID where kids.kidsID=$kidsID";
+                                    $result = $conn->query($sql);
+                                    $count = $result->num_rows;
+                                    $i = 0;
+                                    $row = mysqli_fetch_assoc($result);
+                                    if ($count > 0) {
+                                        $age = date("Y") - $row['yearOfBirth'];
+                                        echo "<div class='col-6 py-1'>" . $row['username'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['phoneNumber'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['address'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['yearRegister'] . "</div></div></div><hr>";
+                                        echo "<div class='card-body text-center'>";
+                                        echo "<h4 class='card-title'>Kid's Information</h4></div>";
+                                        echo "<div class='card-footer bg-transparent py-4 px-5'>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['name'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $age . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['gender'] . "</div></div>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
+                                        echo " <div class='col-6 py-1'>" . $row['medicationHistory'] . "</div>";
+                                    }
                                 }
+                            } else {
+                                echo "error!";
                             }
-                        }
-                        else
-                        {
-                            echo"error!";
-                        }
-                                ?>
-                            </div>
+                            ?>
                         </div>
                     </div>
                 </div>
-            <!-- Content End-->
-                <!-- Footer Start -->
-                <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
-
-                    <div class="container-fluid pt-5">
-                        <p class="m-0 text-center text-white">
-                            &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
-                        </p>
-                    </div>
-                </div>
-                <!-- Footer End -->
-
             </div>
+            <!-- Content End-->
+            <!-- Footer Start -->
+            <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+
+                <div class="container-fluid pt-5">
+                    <p class="m-0 text-center text-white">
+                        &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
+                    </p>
+                </div>
+            </div>
+            <!-- Footer End -->
+
         </div>
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="../lib/easing/easing.min.js"></script>
-        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="../lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="../lib/lightbox/js/lightbox.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#sidebarCollapse').on('click', function() {
-                    $('#sidebar').toggleClass('active');
-                });
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
             });
+        });
 
-            // Get the modal
-            var modal = document.getElementById("myModal");
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-            // Get the button that opens the modal
-            var btn = document.getElementById("logoutBtn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("logoutBtn");
 
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-            // When the user clicks on the button, open the modal
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
 
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+    </script>
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-
-        <!-- Template Javascript -->
-        <script src="../js/main.js"></script>
+    <!-- Template Javascript -->
+    <script src="../js/main.js"></script>
 </body>
 
 </html>
