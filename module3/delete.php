@@ -4,10 +4,11 @@ require "connect.php";
 $username= $_POST["username"]
 $staffID = $_GET['staffID'];
 $page = $_GET['page'];
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {
-    $checkSQL = "SELECT * FROM kids WHERE staffID=$staffID";
+    $checkSQL = "SELECT * FROM staff WHERE staffID=$staffID";
     $result = mysqli_query($conn, $checkSQL);
     $count = $result->num_rows;
     if ($count > 0) {

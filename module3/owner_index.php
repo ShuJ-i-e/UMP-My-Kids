@@ -200,7 +200,15 @@
 
                 <br><br>
                 <h3 class=" mb-4" style="text-align: center">Staff's Information</h3>
-                <table>
+                <table id="staffInformationDynamic" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Staff's Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                <table id="staffInformation">
                     <tr>
                         <th>Staff's Name</th>
                         <th>Actions</th>
@@ -232,14 +240,6 @@
                         }
                     }
                     ?>
-                </table>
-                <table id="staffInformationDynamic" style="display:none">
-                    <thead>
-                        <tr>
-                            <th>Staff's Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
                 </table>
                 <div class="container-fluid py-5" style="display:none;" id="staffErrorTxt">
                     <div class="container">
@@ -310,6 +310,94 @@
                 modal.style.display = "none";
             }
         }
+        function search() {
+            var searchTxt = document.getElementById("searchTxt").value;
+            var select = document.getElementById("option").value;
+            $.ajax({
+                type: "POST",
+                url: "search.php",
+                data: {
+                    searchTxt: searchTxt,
+                    option: select
+                },
+                success: function(result) {
+                    console.log(select);
+                    if (select == "teacher") {
+                        if (result == "fail") {
+                            $('#teacherErrorTxt').show();
+                            $('#staffInformation').show();
+                            $('#staffInformationDynamic').show();
+                            $('#clearSearchBtn').show();
+                            $('#staffInfoDiv').show();
+                        } else {
+                            $('#teacherErrorTxt').show();
+                            $('#staffInformation').show();
+                            $('#staffInformationDynamic').show();
+                            $('#clearSearchBtn').show();
+                            $('#staffInfoDiv').show();
+                        } else {
+                            $('#teacherErrorTxt').show();
+                            $('#staffInformation').show();
+                            $('#staffInformationDynamic').show();
+                            $('#clearSearchBtn').show();
+                            $('#staffInfoDiv').show();
+                        }
+                            staff_info = JSON.parse(result);
+                            var view_url = "owner_view.php?id=" + staff_info[0];
+                            var edit_url = "owner_edit.php?id=" + staff_info[0];
+
+                            var row = '<tr><td>' + staff_info[0].username + '</td>' +
+                                '<td><a class="btn btn-info btn-sm action-btn" href="' + view_url + '" data-toggle="tooltip" id="View"><i class="fa fa-eye"></i></a>' +
+                                '<a class="btn btn-warning btn-sm action-btn" href="' + edit_url + '" data-toggle="tooltip" id="Edit"><i class="fa fa-edit"></i></a>' +
+                                '</td>';
+                            $('#staffInformationDynamic').append(row);
+                        }
+                    } else {
+                        if (result == "fail") {
+                            $('#teacherErrorTxt').show();
+                            $('#staffInformation').show();
+                            $('#staffInformationDynamic').show();
+                            $('#clearSearchBtn').show();
+                            $('#staffInfoDiv').show();
+                        } else {
+                            $('#teacherErrorTxt').show();
+                            $('#staffInformation').show();
+                            $('#staffInformationDynamic').show();
+                            $('#clearSearchBtn').show();
+                            $('#staffInfoDiv').show();
+                            console.log(result);
+                            staff_info = JSON.parse(result);
+                            var view_url = "owner_view.php?id=" + staff_info[0];
+                            var edit_url = "owner_edit.php?id=" + staff_info[0];
+
+                            var row = '<tr><td>' + staff_info[0].name + '</td>' +
+                                '<td><a class="btn btn-info btn-sm action-btn" href="' + view_url + '" data-toggle="tooltip" id="View"><i class="fa fa-eye"></i></a>' +
+                                '<a class="btn btn-warning btn-sm action-btn" href="' + edit_url + '" data-toggle="tooltip" id="Edit"><i class="fa fa-edit"></i></a>' +
+                                '<a class="btn btn-danger btn-sm action-btn" onclick="deleteFunc(&#39;' + staff_info[0].kidsID + '"&#39;,"' + staff_info[0].name + '") data-toggle="tooltip" id="View"><i class="fa fa-times"></i></a>' +
+                                '</td>';
+                            $('#staffInformationDynamic').append(row);
+                        }
+
+                    }
+
+                },
+                fail: function(xhr, textStatus, errorThrown) {
+                    console.log('request failed');
+                }
+            });
+        }
+
+        function clearSearch() {
+            $('#staffInfoDiv').show();
+            $('#StaffErrorTxt').hide();
+            $('#staffInformation').show();
+            $('#clearSearchBtn').hide();
+            $('#staffInformationDynamic').hide();
+            $('#searchTxt').val("");
+            $('#staffInformation').show();
+            $('#staffInformationDynamic').hide();
+        }
+    </script>
     </script>
 
     <script src="../js/main.js"></script>
