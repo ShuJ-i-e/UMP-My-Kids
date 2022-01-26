@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KidKinder - Kindergarten Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <link href="../css/style.css" rel="stylesheet">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            width: 150px;
+        }
+
+        tr:hover {
+            background-color: #dddddd;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 25px;">
+                    <i class="flaticon-043-teddy-bear"></i>
+                    <span class="text-white">UMP MY-KIDS</span>
+                </a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
+                    <ul class="collapse list-unstyled" id="parentsSubmenu">
+                        <li>
+                            <a href="owner_index.php">List</a>
+                        </li>
+                        <li>>
+                            <a href="owner_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="owner_view.php">List</a>
+                        </li>
+                        <li class="active">
+                            <a href="owner_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="owner_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
+                    <ul class="collapse list-unstyled" id="paymentSubmenu">
+                        <li>
+                            <a href="#">List</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="#">List</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="container-fluid bg-primary mb-5">
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="p-2">
+                        <nav class="d-flex navbar navbar-expand-lg" style=" float:left; margin-top: 50px">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                <i class="fas fa-align-left"></i>
+                            </button>
+                        </nav>
+                    </div>
+                    <div class="p-2">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
+                            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                                <i class="flaticon-043-teddy-bear"></i>
+                                <span class="text-white">UMP MY-KIDS</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
+                            <button type="button" id="logoutBtn" class="btn btn-info">
+                                <i class="fas fa-lock"></i> Staff</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal End -->
+            <!-- Content Start -->
+            <div class="card border-0">
+            <div class="card-header bg-secondary text-center p-4">
+                 <h1 class="text-white m-0">Manpower Index</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <br>
+                                <label for="search">Search (Name)</label>
+                                <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: Ali">
+                                <p class="text-danger"></p>
+                                <select class="form-control" id="option">
+                                    <option value="teacher">Teacher</option>
+                                    <option value="caretaker">Infant Caretaker</option>
+                                    <option value="worker">Worker</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <button name="SubmitButton" class="btn btn-primary float-right" onclick="search()"><i class="fas fa-search"></i> Search</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-2" style="display:none" id="clearSearchBtn">
+                            <div class="form-group">
+                                <button name="SubmitButton" class="btn btn-secondary float-right" onclick="clearSearch()">Clear Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="staffInfoDiv">
+
+                <br><br>
+                <h3 class=" mb-4" style="text-align: center">Staff's Information</h3>
+                <table>
+                    <tr>
+                        <th>Staff's Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php
+                    require "connect.php";
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        $sql = "SELECT `staffID`, `staffName` from staff";
+                        $result = $conn->query($sql);
+                        $count = $result->num_rows;
+                        $i = 0;
+                        if ($count > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $a[$i] = $row["staffName"];
+                                $b[$i] = $row["staffID"];
+                                $i++;
+                            }
+                            for ($i = 0; $i < $count; $i++) {
+                                $view_url = "staff_view.php?id=" . $b[$i];
+                                $edit_url = "staff_edit.php?id=" . $b[$i];
+                                echo "<tr>";
+                                echo "<td>" . $a[$i] . "</td>";
+                                echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
+                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                echo "<a class='btn btn-danger btn-sm action-btn' data-toggle='tooltip' onclick='deleteFunc(&#39;" . $a[$i] . "&#39;," . $b[$i] . ")'><i class='fa fa-times'></i></a></td></tr>";
+                            }
+                        }
+                    }
+                    ?>
+                </table>
+                <table id="staffInformationDynamic" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Staff's Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="container-fluid py-5" style="display:none;" id="staffErrorTxt">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <h2 class="mb-4 text-left text-danger text-center">No Result Matches.</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <!-- Content End -->
+            <!-- Footer Start -->
+            <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+
+                <div class="container-fluid pt-5">
+                    <p class="m-0 text-center text-white">
+                        &copy; <a class="text-primary font-weight-bold" href="#">Copyright © 2021 UMP-myKids</a>
+                    </p>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+        </div>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("logoutBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
