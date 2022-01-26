@@ -51,63 +51,37 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
-                    <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
-                            <a href="owner_index.php">List</a>
-                        </li>
-                        <li>
-                            <a href="owner_report.php">Report</a>
-                        </li>
-                    </ul>
+            <li>
+                    <a href="../user_main.php">Home</a>
                 </li>
                 <li class="active">
+                    <a href="../module2/parent_index.php">Parents & Kids</a>
+                </li>
+                <li>
+                    <a href="../module6/user_schedule_list.php">Kid's Activity</a>
+                </li>
+                <li>
+                    <a href="#">Payment</a>
+                </li>
+                <li>
+                <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="owner_view.php">List</a>
-                        </li>
-                        <li class="active">
-                            <a href="owner_index.php">Index</a>
+                            <a href="../module3/parent_view.php">List</a>
                         </li>
                         <li>
-                            <a href="owner_report.php">Report</a>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <>
+                            <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
-                    <ul class="collapse list-unstyled" id="paymentSubmenu">
-                        <li>
-                            <a href="#">List</a>
-                        </li>
-                        <li>
-                            <a href="#">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
-                    <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="#">List</a>
-                        </li>
-                        <li>
-                            <a href="#">Report</a>
-                        </li>
-                    </ul>
-                </li>
-
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">

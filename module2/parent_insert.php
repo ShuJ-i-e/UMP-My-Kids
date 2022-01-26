@@ -40,23 +40,37 @@ $_SESSION["username"] = "parent";
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
-                <li>
-                    <a href="#">Home</a>
+            <li>
+                    <a href="../user_main.php">Home</a>
                 </li>
                 <li class="active">
-                    <a href="parent_index.php">Parents & Kids</a>
+                    <a href="../module2/parent_index.php">Parents & Kids</a>
+                </li>
+                <li>
+                    <a href="../module6/user_schedule_list.php">Kid's Activity</a>
                 </li>
                 <li>
                     <a href="#">Payment</a>
                 </li>
                 <li>
-                    <a href="#">Kid's Activity</a>
+                <li>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/parent_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <>
+                            <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
 
