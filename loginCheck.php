@@ -51,7 +51,14 @@ if ($conn->connect_error) {
                     $_SESSION['username'] = $row["username"];
                     $i++;
                 }
-                header("Location: staff_main.php");
+                if($uname=="owner" && $pass=="owner" )
+                {
+                    header("Location: owner_main.php");
+                }
+                else
+                {
+                    header("Location: staff_main.php");
+                }
             } else {
                 header("Location: login.php?msg=Incorrect username and password!");
             }
