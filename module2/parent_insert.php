@@ -162,6 +162,7 @@
                                 </div>
                                 <br>
                                 <input type='hidden' id='page' name='page' value='parents' />
+                                <input type='hidden' id='parentID' name='parentID' value='<?php echo $loginID; ?>' />
                                 <div>
                                     <button class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" type="submit">Submit</button>
                                     <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="parent_index.php">Back</a>
