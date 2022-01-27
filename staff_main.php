@@ -111,7 +111,7 @@
                         for ($i = 0; $i < $count; $i++) {
 
                             $view_url = "../module5/salary_detail.php?id=" . $a[$i];
-                            echo "<a class='btn btn-info btn-sm action-btn' href=" . $view_url . ">Salary</a>";
+                            echo "<a href=" . $view_url . ">Salary</a>";
                         }
                     }
                 }
