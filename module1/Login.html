@@ -16,14 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="..lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="..lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="..lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="..css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,29 +39,12 @@
 
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="Owner.html">Home</a>
+                    <a href="Login.html">Home</a>
                 </li>
-                <li>
-                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Users</a>
-                    <ul class="collapse list-unstyled" id="userSubmenu">
-                        <li>
-                            <a href="staff.html">Staff</a>
-                        </li>
-                        <li>
-                            <a href="parent.html">Parent</a>
-                        </li>
-                        <li>
-                            <a href="Owner.html">Owner</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="adminReport.php">Report</a>
-                </li>
+               
             </ul>
         </nav>
-        
+
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -108,17 +91,40 @@
               </div>
             </div>
 
-            <div class="container-fluid py-5">
+            <div class="container-fluid py-5" style="margin-left: 300px;">
                 
                 <div class="container">
-                    <h3 style="margin-left: 430px;">User Information</h3>
+                    
                     <div class="row align-items-center">
                         
                         <div style="margin-left: 150px;" class="col-lg-7">
+                           
+                             <form action="login.php" method="post" name="form" class="form">
+
+                                <h2>LOGIN</h2>
+                        
+                                <?php if (isset($_GET['error'])) { ?>
+                        
+                                    <p class="error"><?php echo $_GET['error']; ?></p>
+                        
+                                <?php } ?>
+                        
+                                
+                        
+                                <input type="text" name="uname" placeholder="User Name"><br><br>
+                        
+                               
+                        
+                                <input type="password" name="password" placeholder="Password"><br> <br>
+
+                                <input type="type" name="type" placeholder="type: admin, staff, parent"><br> <br>
+                        
+                                <button class="btn btn-primary mt-2 py-2 px-4" name="button" type="submit">Login</button>
+                        
+                             </form>
                             
-                         <a href="updateUser.html"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Update User</button></a>
-                            <a href="deleteUser.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Delete User</button> </a>
-                           <a href="addUser.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Add new User</button></a> 
+                        
+                       
                                 
                             <div class="row pt-2 pb-4">
                                 <div class="col-6 col-md-8">
@@ -127,6 +133,7 @@
                             </div>
                             
                         </div>
+                    
                     </div>
                 </div>
             </div>
@@ -226,7 +233,7 @@
     </script>
 
     <!-- Template Javascript -->
-    <script src="../js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

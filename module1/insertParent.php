@@ -9,14 +9,14 @@
 	$yearRegister = $_POST['yearRegister'];
 	$email = $_POST['email'];
     $status = $_POST['status'];
-	$userID = $_POST['userID'];
+	
 
 $link = mysqli_connect('localhost', 'root', '','ump_mykids');
 
    
 	
-     $query = "insert into parents (username,password,phoneNumber,address,email,yearRegister,status,userID)
-     VALUES ('$username', '$password', '$phoneNumber', '$address','$email','$yearRegister','$status','$userID')";
+     $query = "insert into parents (username,password,phoneNumber,address,email,yearRegister,status)
+     VALUES ('$username', '$password', '$phoneNumber', '$address','$email','$yearRegister','$status')";
 
      if (mysqli_query($link, $query)) {
         echo "Data insert";

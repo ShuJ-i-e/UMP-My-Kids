@@ -8,14 +8,14 @@ $adminID = $_POST['adminID'];
 	$address = $_POST['address'];
 	$yearRegister = $_POST['yearRegister'];
 	$email = $_POST['email'];
-	$userID = $_POST['userID'];
+	
 
 $link = mysqli_connect('localhost', 'root', '','ump_mykids');
 
    
 	
-     $query = "insert into admin (username,password,phoneNumber,address,yearRegister,email,userID)
-     VALUES ('$username', '$password', '$phoneNumber', '$address','$yearRegister','$email','$userID')";
+     $query = "insert into admin (username,password,phoneNumber,address,yearRegister,email)
+     VALUES ('$username', '$password', '$phoneNumber', '$address','$yearRegister','$email')";
 
      if (mysqli_query($link, $query)) {
         echo "Data insert";

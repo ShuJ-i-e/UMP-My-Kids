@@ -9,14 +9,14 @@
     $email = $_POST['email'];
 	$yearRegister = $_POST['yearRegister'];
 	$status = $_POST['status'];
-	$userID = $_POST['userID'];
+	
 
 $link = mysqli_connect('localhost', 'root', '','ump_mykids');
 
    
 	
      $query = "update staff set username= '$username',password= '$password',phoneNumber= '$phoneNumber',
-     address='$address',email='$email',yearRegister='$yearRegister',status='$status',userID='$userID'  WHERE staffID = $staffID";
+     address='$address',email='$email',yearRegister='$yearRegister',status='$status'  WHERE staffID = $staffID";
 
      
 

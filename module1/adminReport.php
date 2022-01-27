@@ -16,51 +16,54 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="..lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="..lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="..lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="..css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="wrapper">
        <!-- Sidebar  -->
        <nav id="sidebar">
-        <div class="sidebar-header">
-            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 25px;">
-                <i class="flaticon-043-teddy-bear"></i>
-                <span class="text-white">UMP MY-KIDS</span>
-            </a>
-        </div>
+            <div class="sidebar-header">
+                <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 25px;">
+                    <i class="flaticon-043-teddy-bear"></i>
+                    <span class="text-white">UMP MY-KIDS</span>
+                </a>
+            </div>
 
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="Owner.html">Home</a>
-            </li>
-            <li>
-                <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle">Users</a>
-                <ul class="collapse list-unstyled" id="userSubmenu">
-                    <li>
-                        <a href="staff.html">Staff</a>
-                    </li>
-                    <li>
-                        <a href="parent.html">Parent</a>
-                    </li>
-                    <li>
-                        <a href="Owner.html">Owner</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="adminReport.php">Report</a>
-            </li>
-        </ul>
-    </nav>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="Owner.html">Home</a>
+                </li>
+                <li>
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Users</a>
+                    <ul class="collapse list-unstyled" id="userSubmenu">
+                        <li>
+                            <a href="staff.html">Staff</a>
+                        </li>
+                        <li>
+                            <a href="parent.html">Parent</a>
+                        </li>
+                        <li>
+                            <a href="Owner.html">Owner</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="adminReport.php">Report</a>
+                </li>
+                <li>
+                    <a href="owner.php">List</a>
+                </li>
+            </ul>
+        </nav>
 
         <!-- Page Content  -->
         <div id="content">
@@ -184,7 +187,7 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(userID) FROM staff");
+                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff");
                         $row = $result->fetch_row();
                         echo "<td>" . $row[0] . "</td>";
                     }
@@ -197,7 +200,7 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(userID) FROM parents");
+                        $result = mysqli_query($conn, "SELECT COUNT(parentID) FROM parents");
                         $row = $result->fetch_row();
                         echo "<td>" . $row[0] . "</td>";
                     }
@@ -339,7 +342,7 @@
     </script>
 
     <!-- Template Javascript -->
-    <script src="../js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
