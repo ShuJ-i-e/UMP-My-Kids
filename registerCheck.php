@@ -41,8 +41,8 @@ else if($type == "admin")
 }
 else if($type == "parent")
 {
-    $query = "insert into parents (username,password,phoneNumber,address,yearRegister,email)
-    VALUES ('$uname', '$pass', '$phoneNumber', '$address','$yearRegister','$email')";
+    $query = "insert into parents (username,password,phoneNumber,address,yearRegister,email, status)
+    VALUES ('$uname', '$pass', '$phoneNumber', '$address','$yearRegister','$email', '$status')";
 
     if (mysqli_query($conn, $query)) {
       header("Location: login.php?msg=Registered Successfully!"); 
