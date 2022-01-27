@@ -384,7 +384,10 @@
             $('#clearSearchBtn').hide();
             $('#kidsInformationDynamic').hide();
             $('#searchTxt').val("");
-
+        }
+        function clearSession() {
+            window.location.href = "../login.php";
+            $.get("clearsession.php");
         }
 
     </script>

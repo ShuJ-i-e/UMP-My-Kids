@@ -293,6 +293,7 @@
             
         function clearSession() {
             window.location.href = "../login.php";
+            $.get("clearsession.php");
         }
 
         </script>
