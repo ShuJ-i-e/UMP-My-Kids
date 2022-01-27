@@ -1,15 +1,15 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    //direct user back to main when no session
-    else{
-        header("Location: ../index.php"); 
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
+//direct user back to main when no session
+else {
+    header("Location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,36 +64,28 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-            <!-- Sidebar  -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 25px;">
-                        <i class="flaticon-043-teddy-bear"></i>
-                        <span class="text-white">UMP MY-KIDS</span>
-                    </a>
-                </div>
-                <ul class="list-unstyled components">
-                    <li>
-                        <a href="../staff_main.php">Home</a>
-                    </li>
-                    <li>
-                        <a href="../module2/staff_index.php">Parents & Kids</a>
-                    </li>
-                    <li>
-                        <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
-                        <ul class="collapse list-unstyled" id="activitySubmenu">
-                            <li>
-                                <a href="../module6/staff_schedule_list.php">List</a>
-                            </li>
-                            <li>
-                                <a href="../module6/staff_schedule_report.php">Report</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                    <li class="active">
-                        <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-                        <ul class="collapse list-unstyled" id="manpowerSubmenu">
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../staff_main.php">Home</a>
+                </li>
+                <li>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
+                </li>
+                <li>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="../module6/staff_schedule_list.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                <li class="active">
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
                             <a href="../module3/staff_view.php">List</a>
                         </li>
@@ -104,15 +96,15 @@
                             <a href="../module3/staff_report.php">Report</a>
                         </li>
                     </ul>
-                    </li>
-                    <li>
+                </li>
+                <li>
                     <a href="../module5/salary_detail.php">Salary</a>
                 </li>
-                </ul>
-                </li>
-                </ul>
-            </nav>
-            <!-- Page Content  -->
+            </ul>
+            </li>
+            </ul>
+        </nav>
+        <!-- Page Content  -->
             <div id="content">
                 <div class="container-fluid bg-primary mb-5">
                     <div class="d-flex justify-content-between mb-3">
@@ -134,7 +126,7 @@
                         <div class="p-2">
                             <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                                 <button type="button" id="logoutBtn" class="btn btn-info">
-                                   <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
+                                    <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                             </nav>
                         </div>
                     </div>
@@ -308,10 +300,11 @@
                         modal.style.display = "none";
                     }
                 }
+
                 function clearSession() {
-            window.location.href = "../index.php";
-            $.get("clearsession.php");
-        }
+                    window.location.href = "../index.php";
+                    $.get("clearsession.php");
+                }
             </script>
 
             <script src="../js/main.js"></script>
