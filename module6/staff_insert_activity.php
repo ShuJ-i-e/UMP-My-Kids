@@ -6,7 +6,7 @@
         $loginUsername= $_SESSION["username"];
         $loginID= $_SESSION["user_id"];
     }
-    //direct user back to main when no session
+    //direct staff back to main when no session
     else{
         header("Location: ../staff_main.php"); 
     }
@@ -199,13 +199,13 @@
 
                                             <?php
                                                 //get the staff id from username
-                                                $staffSql = "SELECT staffID, user_type FROM staff WHERE username = '$loginUsername';";
+                                                $staffSql = "SELECT staffID, staffType FROM staff WHERE username = '$loginUsername';";
                                                 $result = $conn->query($staffSql);
                                                 if ($result->num_rows > 0) {
                                                     // output data of each row
                                                     while($row = $result->fetch_assoc()) {
                                                         $staffID=$row["staffID"];
-                                                        $staffType= $row["user_type"];
+                                                        $staffType= $row["staffType"];
                                                     }
                                                 }
                                             ?>
