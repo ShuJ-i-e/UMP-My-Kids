@@ -130,7 +130,7 @@ $userId = 1;
                         <p>Are you sure you want to logout?</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
                         <button class="btn btn-light" id="closeLogoutBtn" style="margin: 10px;float:right">No</button>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ $userId = 1;
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $sql = "SELECT `kidsID`, `name` from kids JOIN parents ON kids.parentID=parents.parentID JOIN user ON parents.userID=user.userID where user.userID=$userId";
+                        $sql = "SELECT `kidsID`, `name` from kids JOIN parents ON kids.parentID=parents.parentID  where kids.parentID=$userId";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
 
