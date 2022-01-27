@@ -87,10 +87,6 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="../module5/staff_salary_detail.php">Salary</a>
-                </li>
-                
                 <?php
             		require "conn.php";
                 if ($conn->connect_error) {
@@ -99,10 +95,6 @@
                     $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
                     INNER JOIN salary ON staff.staffID=salary.staffID" ;
                     $result = $conn->query($sql);
-
-                    if (!$result) {
-                        trigger_error('Invalid query: ' . $conn->error);
-                    }
 
                     $count = $result->num_rows;
                     $i = 0;
