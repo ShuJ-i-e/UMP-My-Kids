@@ -127,11 +127,11 @@ else {
             <!-- Content Start-->
             <div class="col-lg-12 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
-                <div class="card-header bg-secondary text-center p-4">
+                    <div class="card-header bg-secondary text-center p-4">
                         <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='parent_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
                         <h1 class="text-white m-0">Registered Kid</h1>
                     </div>
-                    
+
                     <div class="card-body text-center">
                         <h4 class="card-title">Parent's Information</h4>
                     </div>
@@ -249,14 +249,8 @@ else {
         }
 
         function clearSession() {
-            <?php
-            // remove all session variables
-            session_unset();
-
-            // destroy the session
-            session_destroy();
-            ?>
-            window.location.href = "index.php";
+            window.location.href = "../index.php";
+            $.get("clearsession.php");
         }
     </script>
 

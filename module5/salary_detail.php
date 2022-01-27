@@ -333,15 +333,10 @@ if (event.target == modal) {
     modal.style.display = "none";
 }
 }
-function clearSession() {
-            <?php
-            // remove all session variables
-            session_unset();
 
-            // destroy the session
-            session_destroy();
-            ?>
-            window.location.href = "index.php";
+function clearSession() {
+            window.location.href = "../index.php";
+            $.get("clearsession.php");
         }
 </script>
 
