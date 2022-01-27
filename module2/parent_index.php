@@ -9,7 +9,7 @@
     //direct user back to main when no session
     else{
         echo $_SESSION["user_id"];
-        //header("Location: ../login.php"); 
+        //header("Location: ../index.php"); 
     }
 ?>
 
@@ -386,7 +386,7 @@
             $('#searchTxt').val("");
         }
         function clearSession() {
-            window.location.href = "../login.php";
+            window.location.href = "../index.php";
             $.get("clearsession.php");
         }
 

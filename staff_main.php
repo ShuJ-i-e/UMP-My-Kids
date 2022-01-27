@@ -445,7 +445,7 @@
         
 
         function clearSession() {
-            window.location.href = "login.php";
+            window.location.href = "index.php";
         }
 
     </script>

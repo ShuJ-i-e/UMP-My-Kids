@@ -37,7 +37,7 @@ if ($conn->connect_error) {
                 header("Location: module1/admin.php");
             } else {
 
-                header("Location: login.php?msg=Incorrect username and password!");
+                header("Location: index.php?msg=Incorrect username and password!");
             }
         } else if ($type == 'staff') {
             $sql = "SELECT * FROM staff WHERE username ='$uname' AND password='$pass'";
@@ -60,7 +60,7 @@ if ($conn->connect_error) {
                     header("Location: staff_main.php");
                 }
             } else {
-                header("Location: login.php?msg=Incorrect username and password!");
+                header("Location: index.php?msg=Incorrect username and password!");
             }
         } else {
             $sql = "SELECT * FROM parents WHERE username ='$uname' AND password='$pass'";
@@ -77,7 +77,7 @@ if ($conn->connect_error) {
                 header("Location: user_main.php");
             } else {
 
-                header("Location: login.php?msg=Incorrect username and password!");
+                header("Location: index.php?msg=Incorrect username and password!");
             }
         }
     }

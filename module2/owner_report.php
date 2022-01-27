@@ -8,7 +8,7 @@
     }
     //direct user back to main when no session
     else{
-        header("Location: ../login.php"); 
+        header("Location: ../index.php"); 
     }
 ?>
 
@@ -356,7 +356,7 @@
             const myChart = new Chart(document.getElementById('myChart'), config);
         });
         function clearSession() {
-            window.location.href = "../login.php";
+            window.location.href = "../index.php";
             $.get("clearsession.php");
         }
     </script>

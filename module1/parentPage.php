@@ -8,7 +8,7 @@
     }
     //direct user back to main when no session
     else{
-        header("Location: ../login.php"); 
+        header("Location: ../index.php"); 
     }
 ?>
 <!DOCTYPE html>
@@ -240,7 +240,7 @@
             }
         }
             function clearSession() {
-            window.location.href = "../login.php";
+            window.location.href = "../index.php";
             $.get("clearsession.php");
         }
     </script>

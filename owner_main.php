@@ -443,7 +443,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
         }
 
         function clearSession() {
-            window.location.href = "login.php";
+            window.location.href = "index.php";
         }
     </script>
     <!-- Template Javascript -->

@@ -8,7 +8,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
 }
 //direct user back to main when no session
 else {
-    header("Location: ../login.php");
+    header("Location: ../index.php");
 }
 ?>
 
@@ -482,7 +482,7 @@ else {
             chartAll.draw(dataYear, optionsAll);
         }
         function clearSession() {
-            window.location.href = "../login.php";
+            window.location.href = "../index.php";
             $.get("clearsession.php");
         }
     </script>

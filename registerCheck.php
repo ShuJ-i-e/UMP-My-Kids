@@ -21,7 +21,7 @@ if($type == "staff")
     VALUES ('$uname', '$pass', '$phoneNumber', '$address','$yearRegister','$email', '$staffType', 'active', '$medicationHistory')";
 
     if (mysqli_query($conn, $query)) {
-      header("Location: login.php?msg=Registered Successfully!"); 
+      header("Location: index.php?msg=Registered Successfully!"); 
    } else {
        echo "Data failed";
     }
@@ -33,7 +33,7 @@ else if($type == "admin")
     VALUES ('$uname', '$pass', '$phoneNumber', '$address','$yearRegister','$email')";
 
     if (mysqli_query($conn, $query)) {
-      header("Location: login.php?msg=Registered Successfully!"); 
+      header("Location: index.php?msg=Registered Successfully!"); 
     } else {
        echo "Data failed" ;
     }
@@ -45,7 +45,7 @@ else if($type == "parent")
     VALUES ('$uname', '$pass', '$phoneNumber', '$address','$yearRegister','$email', '$status')";
 
     if (mysqli_query($conn, $query)) {
-      header("Location: login.php?msg=Registered Successfully!"); 
+      header("Location: index.php?msg=Registered Successfully!"); 
     } else {
        echo "Data failed" ;
     }

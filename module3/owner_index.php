@@ -8,7 +8,7 @@
     }
     //direct user back to main when no session
     else{
-        header("Location: ../login.php"); 
+        header("Location: ../index.php"); 
     }
 ?>
 <!DOCTYPE html>
