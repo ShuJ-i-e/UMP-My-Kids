@@ -98,6 +98,17 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenu">
                         <li>
@@ -111,7 +122,7 @@
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
+                    <li>
                             <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
@@ -122,6 +133,7 @@
             </ul>
         </nav>
         <!-- Page Content  -->
+
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
                 <div class="d-flex justify-content-between mb-3">

@@ -108,17 +108,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Salary</a>
-                    <ul class="collapse list-unstyled" id="salarySubmenu">
-                        <li>
-                            <a href="../module5/salarylist.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module5/report_test.php">Report</a>
-                        </li>
-                        </li>
-                    </ul>
+                    <a href="../module5/salary_detail.php">Salary</a>
                 </li>
             </ul>
         </nav>

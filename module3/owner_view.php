@@ -68,10 +68,10 @@
                 <li>
                     <a href="../owner_main.php">Home</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
+                        <li class="active">
                             <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
@@ -79,8 +79,9 @@
                         </li>
                     </ul>
                 </li>
-                <li  class="active">
+                <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
                             <a href="../module3/owner_index.php">List</a>

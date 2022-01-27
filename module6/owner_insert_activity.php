@@ -1,15 +1,15 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    //direct owner back to main when no session
-    else{
-        header("Location: ../index.php"); 
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
+//direct owner back to main when no session
+else {
+    header("Location: ../index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,10 +54,10 @@
                 <li>
                     <a href="../owner_main.php">Home</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
+                        <li class="active">
                             <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
@@ -88,10 +88,10 @@
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li class="active">
+                        <li>
                             <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
@@ -99,7 +99,6 @@
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </nav>
         <!-- Page Content  -->
@@ -162,11 +161,11 @@
                                     <div class="col-lg-2">
                                         <h5 class=" mb-4">Kid's name</h5>
                                     </div>
-                                
+
                                     <div class="col-lg-10">
                                         <div class="form-group">
                                             <select name="kidsID" id="kidsID" class="custom-select border-0 px-4">
-                                                <option selected disabled="disabled">-- Select --</option> 
+                                                <option selected disabled="disabled">-- Select --</option>
                                                 <?php
                                                 require "conn.php";
                                                 if ($conn->connect_error) {
@@ -175,7 +174,7 @@
                                                     $sql = "SELECT kidsID, name  FROM kids ";
                                                     $result = $conn->query($sql);
                                                     $count = $result->num_rows;
-                                                    if ($count >0) {
+                                                    if ($count > 0) {
                                                         while ($row = mysqli_fetch_array($result)) {
                                                             $menu = "<option value=" . $row['kidsID'] . ">" . $row['name'] . "</option>";
                                                             echo $menu;
@@ -202,26 +201,26 @@
                                             <select name="staffID" id="staffID" class="custom-select border-0 px-4" onchange="getStaffType()">
                                                 <option selected disabled="disabled">-- Select --</option>
                                                 <?php
-                                                    require "conn.php";
-                                                    if ($conn->connect_error) {
-                                                        die("Connection failed: " . $conn->connect_error);
-                                                    } else {
-                                                        $sql = "SELECT staffID, username, staffType  FROM staff";
-                                                        $result = $conn->query($sql);
-                                                        $count = $result->num_rows;
-                                                        if ($count >0) {
-                                                            $i=0;
-                                                            while ($row = mysqli_fetch_array($result)) {
-                                                                $menu = "<option value=" . $row['staffID'] . ">" . $row['username'] . "</option>";
-                                                                echo $menu;
-                                                                $user_type[$i] = $row['staffType'];
-                                                                $i++;
-                                                            }
-                                                        } else {
-                                                            $menu = "<option disabled='disabled'> No parents registered yet </option>";
+                                                require "conn.php";
+                                                if ($conn->connect_error) {
+                                                    die("Connection failed: " . $conn->connect_error);
+                                                } else {
+                                                    $sql = "SELECT staffID, username, staffType  FROM staff";
+                                                    $result = $conn->query($sql);
+                                                    $count = $result->num_rows;
+                                                    if ($count > 0) {
+                                                        $i = 0;
+                                                        while ($row = mysqli_fetch_array($result)) {
+                                                            $menu = "<option value=" . $row['staffID'] . ">" . $row['username'] . "</option>";
                                                             echo $menu;
+                                                            $user_type[$i] = $row['staffType'];
+                                                            $i++;
                                                         }
+                                                    } else {
+                                                        $menu = "<option disabled='disabled'> No parents registered yet </option>";
+                                                        echo $menu;
                                                     }
+                                                }
                                                 ?>
                                             </select>
                                             <p class="text-danger" id="errorLblStaff">
@@ -233,10 +232,10 @@
                                     <div class="col-lg-2">
                                         <h5 class=" mb-4">Staff type</h5>
                                     </div>
-                                        
+
                                     <div class="col-lg-10">
                                         <div class="form-group">
-                                            <input name="staffType" id="staffType" type="text" class="form-control border-0 p-4" placeholder="Staff type" readonly/>
+                                            <input name="staffType" id="staffType" type="text" class="form-control border-0 p-4" placeholder="Staff type" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +244,7 @@
                                     <div class="col-lg-2">
                                         <h5 class=" mb-4">Start Time</h5>
                                     </div>
-                                        
+
                                     <div class="col-lg-10">
                                         <div class="form-group">
                                             <input type="datetime-local" id="startTimeTxt" name="startTimeTxt" class="form-control">
@@ -258,7 +257,7 @@
                                     <div class="col-lg-2">
                                         <h5 class=" mb-4">End Time</h5>
                                     </div>
-                                        
+
                                     <div class="col-lg-10">
                                         <div class="form-group">
                                             <input type="datetime-local" id="endTimeTxt" name="endTimeTxt" class="form-control">
@@ -271,13 +270,13 @@
                                     <div class="col-lg-2">
                                         <h5 class=" mb-4">Status</h5>
                                     </div>
-                                        
+
                                     <div class="col-lg-10">
                                         <div class="form-group">
                                             <h5 class=" mb-4">
-                                                <input type="radio" id="activeRdb" name="statusRdb" value="Active" >
+                                                <input type="radio" id="activeRdb" name="statusRdb" value="Active">
                                                 <label for="activeRdb">Active</label>
-                                                <input type="radio" id="notActiveRdb" name="statusRdb" value="Not Active" style="margin-left: 20px" >
+                                                <input type="radio" id="notActiveRdb" name="statusRdb" value="Not Active" style="margin-left: 20px">
                                                 <label for="notActiveRdb">Not Active</label>
                                                 <p class="text-danger" id="errorLblCmb"></p>
                                             </h5>
@@ -286,7 +285,7 @@
                                 </div>
 
                                 <!-- pass staff type to insert.php -->
-                                <input type='hidden' id='page' name='page' value='owner'/>
+                                <input type='hidden' id='page' name='page' value='owner' />
                                 <div>
                                     <button type="button" class="btn btn-secondary border-0 px-4 mx-auto mb-4 float-right" onclick="validate()">Submit</button>
                                     <a class="btn btn-light border-0 px-4 mx-auto mb-4" type="button" href="owner_schedule_list.php">Back</a>
@@ -356,67 +355,68 @@
 
         function getStaffType() {
             var staffIDCmb = document.getElementById("staffID");
-            var index= staffIDCmb.selectedIndex;
+            var index = staffIDCmb.selectedIndex;
 
             //pass user type from php to JS
             var userType = <?php echo json_encode($user_type); ?>;
 
-            var staffType= userType [index-1];
-            
-            document.getElementById("staffType").value = staffType; 
+            var staffType = userType[index - 1];
+
+            document.getElementById("staffType").value = staffType;
         }
 
-        function validate(){
+        function validate() {
             var kidsIDCmb = document.getElementById("kidsID");
             var staffIDCmb = document.getElementById("staffID");
 
-            var kidsValue=kidsIDCmb.options[kidsIDCmb.selectedIndex].text;
-            var staffValue=staffIDCmb.options[staffIDCmb.selectedIndex].text;
+            var kidsValue = kidsIDCmb.options[kidsIDCmb.selectedIndex].text;
+            var staffValue = staffIDCmb.options[staffIDCmb.selectedIndex].text;
 
-            var DEFAULT_VALUE="-- Select --" ;
+            var DEFAULT_VALUE = "-- Select --";
 
             document.getElementById("errorLblKids").innerHTML = " ";
             document.getElementById("errorLblStaff").innerHTML = " ";
             document.getElementById("errorLblStart").innerHTML = " ";
             document.getElementById("errorLblEnd").innerHTML = " ";
             document.getElementById("errorLblCmb").innerHTML = " ";
-            
-            var errorStat= false;
 
-            if(kidsValue ==  DEFAULT_VALUE){
+            var errorStat = false;
+
+            if (kidsValue == DEFAULT_VALUE) {
                 document.getElementById("errorLblKids").innerHTML = "Please select kids name";
-                errorStat= true;
+                errorStat = true;
             }
 
-            if(staffValue ==  DEFAULT_VALUE){
+            if (staffValue == DEFAULT_VALUE) {
                 document.getElementById("errorLblStaff").innerHTML = "Please select staff name";
-                errorStat= true;
+                errorStat = true;
             }
 
             var startTimeTxt = document.getElementById("startTimeTxt").value;
             var endTimeTxt = document.getElementById("endTimeTxt").value;
             var activeRdb = document.getElementById("activeRdb");
             var notActiveRdb = document.getElementById("notActiveRdb");
-            
-            if(startTimeTxt.trim() == ""){
+
+            if (startTimeTxt.trim() == "") {
                 document.getElementById("errorLblStart").innerHTML = "Please select start time";
-                errorStat= true;
+                errorStat = true;
             }
 
-            if(endTimeTxt.trim() == ""){
+            if (endTimeTxt.trim() == "") {
                 document.getElementById("errorLblEnd").innerHTML = "Please select end time";
-                errorStat= true;
-            }
-            
-            if(activeRdb.checked == false && notActiveRdb.checked == false){
-                document.getElementById("errorLblCmb").innerHTML = "Please select end time";
-                errorStat= true;
+                errorStat = true;
             }
 
-            if(!errorStat){
+            if (activeRdb.checked == false && notActiveRdb.checked == false) {
+                document.getElementById("errorLblCmb").innerHTML = "Please select end time";
+                errorStat = true;
+            }
+
+            if (!errorStat) {
                 document.getElementById("insertForm").submit();
             }
         }
+
         function clearSession() {
             window.location.href = "../index.php";
             $.get("clearsession.php");

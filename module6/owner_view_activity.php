@@ -54,10 +54,10 @@ else {
                 <li>
                     <a href="../owner_main.php">Home</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
+                        <li class="active">
                             <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
@@ -88,10 +88,10 @@ else {
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li class="active">
+                        <li>
                             <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
@@ -99,7 +99,6 @@ else {
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </nav>
         <!-- Page Content  -->
@@ -342,6 +341,7 @@ else {
                 modal.style.display = "none";
             }
         }
+
         function clearSession() {
             window.location.href = "../index.php";
             $.get("clearsession.php");
