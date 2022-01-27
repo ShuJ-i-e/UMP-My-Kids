@@ -6,7 +6,7 @@
         $loginUsername= $_SESSION["username"];
         $loginID= $_SESSION["user_id"];
     }
-    //direct user back to main when no session
+    //direct owner back to main when no session
     else{
         header("Location: ../login.php"); 
     }
@@ -206,7 +206,7 @@
                                                     if ($conn->connect_error) {
                                                         die("Connection failed: " . $conn->connect_error);
                                                     } else {
-                                                        $sql = "SELECT staffID, username,userID  FROM staff";
+                                                        $sql = "SELECT staffID, username, staffType  FROM staff";
                                                         $result = $conn->query($sql);
                                                         $count = $result->num_rows;
                                                         if ($count >0) {
@@ -214,23 +214,9 @@
                                                             while ($row = mysqli_fetch_array($result)) {
                                                                 $menu = "<option value=" . $row['staffID'] . ">" . $row['username'] . "</option>";
                                                                 echo $menu;
-                                                                $staffUserID[$i]= $row['userID'];
+                                                                $user_type[$i] = $row['staffType'];
                                                                 $i++;
                                                             }
-
-                                                            $j=0;
-                                                            for ($x = 0; $x <= sizeof($staffUserID) ; $x++) {
-                                                                $staffSql = "SELECT user_type FROM user WHERE userID = '$staffUserID[$x]';";
-                                                                $staffResult = $conn->query($staffSql);
-                                                                $count = $staffResult->num_rows;
-                                                                if ($count >0) {
-                                                                    while ($row = mysqli_fetch_array($staffResult)) {
-                                                                        $user_type[$j] = $row['user_type'];
-                                                                        $j++;
-                                                                    }
-                                                                }
-                                                            }
-                                                                
                                                         } else {
                                                             $menu = "<option disabled='disabled'> No parents registered yet </option>";
                                                             echo $menu;
@@ -372,6 +358,7 @@
             var staffIDCmb = document.getElementById("staffID");
             var index= staffIDCmb.selectedIndex;
 
+            //pass user type from php to JS
             var userType = <?php echo json_encode($user_type); ?>;
 
             var staffType= userType [index-1];

@@ -54,7 +54,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
             </div>
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="../owner_main.php">Home</a>
+                    <a href="owner_main.php">Home</a>
                 </li>
                 <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>

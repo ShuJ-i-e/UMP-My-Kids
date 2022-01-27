@@ -156,28 +156,18 @@ else {
 
             <?php include 'conn.php'; ?>
             <?php
-            $errorLbl = "";
-            $noResultLbl = "";
-
-            //get parent ID from login ID
-            $sql = "SELECT parentID FROM parents 
-                    WHERE userID = '$loginID';";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    $parentID = $row["parentID"];
-                }
-            }
+                $errorLbl = "";
+                $noResultLbl = "";
             ?>
+            
 
             <?php
-            function findKidsName($dbConn, $passName, $parentID)
+            function findKidsName($dbConn, $passName, $loginID)
             {
                 //get the kids name form ID
                 $kidsSql = "SELECT name FROM kids 
                     WHERE (kidsID = '$passName'
-                    AND parentID = '$parentID');";
+                    AND parentID = '$loginID');";
                 $kidsResult = $dbConn->query($kidsSql);
                 if ($kidsResult->num_rows > 0) {
                     // output data of each row
@@ -298,7 +288,7 @@ else {
                         //get the kids name like search text
                         $kidsSql = "SELECT kidsID,name FROM `kids` 
                             WHERE (`name` LIKE '%{$searchTxt}%' 
-                            AND parentID = '$parentID');";
+                            AND parentID = '$loginID');";
                         $result = $conn->query($kidsSql);
                         $i = 0;
                         if ($result->num_rows > 0) {
@@ -418,11 +408,11 @@ else {
                                             $NewKidsName[$count] = $kidsName[$i];
                                         } else {
                                             $NewKidsID[$count] = $row["kidsID"];
-                                            $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $parentID);
+                                            $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $loginID);
                                         }
                                     } else {
                                         $NewKidsID[$count] = $row["kidsID"];
-                                        $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $parentID);
+                                        $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $loginID);
                                     }
 
                                     if (isset($staffID)) {
@@ -464,7 +454,7 @@ else {
                                 FROM activity
                                 WHERE startTime >= '$startTimeTxt' 
                                 AND endTime <= '$endTimeTxt' 
-                                AND parentID = '$parentID' ;";
+                                AND parentID = '$loginID' ;";
 
                         $result = $conn->query($sql);
 
@@ -475,7 +465,7 @@ else {
                                 $NewsActivityID[$count] = $row["activityID"];
 
                                 $NewKidsID[$count] = $row["kidsID"];
-                                $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $parentID);
+                                $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $loginID);
 
                                 $NewStaffID[$count] = $row["staffID"];
                                 $NewStaffName[$count] = findStaffName($conn, $NewStaffID[$count]);
@@ -555,11 +545,11 @@ else {
                                             $NewKidsName[$count] = $kidsName[$i];
                                         } else {
                                             $NewKidsID[$count] = $row["kidsID"];
-                                            $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $parentID);
+                                            $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $loginID);
                                         }
                                     } else {
                                         $NewKidsID[$count] = $row["kidsID"];
-                                        $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $parentID);
+                                        $NewKidsName[$count] = findKidsName($conn, $NewKidsID[$count], $loginID);
                                     }
 
                                     if (isset($staffID)) {
