@@ -102,6 +102,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
                     </ul>
                 </li>
             </ul>
+        </nav>
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
