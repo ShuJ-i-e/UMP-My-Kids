@@ -3,8 +3,6 @@ $uname = $_POST['uname'];
 $pass = $_POST['password'];
 $type = $_POST['type'];
 
-
-
 $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

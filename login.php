@@ -67,8 +67,8 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg"
                             style="float:right; margin-top: 50px">
-                            <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i>Register</a>
+                            <button type="button" id="registerBtn" class="btn btn-info">
+                               <a href="register.php"> Register</a>
                         </nav>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                             
                                     <?php
                                     if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
-                                        echo "<div id='message' style='color: red'>" . $_REQUEST["msg"] . "</div>";
+                                        echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
                                     }
                                     ?>
 
