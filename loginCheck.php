@@ -27,30 +27,50 @@ if ($conn->connect_error) {
             $result = mysqli_query($conn, $sql);
             $count = $result->num_rows;
             if ($count == 1) {
-                header("Location: module1/admin.html"); 
+               $i=0;
+                session_start();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $_SESSION['user_id'] = $row["adminID"];
+                    $_SESSION['username'] = $row["username"];
+                    $i++;
+                }
+                header("Location: module1/admin.php");
             } else {
 
-                header("Location: login.php?msg=Incorrect username and password!"); 
+                header("Location: login.php?msg=Incorrect username and password!");
             }
         } else if ($type == 'staff') {
             $sql = "SELECT * FROM staff WHERE username ='$uname' AND password='$pass'";
-
             $result = mysqli_query($conn, $sql);
+            $count = $result->num_rows;
             if ($count == 1) {
-                header("Location: staff_main.php"); 
+                $i=0;
+                session_start();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $_SESSION['user_id'] = $row["staffID"];
+                    $_SESSION['username'] = $row["username"];
+                    $i++;
+                }
+                header("Location: staff_main.php");
             } else {
-
-                header("Location: login.php?msg=Incorrect username and password!"); 
+                header("Location: login.php?msg=Incorrect username and password!");
             }
         } else {
             $sql = "SELECT * FROM parents WHERE username ='$uname' AND password='$pass'";
-
             $result = mysqli_query($conn, $sql);
+            $count = $result->num_rows;
             if ($count == 1) {
-                header("Location: user_main.php"); 
+                $i=0;
+                session_start();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $_SESSION['user_id'] = $row["parentID"];
+                    $_SESSION['username'] = $row["username"];
+                    $i++;
+                }
+                header("Location: user_main.php");
             } else {
 
-                header("Location: login.php?msg=Incorrect username and password!"); 
+                header("Location: login.php?msg=Incorrect username and password!");
             }
         }
     }
