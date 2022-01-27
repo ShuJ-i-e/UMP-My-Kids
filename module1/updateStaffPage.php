@@ -1,3 +1,16 @@
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        header("Location: ../login.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,20 +52,20 @@
 
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="Owner.html">Home</a>
+                    <a href="admin.html">Home</a>
                 </li>
                 <li>
                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Users</a>
                     <ul class="collapse list-unstyled" id="userSubmenu">
                         <li>
-                            <a href="staff.html">Staff</a>
+                            <a href="staffPage.php">Staff</a>
                         </li>
                         <li>
-                            <a href="parent.html">Parent</a>
+                            <a href="parentPage.php">Parent</a>
                         </li>
                         <li>
-                            <a href="Owner.html">Owner</a>
+                            <a href="ownerPage.php">Owner</a>
                         </li>
                     </ul>
                 </li>
@@ -89,7 +102,7 @@
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg"
                             style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Username</a>
+                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -112,16 +125,62 @@
             </div>
 
             <div class="container-fluid py-5">
-                
                 <div class="container">
-                    <h3 style="margin-left: 430px;">Parent Information</h3>
                     <div class="row align-items-center">
-                        
-                        <div style="margin-left: 150px;" class="col-lg-7">
+                       
+                        <div class="col-lg-7">
                             
-                         <a href="updateParent.html"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Update Parent</button></a>
-                            <a href="deleteParent.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Delete Parent</button> </a>
-                           <a href="addParent.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Add new Parent</button></a> 
+                            <form  method="post" action="updateStaff.php">
+                                 <h3>Update Staff</h3>
+                            <table class="table">
+                                
+                                <tr>
+                                    <td class="td">
+                                        <input name="staffID" class="staffID" type="text" placeholder="Staff ID">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="username" class="username" type="text" placeholder="User name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="password" class="Password" type="text" placeholder="Password">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="phoneNumber" class="phoneNumber" type="text" placeholder="Phone Number">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="address" class="address" type="text" placeholder="Address">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="email" class="email" type="text" placeholder="E-mail">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="yearRegister" class="yearRegister" type="text" placeholder="Year Register">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="status" class="status" type="text" placeholder="Status">
+                                    </td>
+                                </tr>
+                               
+                               
+                            </table>
+                            
+                            <button class="btn btn-secondary" style="margin: 10px;float:left" type="submit">Submit</button>
+                        </form>
+                            
                                 
                             <div class="row pt-2 pb-4">
                                 <div class="col-6 col-md-8">
@@ -137,27 +196,6 @@
 
 
 
-            <div class="container-fluid py-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid py-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid py-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        
-                    </div>
-                </div>
-            </div>
             <div class="container-fluid py-5">
                 <div class="container">
                     <div class="row align-items-center">
@@ -220,11 +258,15 @@
             modal.style.display = "none";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        /// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+            function clearSession() {
+            window.location.href = "../login.php";
+            $.get("clearsession.php");
         }
     </script>
 

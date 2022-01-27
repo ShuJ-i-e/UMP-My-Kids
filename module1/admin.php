@@ -14,6 +14,19 @@
         $loginID= $_SESSION["user_id"];
     }
 ?>
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        header("Location: ../login.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,13 +75,13 @@
                         class="dropdown-toggle">Users</a>
                     <ul class="collapse list-unstyled" id="userSubmenu">
                         <li>
-                            <a href="staff.html">Staff</a>
+                            <a href="staffPage.php">Staff</a>
                         </li>
                         <li>
-                            <a href="parent.html">Parent</a>
+                            <a href="parentPage.php">Parent</a>
                         </li>
                         <li>
-                            <a href="Owner.html">Owner</a>
+                            <a href="ownerPage.php">Owner</a>
                         </li>
                     </ul>
                 </li>
@@ -135,9 +148,9 @@
                         
                         <div style="margin-left: 150px;" class="col-lg-7">
                             
-                         <a href="editaddmin.html"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Eidt Admin</button></a>
-                            <a href="deleteaddmin.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Delete Admin</button> </a>
-                           <a href="addAdmin.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Add new Admin</button></a> 
+                         <a href="editAdminPage.php"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Eidt Admin</button></a>
+                            <a href="deleteAdminPage.php"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Delete Admin</button> </a>
+                           <a href="addAdminPage.php"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Add new Admin</button></a> 
                                 
                             <div class="row pt-2 pb-4">
                                 <div class="col-6 col-md-8">
@@ -236,11 +249,15 @@
             modal.style.display = "none";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        /// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+            function clearSession() {
+            window.location.href = "../login.php";
+            $.get("clearsession.php");
         }
     </script>
 

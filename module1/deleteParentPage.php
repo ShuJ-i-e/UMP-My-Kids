@@ -1,3 +1,16 @@
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        header("Location: ../login.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,42 +41,42 @@
 
 <body>
     <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 25px;">
-                    <i class="flaticon-043-teddy-bear"></i>
-                    <span class="text-white">UMP MY-KIDS</span>
-                </a>
-            </div>
+       <!-- Sidebar  -->
+       <nav id="sidebar">
+        <div class="sidebar-header">
+            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 25px;">
+                <i class="flaticon-043-teddy-bear"></i>
+                <span class="text-white">UMP MY-KIDS</span>
+            </a>
+        </div>
 
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="admin.html">Home</a>
-                </li>
-                <li>
-                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Users</a>
-                    <ul class="collapse list-unstyled" id="userSubmenu">
-                        <li>
-                            <a href="staff.html">Staff</a>
-                        </li>
-                        <li>
-                            <a href="parent.html">Parent</a>
-                        </li>
-                        <li>
-                            <a href="Owner.html">Owner</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="adminReport.php">Report</a>
-                </li>
-                <li>
-                        <a href="owner.php">List</a>
+        <ul class="list-unstyled components">
+            <li class="active">
+                <a href="admin.html">Home</a>
+            </li>
+            <li>
+                <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle">Users</a>
+                <ul class="collapse list-unstyled" id="userSubmenu">
+                    <li>
+                        <a href="staffPage.php">Staff</a>
                     </li>
-            </ul>
-        </nav>
+                    <li>
+                        <a href="parentPage.php">Parent</a>
+                    </li>
+                    <li>
+                        <a href="ownerPage.php">Owner</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="adminReport.php">Report</a>
+            </li>
+            <li>
+                    <a href="owner.php">List</a>
+                </li>
+        </ul>
+    </nav>
 
         <!-- Page Content  -->
         <div id="content">
@@ -89,7 +102,7 @@
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg"
                             style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Username</a>
+                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -117,13 +130,13 @@
                        
                         <div class="col-lg-7">
                             
-                            <form  method="post" action="deleteSatff.php">
-                                 <h3>delete Staff</h3>
+                            <form  method="post" action="deleteparentPage.php">
+                                 <h3>delete parent</h3>
                             <table class="table">
                                 
                                 <tr>
                                     <td class="td">
-                                        <input name="staffID" class="staffID" type="text" placeholder="Staff ID">
+                                        <input name="parentID" class="parentID" type="text" placeholder="parentID">
                                     </td>
                                 </tr>
                                 
@@ -209,11 +222,15 @@
             modal.style.display = "none";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        /// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+            function clearSession() {
+            window.location.href = "../login.php";
+            $.get("clearsession.php");
         }
     </script>
 

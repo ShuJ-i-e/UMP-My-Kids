@@ -1,3 +1,16 @@
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        header("Location: ../login.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,13 +59,13 @@
                         class="dropdown-toggle">Users</a>
                     <ul class="collapse list-unstyled" id="userSubmenu">
                         <li>
-                            <a href="staff.html">Staff</a>
+                            <a href="staffPage.php">Staff</a>
                         </li>
                         <li>
-                            <a href="parent.html">Parent</a>
+                            <a href="parentPage.php">Parent</a>
                         </li>
                         <li>
-                            <a href="#">Owner</a>
+                            <a href="ownerPage.php">Owner</a>
                         </li>
                     </ul>
                 </li>
@@ -60,8 +73,8 @@
                     <a href="adminReport.php">Report</a>
                 </li>
                 <li>
-                    <a href="owner.php">List</a>
-                </li>
+                        <a href="owner.php">List</a>
+                    </li>
             </ul>
         </nav>
 
@@ -89,7 +102,7 @@
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg"
                             style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Username</a>
+                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -117,9 +130,15 @@
                        
                         <div class="col-lg-7">
                             
-                            <form  method="post" action="insertParent.php">
-                                 <h3>Add Parent</h3>
+                            <form  method="post" action="updateparentPage.php">
+                                 <h3>Update Parent</h3>
                             <table class="table">
+                                
+                                <tr>
+                                    <td class="td">
+                                        <input name="parentID" class="parentID" type="text" placeholder="parentID">
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="td">
                                         <input name="username" class="username" type="text" placeholder="User name">
@@ -142,20 +161,20 @@
                                 </tr>
                                 <tr>
                                     <td class="td">
-                                        <input name="yearRegister" class="yearRegister" type="text" placeholder="Year Register">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td">
                                         <input name="email" class="email" type="text" placeholder="E-mail">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="td">
-                                        <input name="status" class="status" type="text" placeholder="Active">
+                                        <input name="yearRegister" class="yearRegister" type="text" placeholder="Year Register">
                                     </td>
                                 </tr>
-                                
+                                <tr>
+                                    <td class="td">
+                                        <input name="status" class="status" type="text" placeholder="Status">
+                                    </td>
+                                </tr>
+                               
                                
                             </table>
                             
@@ -239,11 +258,15 @@
             modal.style.display = "none";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        /// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+            function clearSession() {
+            window.location.href = "../login.php";
+            $.get("clearsession.php");
         }
     </script>
 

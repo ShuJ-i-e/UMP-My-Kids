@@ -1,3 +1,16 @@
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        header("Location: ../login.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,13 +59,13 @@
                         class="dropdown-toggle">Users</a>
                     <ul class="collapse list-unstyled" id="userSubmenu">
                         <li>
-                            <a href="staff.html">Staff</a>
+                            <a href="staffPage.php">Staff</a>
                         </li>
                         <li>
-                            <a href="parent.html">Parent</a>
+                            <a href="parentPage.php">Parent</a>
                         </li>
                         <li>
-                            <a href="Owner.html">Owner</a>
+                            <a href="ownerPage.php">Owner</a>
                         </li>
                     </ul>
                 </li>
@@ -89,7 +102,7 @@
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg"
                             style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Username</a>
+                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -117,13 +130,13 @@
                        
                         <div class="col-lg-7">
                             
-                            <form  method="post" action="deleteaddmin.php">
-                                 <h3>Admin Information</h3>
+                            <form  method="post" action="deleteSatff.php">
+                                 <h3>delete Staff</h3>
                             <table class="table">
                                 
                                 <tr>
                                     <td class="td">
-                                        <input name="adminID" class="adminID" type="text" placeholder="AdminID">
+                                        <input name="staffID" class="staffID" type="text" placeholder="Staff ID">
                                     </td>
                                 </tr>
                                 
@@ -209,11 +222,15 @@
             modal.style.display = "none";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        /// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+            function clearSession() {
+            window.location.href = "../login.php";
+            $.get("clearsession.php");
         }
     </script>
 
