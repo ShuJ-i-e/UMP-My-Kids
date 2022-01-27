@@ -87,9 +87,31 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="../module5/staff_salary_detail.php">Salary</a>
-                </li>
+                <?php
+            		require "conn.php";
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }else {
+                    $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
+                    INNER JOIN salary ON staff.staffID=salary.staffID" ;
+                    $result = $conn->query($sql);
+
+                    $count = $result->num_rows;
+                    $i = 0;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $a[$i] = $row["staffID"];
+                            $i++;
+                        }
+                        for ($i = 0; $i < $count; $i++) {
+                            echo "<li>";
+                            $view_url = "../module5/salary_detail.php?id=" . $a[$i];
+                            echo "<a href=" . $view_url . ">Salary</a></li>";
+                        }
+                    }
+                }
+                ?>
+            </li>
             </ul>
         </nav>
         <!-- Page Content  -->
