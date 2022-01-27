@@ -128,9 +128,10 @@ else {
             <div class="col-lg-12 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
                 <div class="card-header bg-secondary text-center p-4">
-                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='owner_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
+                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='parent_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
                         <h1 class="text-white m-0">Registered Kid</h1>
                     </div>
+                    
                     <div class="card-body text-center">
                         <h4 class="card-title">Parent's Information</h4>
                     </div>
