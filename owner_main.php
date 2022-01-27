@@ -1,18 +1,17 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    else{
-        $_SESSION["username"] ="Owner";
-        $_SESSION["user_id"]= 7;
-        
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+} else {
+    $_SESSION["username"] = "Owner";
+    $_SESSION["user_id"] = 7;
+
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,10 +60,10 @@
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li>
-                            <a href="../module2/owner_index.php">List</a>
+                            <a href="module2/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="../module2/owner_report.php">Report</a>
+                            <a href="module2/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -73,10 +72,10 @@
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="../module3/owner_index.php">List</a>
+                            <a href="module3/owner_index.php">List</a>
                         </li>
                         <li>
-                            <a href="../module3/owner_report.php">Report</a>
+                            <a href="module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -95,10 +94,10 @@
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="../module6/owner_schedule_list.php">List</a>
+                            <a href="module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="../module6/owner_schedule_report.php">Report</a>
+                            <a href="module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -117,8 +116,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -126,8 +124,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
@@ -136,19 +133,19 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
-                </div>
-              </div>
             </div>
             <div class="container-fluid py-5">
                 <div class="container">
@@ -157,7 +154,7 @@
                             <img class="img-fluid rounded mb-5 mb-lg-0" src="img/about-1.jpg" alt="">
                         </div>
                         <div class="col-lg-7">
-                            <p >Learn About Us</p>
+                            <p>Learn About Us</p>
                             <h1 class="mb-4">Best School For Your Kids</h1>
                             <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed
                                 eos,
@@ -170,11 +167,9 @@
                                 </div>
                                 <div class="col-6 col-md-8">
                                     <ul class="list-inline m-0">
-                                        <li class="py-2 border-top border-bottom"><i
-                                                class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet
+                                        <li class="py-2 border-top border-bottom"><i class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet
                                             diam</li>
-                                        <li class="py-2 border-bottom"><i
-                                                class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum
+                                        <li class="py-2 border-bottom"><i class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum
                                         </li>
                                         <li class="py-2 border-bottom"><i class="fa fa-check text-primary mr-3"></i>Diam
                                             dolor diam elitripsum vero.</li>
@@ -263,15 +258,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Julia Smith</h4>
@@ -280,15 +270,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Jhon Doe</h4>
@@ -297,15 +282,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Mollie Ross</h4>
@@ -314,15 +294,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Donald John</h4>
@@ -344,53 +319,50 @@
                 </div>
             </div>
 
-            <?php include 'module6/conn.php';?>
+            <?php include 'module6/conn.php'; ?>
             <?php
-                $infoLbl= "";
+            $infoLbl = "";
 
-                //check if form was submitted
-                if(isset($_POST['SubmitButton'])){
-                    //input some is filled 
-                    if(!empty($_POST["linkTxt"])){
-                        $linkTxt= $_POST["linkTxt"];
+            //check if form was submitted
+            if (isset($_POST['SubmitButton'])) {
+                //input some is filled 
+                if (!empty($_POST["linkTxt"])) {
+                    $linkTxt = $_POST["linkTxt"];
 
-                        if ($result = $conn->query("SHOW TABLES LIKE 'qr'")) {
-                            if($result->num_rows < 1){
-                                
-                                // sql to create table QR code
-                                $sql = "CREATE TABLE qr (
+                    if ($result = $conn->query("SHOW TABLES LIKE 'qr'")) {
+                        if ($result->num_rows < 1) {
+
+                            // sql to create table QR code
+                            $sql = "CREATE TABLE qr (
                                 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                                 link VARCHAR(100) NOT NULL)";
-                                
-                                $conn->query($sql);
-                            }
-                        }
 
-                        $sql= "INSERT INTO `qr` (`link`) 
-                        VALUES ('$linkTxt');";
-                        if ($conn->query($sql) === TRUE) 
-                        {
-                            $infoLbl= "Success Insert!!";
-                        } 
-                        else 
-                        {
-                            $infoLbl= "Error: " . $sql . "<br>" . $conn->error;
+                            $conn->query($sql);
                         }
                     }
+
+                    $sql = "INSERT INTO `qr` (`link`) 
+                        VALUES ('$linkTxt');";
+                    if ($conn->query($sql) === TRUE) {
+                        $infoLbl = "Success Insert!!";
+                    } else {
+                        $infoLbl = "Error: " . $sql . "<br>" . $conn->error;
+                    }
                 }
+            }
             ?>
 
-            
+
             <form method="POST">
                 <div class="container-fluid mb-5">
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-lg-3">
-                                    <label for="start">Insert satisfaction survey google form link</label>
+                                <label for="start">Insert satisfaction survey google form link</label>
                             </div>
 
                             <div class="col-lg-9">
-                                <input name="linkTxt" id="linkTxt" type="text" class="form-control border-0 p-4" placeholder="Google Forms link here..." required/>
+                                <input name="linkTxt" id="linkTxt" type="text" class="form-control border-0 p-4" placeholder="Google Forms link here..." required />
                             </div>
                         </div>
                     </div>
@@ -400,7 +372,7 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-lg-12 text-center">
-                                    <label for="infoLbl"><?php echo $infoLbl ?> </label>
+                                <label for="infoLbl"><?php echo $infoLbl ?> </label>
                             </div>
                         </div>
                     </div>
@@ -430,16 +402,16 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-  <!-- JavaScript Libraries -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
@@ -454,20 +426,24 @@
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+
+        function clearSession() {
+            window.location.href = "login.php";
         }
     </script>
     <!-- Template Javascript -->

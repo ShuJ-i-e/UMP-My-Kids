@@ -124,7 +124,7 @@
                   <p>Are you sure you want to logout?</p>
                 </div>
                 <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                  <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
                   <button class="btn btn-light" style="margin: 10px;float:right">No</button>
                 </div>
               </div>
@@ -425,6 +425,9 @@
             }
         <?php }?>;
         
+        function clearSession() {
+            window.location.href = "login.php";
+        }
     </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

@@ -8,7 +8,7 @@
     }
     //direct user back to main when no session
     else{
-        header("Location: ../staff_main.php"); 
+        header("Location: ../login.php"); 
     }
 ?>
 
@@ -136,7 +136,7 @@
                         <p>Are you sure you want to logout?</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
                         <button class="btn btn-light" style="margin: 10px;float:right">No</button>
                     </div>
                 </div>
@@ -385,7 +385,9 @@
                 document.getElementById("insertForm").submit();
             }
         }
-
+        function clearSession() {
+            window.location.href = "../login.php";
+        }
     </script>
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>

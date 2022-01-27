@@ -1,3 +1,18 @@
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        echo $_SESSION["user_id"];
+        //header("Location: ../login.php"); 
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,13 +59,7 @@
         }
     </style>
 </head>
-<?php
-// Start the session
-session_start();
-$_SESSION["username"] = "parent";
-// $userId = $_SESSION['user_id'];
-$userId = 1;
-?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -114,7 +123,7 @@ $userId = 1;
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i><?php echo $_SESSION["username"] ?></a>
+                                <i class="fas fa-lock"></i><?php echo $loginUsername ?></a>
                         </nav>
                     </div>
                 </div>
@@ -215,7 +224,7 @@ $userId = 1;
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $sql = "SELECT `kidsID`, `name` from kids JOIN parents ON kids.parentID=parents.parentID  where kids.parentID=$userId";
+                        $sql = "SELECT `kidsID`, `name` from kids JOIN parents ON kids.parentID=parents.parentID  where kids.parentID=$loginID";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
 
@@ -377,6 +386,7 @@ $userId = 1;
             $('#searchTxt').val("");
 
         }
+
     </script>
 
     <!-- Template Javascript -->

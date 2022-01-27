@@ -92,7 +92,7 @@
                                     <input type="text" id="uname" name="uname" class="form-control border-0 p-4" placeholder="Username" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" type="password" name="password" id="password" class="form-control border-0 p-4" placeholder="Password" />
+                                    <input type="password" name="password" id="password" class="form-control border-0 p-4" placeholder="Password" />
                                 </div>
 
                                 <select name="type" id="roleSelect" class="custom-select border-0 px-4" style="height: 47px;">
