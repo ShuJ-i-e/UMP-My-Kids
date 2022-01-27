@@ -16,33 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 8px;
-            width: 150px;
-        }
-
-        tr:hover {
-            background-color: #dddddd;
-        }
-    </style>
 </head>
 
 <body>
@@ -54,24 +35,13 @@
                     <i class="flaticon-043-teddy-bear"></i>
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
-        </div>
+            </div>
 
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="#">Home</a>
+                    <a href="Login.html">Home</a>
                 </li>
-                <li>
-                    <a href="#">Kid's Registration</a>
-                </li>
-                    <li>
-                        <a href="manpower_list_view.html">Manpower List</a>
-                    </li>
-                    <li>
-                    <a href="#">Payment</a>
-                </li>
-                <li>
-                    <a href="#">Kid's Activity</a>
-                </li>
+               
             </ul>
         </nav>
 
@@ -99,7 +69,7 @@
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg"
                             style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Staff Owner</a>
+                                <i class="fas fa-lock"></i> Username</a>
                         </nav>
                     </div>
                 </div>
@@ -116,79 +86,93 @@
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                  
                 </div>
               </div>
             </div>
-                        <div class="col-lg-5">
-                            <img class="img-fluid rounded mb-5 mb-lg-0" src="img/about-1.jpg" alt="">
-                        </div>
-                        <div class="col-lg-7">
-                            <p>Information and Details of Staff</p>
-                            <h1 class="mb-4">Manpower List of UMP My-Kids</h1>
-            
+
+            <div class="container-fluid py-5" style="margin-left: 300px;">
+                
+                <div class="container">
+                    
+                    <div class="row align-items-center">
+                        
+                        <div style="margin-left: 150px;" class="col-lg-7">
+                           
+                             <form action="login.php" method="post" name="form" class="form">
+
+                                <h2>LOGIN</h2>
+                        
+                                <?php if (isset($_GET['error'])) { ?>
+                        
+                                    <p class="error"><?php echo $_GET['error']; ?></p>
+                        
+                                <?php } ?>
+                        
+                                
+                        
+                                <input type="text" name="uname" placeholder="User Name"><br><br>
+                        
+                               
+                        
+                                <input type="password" name="password" placeholder="Password"><br> <br>
+
+                                <input type="type" name="type" placeholder="type: admin, staff, parent"><br> <br>
+                        
+                                <button class="btn btn-primary mt-2 py-2 px-4" name="button" type="submit">Login</button>
+                        
+                             </form>
+                            
+                        
+                       
+                                
                             <div class="row pt-2 pb-4">
-                                <div class="col-6 col-md-4">
-                                    <img class="img-fluid rounded" src="img/about-2.jpg" alt="">
+                                <div class="col-6 col-md-8">
+                                    
                                 </div>
-                            <table>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Staff Type</th>
-                                    <th>Phone number</th>
-                                    <th>Address</th>
-                                    <th>Year Register</th>
-                                    <th>Status</th>
-                                    <th>Medication History</th>
-                                    <th>...</th>
-                                </tr>
-                                <tr>
-                                    <th>Puteri</th>
-                                    <th>Worker</th>
-                                    <th>013-7799646</th>
-                                    <th>No. 20, Lorong Teratai 2, Taman Teratai</th>
-                                    <th>2015</th>
-                                    <th>Active</th>
-                                    <th>None</th>
-                                    <th><button class="terminate">Terminate</button></th>
-                                </tr>
-                                <tr>
-                                    <th>Ariana</th>
-                                    <th>Teacher</th>
-                                    <th>011-2233454</th>
-                                    <th>No. 3, Jalan Kalkatu, Taman Desa Permai</th>
-                                    <th>2019</th>
-                                    <th>Active</th>
-                                    <th>None</th>
-                                    <th><button class="terminate">Terminate</button></th>
-                                </tr>
-                                <tr>
-                                    <th>Umiera</th>
-                                    <th>Infant Caretaker</th>
-                                    <th>012-6562241</th>
-                                    <th>446 Jalan Sri Langka 18/1 Taman Langka</th>
-                                    <th>2015</th>
-                                    <th>Active</th>
-                                    <th>None</th>
-                                    <th><button class="terminate">Terminate</button></th>
-                                </tr>
-                                <tr>
-                                    <th>Aiman</th>
-                                    <th>Teacher</th>
-                                    <th>012-3456789</th>
-                                    <th>No. 7, Jalan Jaya 1/1, Taman Jaya</th>
-                                    <th>2021</th>
-                                    <th>Active</th>
-                                    <th>None</th>
-                                    <th><button name="terminate" href="manpower_list_view.html">Terminate</button></th>
-                                </tr>
-                            </table>
                             </div>
-                            <a href="manpower_dah update_FAKE.html" class="btn btn-primary mt-2 py-2 px-4">Add manpower</a>
+                            
                         </div>
+                    
                     </div>
                 </div>
             </div>
+
+
+
+
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            
+          
+           
+
 
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">

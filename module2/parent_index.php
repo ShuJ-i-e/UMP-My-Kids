@@ -48,12 +48,8 @@
 // Start the session
 session_start();
 $_SESSION["username"] = "parent";
-<<<<<<< HEAD
 // $userId = $_SESSION['user_id'];
 $userId = 1;
-=======
-$userId = $_SESSION['user_id'];
->>>>>>> f8d39da83f2e911b3cd340b9498366f8e6ada378
 ?>
 <body>
     <div class="wrapper">
@@ -65,27 +61,37 @@ $userId = $_SESSION['user_id'];
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
-                <li>
-                    <a href="#">Home</a>
+            <li>
+                    <a href="../user_main.php">Home</a>
                 </li>
                 <li class="active">
-                    <a href="parent_index.php">Parents & Kids</a>
+                    <a href="../module2/parent_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#">Activity</a>
+                    <a href="../module6/user_schedule_list.php">Kid's Activity</a>
+                </li>
+                <li>
+                    <a href="#">Payment</a>
                 </li>
                 <li>
                 <li>
-                    <a href="#">Manpower Registration</a>
-                </li>
-                <li>
-                    <a href="#">Salary</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/parent_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        
+                            <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -108,11 +114,7 @@ $userId = $_SESSION['user_id'];
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-<<<<<<< HEAD
                                 <i class="fas fa-lock"></i><?php echo $_SESSION["username"] ?></a>
-=======
-                                <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
->>>>>>> f8d39da83f2e911b3cd340b9498366f8e6ada378
                         </nav>
                     </div>
                 </div>

@@ -16,14 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,23 +39,29 @@
 
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="#">Home</a>
+                    <a href="admin.html">Home</a>
                 </li>
                 <li>
                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Users</a>
                     <ul class="collapse list-unstyled" id="userSubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="staff.html">Staff</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="parent.html">Parent</a>
+                        </li>
+                        <li>
+                            <a href="Owner.html">Owner</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Report</a>
+                    <a href="adminReport.php">Report</a>
                 </li>
+                <li>
+                        <a href="owner.php">List</a>
+                    </li>
             </ul>
         </nav>
 
@@ -106,16 +112,62 @@
             </div>
 
             <div class="container-fluid py-5">
-                
                 <div class="container">
-                    <h3 style="margin-left: 430px;">Admin Information</h3>
                     <div class="row align-items-center">
-                        
-                        <div style="margin-left: 150px;" class="col-lg-7">
+                       
+                        <div class="col-lg-7">
                             
-                         <a href="/UMP-My-Kids-main/editaddmin.php"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Eidt Admin</button></a>
-                            <a href="/UMP-My-Kids-main/deleteaddmin.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Delete Admin</button> </a>
-                           <a href="/UMP-My-Kids-main/addAdmin.html"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Add new Admin</button></a> 
+                            <form  method="post" action="updateStaff.php">
+                                 <h3>Update Staff</h3>
+                            <table class="table">
+                                
+                                <tr>
+                                    <td class="td">
+                                        <input name="staffID" class="staffID" type="text" placeholder="Staff ID">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="username" class="username" type="text" placeholder="User name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="password" class="Password" type="text" placeholder="Password">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="phoneNumber" class="phoneNumber" type="text" placeholder="Phone Number">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="address" class="address" type="text" placeholder="Address">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="email" class="email" type="text" placeholder="E-mail">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="yearRegister" class="yearRegister" type="text" placeholder="Year Register">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">
+                                        <input name="status" class="status" type="text" placeholder="Status">
+                                    </td>
+                                </tr>
+                               
+                               
+                            </table>
+                            
+                            <button class="btn btn-secondary" style="margin: 10px;float:left" type="submit">Submit</button>
+                        </form>
+                            
                                 
                             <div class="row pt-2 pb-4">
                                 <div class="col-6 col-md-8">

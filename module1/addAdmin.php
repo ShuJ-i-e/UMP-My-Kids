@@ -8,21 +8,19 @@ $adminID = $_POST['adminID'];
 	$address = $_POST['address'];
 	$yearRegister = $_POST['yearRegister'];
 	$email = $_POST['email'];
-	$userID = $_POST['userID'];
+	
 
 $link = mysqli_connect('localhost', 'root', '','ump_mykids');
 
    
 	
-     $query = "update admin set username= '$username',password= '$password',phoneNumber= '$phoneNumber',
-     address='$address',yearRegister='$yearRegister',email='$email',userID='$userID'";
-
-     
+     $query = "insert into admin (username,password,phoneNumber,address,yearRegister,email)
+     VALUES ('$username', '$password', '$phoneNumber', '$address','$yearRegister','$email')";
 
      if (mysqli_query($link, $query)) {
-         echo ("Data Updated");
+        echo "Data insert";
      } else {
-        echo("Update failed");
+        echo("Data failed");
      }
      mysqli_close($link);
 

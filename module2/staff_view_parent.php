@@ -30,6 +30,7 @@
 session_start();
 $_SESSION["username"] = "parent";
 ?>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -40,27 +41,53 @@ $_SESSION["username"] = "parent";
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li class="active">
-                    <a href="staff_index.php">Parents & Kids</a>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#">Activity</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="../module6/staff_schedule_list.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                 <li>
-                    <a href="#">Manpower Registration</a>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/staff_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/staff_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/staff_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Salary</a>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                 </li>
             </ul>
+            </li>
+            </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -109,7 +136,7 @@ $_SESSION["username"] = "parent";
             <div class="col-lg-12 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
                     <div class="card-header bg-secondary text-center p-4">
-                    <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'" ><i class='fa fa-chevron-left'></i> Back</button>
+                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
                         <h1 class="text-white m-0">Registered Kid</h1>
                     </div>
                     <div class="card-body text-center">
@@ -152,31 +179,31 @@ $_SESSION["username"] = "parent";
                                         $count = $result->num_rows;
                                         $i = 0;
                                         if ($count > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $a[$i] = $row["name"];
-                                            $b[$i] = $row["yearOfBirth"];
-                                            $c[$i] = $row["gender"];
-                                            $d[$i] = $row["medicationHistory"];
-                                            $i++;
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $a[$i] = $row["name"];
+                                                $b[$i] = $row["yearOfBirth"];
+                                                $c[$i] = $row["gender"];
+                                                $d[$i] = $row["medicationHistory"];
+                                                $i++;
+                                            }
+                                            for ($i = 0; $i < $count; $i++) {
+                                                $age[$i] = date("Y") - $b[$i];
+                                                $k = $i + 1;
+                                                echo "<h5 class='card-title' style=text-align:center;'>Kid" . $k . "</h5>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
+                                                echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
+                                                echo "<div class='col-6 py-1'>" . $age[$i] . "</div></div>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
+                                                echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div>";
+                                                echo "<div class='row border-bottom'>";
+                                                echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
+                                                echo " <div class='col-6 py-1'>" . $d[$i] . "</div></div><br>";
+                                            }
                                         }
-                                        for ($i = 0; $i < $count; $i++) {
-                                            $age[$i] = date("Y") - $b[$i];
-                                            $k=$i+1;
-                                            echo "<h5 class='card-title' style=text-align:center;'>Kid".$k."</h5>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Kid's Name</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Age</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $age[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Gender</strong></div>";
-                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div>";
-                                            echo "<div class='row border-bottom'>";
-                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
-                                            echo " <div class='col-6 py-1'>" . $d[$i] . "</div></div><br>";
-                                        }
-                                    }
                                     }
                                 }
                             } else {
@@ -184,11 +211,11 @@ $_SESSION["username"] = "parent";
                             }
 
                             ?>
-                        
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Content End-->
+                <!-- Content End-->
 
                 <!-- Footer Start -->
                 <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">

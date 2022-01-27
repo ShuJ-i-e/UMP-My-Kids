@@ -41,21 +41,6 @@
                 <li class="active">
                     <a href="#">Home</a>
                 </li>
-                <li>
-                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Users</a>
-                    <ul class="collapse list-unstyled" id="userSubmenu">
-                        <li>
-                            <a href="#">List</a>
-                        </li>
-                        <li>
-                            <a href="#">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Report</a>
-                </li>
             </ul>
         </nav>
 
@@ -82,51 +67,63 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg"
                             style="float:right; margin-top: 50px">
-                            <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Username</a>
+                            <button type="button" id="registerBtn" class="btn btn-info">
+                               <a href="register.php"> Register</a>
                         </nav>
                     </div>
                 </div>
             </div>
-            <!-- The Modal -->
-            <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
-                  
-                </div>
-              </div>
-            </div>
+            <!-- Content Start -->
+                <div class="center">
+                    <div class="col-lg-10-m2">
 
-            <div class="container-fluid py-5">
+                        <div class="card border-0">
+                            <div class="card-header bg-secondary text-center p-4">
+                                <h1 class="text-white m-0">Login</h1>
+                            </div>
+                            <div class="card-body rounded-bottom bg-primary p-5">
+                                <form action="loginCheck.php" method="post" name="form" class="form">
+                            
+                                    <?php
+                                    if (isset($_REQUEST["msg"]) and !empty($_REQUEST["msg"])) {
+                                        echo "<div id='message'>" . $_REQUEST["msg"] . "</div>";
+                                    }
+                                    ?>
+
+                                    <div class="form-group">
+                                        <input type="text" id="uname" name="uname" class="form-control border-0 p-4" placeholder="Username"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" type="password" name="password" id="password" class="form-control border-0 p-4" placeholder="Password" />
+                                    </div>
+                                   
+                                    <select name="type" class="custom-select border-0 px-4" style="height: 47px;">
+                                        <option selected>Select Role</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="parent">Parent</option>
+                                        <option value="staff">Staff</option>
+                                    </select>
+                                    <br>
+                                    <br>
+                                    <div class="form-group text-center">
+                                        <button type="submit" name="SubmitButton" class="btn btn-light">Submit</button>
+                                    </div>
+                                    <!-- <button class="btn btn-light border-0 px-4 mx-auto mb-4" name="button" type="submit">Login</button> -->
+                                 </form>
+
+                            </div>
+                        </div>
+                    </div>
+            <!-- Content End -->
+            <div class="container-fluid py-5" style="margin-left: 300px;">
+                
                 <div class="container">
+                    
                     <div class="row align-items-center">
-                       
-                        <div class="col-lg-7">
-                            
-                            <form  method="post" action="deleteaddmin.php">
-                                 <h3>Admin Information</h3>
-                            <table class="table">
-                                
-                                <tr>
-                                    <td class="td">
-                                        <input name="adminID" class="adminID" type="text" placeholder="AdminID">
-                                    </td>
-                                </tr>
-                                
-                            </table>
-                            
-                            <button class="btn btn-secondary" style="margin: 10px;float:left" type="submit">Submit</button>
-                        </form>
-                            
-                                
+                        
+                        <div style="margin-left: 150px;" class="col-lg-7">
+                           
+                             
                             <div class="row pt-2 pb-4">
                                 <div class="col-6 col-md-8">
                                     
@@ -134,12 +131,10 @@
                             </div>
                             
                         </div>
+                    
                     </div>
                 </div>
             </div>
-
-
-
 
             <div class="container-fluid py-5">
                 <div class="container">
@@ -148,11 +143,27 @@
                     </div>
                 </div>
             </div>
-            
-          
-           
-
-
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
@@ -177,40 +188,6 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("logoutBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on the button, open the modal
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
