@@ -186,6 +186,7 @@
                             <div class="form-group">
                                 <label for="search">Search (Name)</label>
                                 <input type="text" class="form-control" id="searchTxt" name="searchTxt" placeholder="Eg: Ali">
+                                <input type="hidden" class="form-control" id="loginId" name="loginId">
                                 <p class="text-danger"></p>
                             </div>
                         </div>
@@ -344,10 +345,11 @@
         function search() {
 
             var searchTxt = document.getElementById("searchTxt").value;
+            var loginId = document.getElementById("loginId").value;
             $.ajax({
                 type: "POST",
                 url: "search_parents.php",
-                data: {searchTxt: searchTxt, parentID: $loginID},
+                data: {searchTxt: searchTxt, parentID: loginID},
                 success: function(result) {
                     if (result == "fail") {
                         $('#errorTxt').show();
