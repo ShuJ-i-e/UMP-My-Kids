@@ -16,7 +16,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>UMP MY KIDS</title>
+    <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link href="img/favicon.ico" rel="icon">
@@ -68,10 +68,10 @@
                 <li>
                     <a href="../owner_main.php">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li class="active">
+                        <li>
                             <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
@@ -79,12 +79,14 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li  class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li class="active">
+                            <a href="../module3/owner_view.php">List</a>
+                        </li>
                         <li>
-                            <a href="../module3/owner_index.php">List</a>
+                            <a href="../module3/owner_index.php">Index</a>
                         </li>
                         <li>
                             <a href="../module3/owner_report.php">Report</a>
@@ -182,14 +184,14 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $sql = "SELECT `staffID`, `staffName`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
+                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $a[$i] = $row["staffID"];
-                                $b[$i] = $row["staffName"];
+                                $b[$i] = $row["username"];
                                 $c[$i] = $row["phoneNumber"];
                                 $d[$i] = $row["address"];
                                 $e[$i] = $row["yearRegister"];
