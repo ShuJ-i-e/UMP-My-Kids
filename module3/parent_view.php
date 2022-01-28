@@ -66,30 +66,39 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../user_main.php">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
-                    <a href="../module2/parent_index.php">Parents & Kids</a>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="../module6/user_schedule_list.php">Kid's Activity</a>
-                </li>
-                <li>
-                    <a href="#">Payment</a>
-                </li>
-                <li>
-                <li  class="active">
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
-                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
-                        <li  class="active">
-                            <a href="../module3/parent_view.php">List</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="../module6/staff_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="../module3/parent_index.php">Index</a>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
                         </li>
-                        
-                            <a href="../module3/parent_report.php">Report</a>
+                    </ul>
+                </li>
+                <li>
+                <li class="active">
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/staff_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/staff_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/staff_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../module5/salary_detail.php">Salary</a>
                 </li>
             </ul>
             </li>
@@ -117,7 +126,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
+                               <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -155,6 +164,7 @@
                         <th>Status</th>
                         <th>Staff Type</th>
                         <th>Medication History</th>
+                        <th>Salary</th>
                     </tr>
 
                     <?php
@@ -162,20 +172,21 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $sql = "SELECT `staffID`, `staffName`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
+                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory`, `salary` from staff";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $a[$i] = $row["staffID"];
-                                $b[$i] = $row["staffName"];
+                                $b[$i] = $row["username"];
                                 $c[$i] = $row["phoneNumber"];
                                 $d[$i] = $row["address"];
                                 $e[$i] = $row["yearRegister"];
                                 $f[$i] = $row["status"];
                                 $g[$i] = $row["staffType"];
                                 $h[$i] = $row["medicationHistory"];
+                                $i[$i] = $row["amount"];
                                 $i++;
                             }
                             for ($i = 0; $i < $count; $i++) {
@@ -187,7 +198,8 @@
                                 echo "<td>" . $e[$i] . "</td>";
                                 echo "<td>" . $f[$i] . "</td>";
                                 echo "<td>" . $g[$i] . "</td>";
-                                echo "<td>" . $g[$i] . "</td>";
+                                echo "<td>" . $h[$i] . "</td>";
+                                echo "<td>" . $i[$i] . "</td>";
                             }
                         }
                     }
