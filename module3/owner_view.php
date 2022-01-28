@@ -16,7 +16,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>UMP MY KIDS</title>
+    <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link href="img/favicon.ico" rel="icon">
@@ -66,60 +66,55 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../staff_main.php">Home</a>
+                    <a href="../owner_main.php">Home</a>
                 </li>
-<<<<<<< HEAD
                 <li>
-                    <a href="../module2/staff_index.php">Parents & Kids</a>
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
+                    <ul class="collapse list-unstyled" id="parentsSubmenu">
+                        <li>
+                            <a href="../module2/owner_index.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module2/owner_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li  class="active">
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li class="active">
+                            <a href="../module3/owner_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/owner_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/owner_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
+                    <ul class="collapse list-unstyled" id="paymentSubmenu">
+                        <li>
+                            <a href="#">List</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="../module6/staff_schedule_list.php">List</a>
-=======
-                <li class="active">
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
-                    <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li class="active">
-                            <a href="../module2/owner_index.php">List</a>
->>>>>>> parent of 971f093 (Owner view)
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="../module6/staff_schedule_report.php">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-<<<<<<< HEAD
-                <li class="active">
-=======
->>>>>>> parent of 971f093 (Owner view)
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
-                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
-<<<<<<< HEAD
-=======
-                        <li>
-                            <a href="../module3/owner_index.php">List</a>
-                        </li>
->>>>>>> parent of 971f093 (Owner view)
-                        <li>
-                            <a href="../module3/staff_view.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module3/staff_index.php">Index</a>
-                        </li>
-                        <li>
-                            <a href="../module3/staff_report.php">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="../module5/salary_detail.php">Salary</a>
-                </li>
-            </ul>
-            </li>
             </ul>
         </nav>
         <!-- Page Content  -->
@@ -144,7 +139,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                               <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
+                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -182,7 +177,6 @@
                         <th>Status</th>
                         <th>Staff Type</th>
                         <th>Medication History</th>
-                        <th>Salary</th>
                     </tr>
 
                     <?php
@@ -190,29 +184,20 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-<<<<<<< HEAD
-                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory`, `amount` from staff";
-=======
-<<<<<<< HEAD
-                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory`, `salary` from staff";
-=======
-                        $sql = "SELECT `staffID`, `staffName`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
->>>>>>> parent of 971f093 (Owner view)
->>>>>>> parent of 289a60d (owner_view)
+                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $a[$i] = $row["staffID"];
-                                $b[$i] = $row["staffName"];
+                                $b[$i] = $row["username"];
                                 $c[$i] = $row["phoneNumber"];
                                 $d[$i] = $row["address"];
                                 $e[$i] = $row["yearRegister"];
                                 $f[$i] = $row["status"];
                                 $g[$i] = $row["staffType"];
                                 $h[$i] = $row["medicationHistory"];
-                                $i[$i] = $row["amount"];
                                 $i++;
                             }
                             for ($i = 0; $i < $count; $i++) {
@@ -225,7 +210,6 @@
                                 echo "<td>" . $f[$i] . "</td>";
                                 echo "<td>" . $g[$i] . "</td>";
                                 echo "<td>" . $h[$i] . "</td>";
-                                echo "<td>" . $i[$i] . "</td>";
                             }
                         }
                     }
