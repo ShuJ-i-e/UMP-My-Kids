@@ -184,7 +184,7 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory`, `amount` from staff";
+                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
                         $i = 0;
@@ -198,7 +198,6 @@
                                 $f[$i] = $row["status"];
                                 $g[$i] = $row["staffType"];
                                 $h[$i] = $row["medicationHistory"];
-                                $i[$i] = $row["amount"];
                                 $i++;
                             }
                             for ($i = 0; $i < $count; $i++) {
@@ -210,8 +209,7 @@
                                 echo "<td>" . $e[$i] . "</td>";
                                 echo "<td>" . $f[$i] . "</td>";
                                 echo "<td>" . $g[$i] . "</td>";
-                                echo "<td>" . $h[$i] . "</td>";
-                                echo "<td>" . $i[$i] . "</td>";
+                                echo "<td>" . $g[$i] . "</td>";
                             }
                         }
                     }
