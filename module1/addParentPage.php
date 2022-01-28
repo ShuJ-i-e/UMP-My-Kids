@@ -52,7 +52,7 @@
 
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="admin.html">Home</a>
+                    <a href="admin.php">Home</a>
                 </li>
                 <li>
                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"

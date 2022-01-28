@@ -132,7 +132,7 @@
                         
                         <div style="margin-left: 150px;" class="col-lg-7">
                             
-                         <a href="admin.html"> <button class="btn btn-primary mt-2 py-2 px-5" style="margin: 10px;float:right">Admin</button></a>
+                         <a href="admin.php"> <button class="btn btn-primary mt-2 py-2 px-5" style="margin: 10px;float:right">Admin</button></a>
                             <a href="parentPage.php"><button class="btn btn-primary mt-2 py-2 px-5" style="margin: 10px;float:right">Parent</button> </a>
                            <a href="staffPage.php"><button class="btn btn-primary mt-2 py-2 px-5" style="margin: 10px;float:right">Staff</button></a> 
                                 
