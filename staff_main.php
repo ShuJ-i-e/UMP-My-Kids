@@ -1,18 +1,17 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    else{
-        $_SESSION["username"] ="Kevin Lee";
-        $_SESSION["user_id"]= 4;
-        
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+} else {
+    $_SESSION["username"] = "Kevin Lee";
+    $_SESSION["user_id"] = 4;
+
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,8 +53,8 @@
                 </a>
             </div>
             <ul class="list-unstyled components">
-                <li  class="active">
-                <a href="staff_main.php">Home</a>
+                <li class="active">
+                    <a href="staff_main.php">Home</a>
                 </li>
                 <li>
                     <a href="module2/staff_index.php">Parents & Kids</a>
@@ -87,30 +86,31 @@
                         </li>
                     </ul>
                 </li>
-                <?php
-            		require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }else {
-                    $sql = "SELECT staff.staffID FROM staff
-                    INNER JOIN salary ON staff.staffID=salary.staffID" ;
-                    $result = $conn->query($sql);
+            </ul>
+            <?php
+            require "conn.php";
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            } else {
+                $sql = "SELECT staff.staffID FROM staff
+                    INNER JOIN salary ON staff.staffID=salary.staffID";
+                $result = $conn->query($sql);
 
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["staffID"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<li>";
-                            $view_url = "../module5/staff_salary_detail.php?id=" . $a[$i];
-                            echo "<a href=" . $view_url . ">Salary</a></li>";
-                        }
+                $count = $result->num_rows;
+                $i = 0;
+                if ($count > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $a[$i] = $row["staffID"];
+                        $i++;
+                    }
+                    for ($i = 0; $i < $count; $i++) {
+                        echo "<li>";
+                        $view_url = "../module5/staff_salary_detail.php?id=" . $a[$i];
+                        echo "<a href=" . $view_url . ">Salary</a></li>";
                     }
                 }
-                ?>
+            }
+            ?>
             </li>
             </ul>
         </nav>
@@ -126,8 +126,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -135,8 +134,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
@@ -145,19 +143,19 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
+                        <button class="btn btn-light" style="margin: 10px;float:right">No</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
-                  <button class="btn btn-light" style="margin: 10px;float:right">No</button>
-                </div>
-              </div>
             </div>
             <div class="container-fluid py-5">
                 <div class="container">
@@ -166,7 +164,7 @@
                             <img class="img-fluid rounded mb-5 mb-lg-0" src="img/about-1.jpg" alt="">
                         </div>
                         <div class="col-lg-7">
-                            <p >Learn About Us</p>
+                            <p>Learn About Us</p>
                             <h1 class="mb-4">Best School For Your Kids</h1>
                             <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed
                                 eos,
@@ -179,11 +177,9 @@
                                 </div>
                                 <div class="col-6 col-md-8">
                                     <ul class="list-inline m-0">
-                                        <li class="py-2 border-top border-bottom"><i
-                                                class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet
+                                        <li class="py-2 border-top border-bottom"><i class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet
                                             diam</li>
-                                        <li class="py-2 border-bottom"><i
-                                                class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum
+                                        <li class="py-2 border-bottom"><i class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum
                                         </li>
                                         <li class="py-2 border-bottom"><i class="fa fa-check text-primary mr-3"></i>Diam
                                             dolor diam elitripsum vero.</li>
@@ -272,15 +268,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Julia Smith</h4>
@@ -289,15 +280,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Jhon Doe</h4>
@@ -306,15 +292,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Mollie Ross</h4>
@@ -323,15 +304,10 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
                                 <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
-                                <div
-                                    class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-light text-center mr-2 px-0"
-                                        style="width: 38px; height: 38px;" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
-                                        href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <h4>Donald John</h4>
@@ -342,49 +318,49 @@
             </div>
             <!-- Team End -->
 
-            <?php include 'module6/conn.php';?>
+            <?php include 'module6/conn.php'; ?>
             <?php
-                $infoLbl= "";
+            $infoLbl = "";
 
-                // if database exist
-                if ($result = $conn->query("SHOW TABLES LIKE 'qr'")) {
-                    if($result->num_rows >= 1){
-                        
-                        $sql = "SELECT link from qr";
-                        $result = $conn->query($sql);
-                        $count = $result->num_rows;
-                        if ($count >0) {
-                            while ($row = mysqli_fetch_array($result)) {
-                                $link= $row['link'];
-                            }
+            // if database exist
+            if ($result = $conn->query("SHOW TABLES LIKE 'qr'")) {
+                if ($result->num_rows >= 1) {
+
+                    $sql = "SELECT link from qr";
+                    $result = $conn->query($sql);
+                    $count = $result->num_rows;
+                    if ($count > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                            $link = $row['link'];
                         }
                     }
                 }
+            }
 
             ?>
 
             <!-- Display only when got qr code (Satisfaction Survey) -->
-            <?php if(isset($link)){ ?>;
+            <?php if (isset($link)) { ?>;
 
-                <div class="container-fluid py-2">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12 text-center">
-                                <h1 class="mb-4">Fill in Satisfaction Survey!</h1>
-                            </div>
+            <div class="container-fluid py-2">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12 text-center">
+                            <h1 class="mb-4">Fill in Satisfaction Survey!</h1>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="container-fluid">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12 text-center">
-                                <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code" width="200px" height="200px" />
-                            </div>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12 text-center">
+                            <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code" width="200px" height="200px" />
                         </div>
                     </div>
                 </div>
+            </div>
             <?php } ?>;
 
 
@@ -405,16 +381,16 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-  <!-- JavaScript Libraries -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
@@ -429,37 +405,36 @@
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
 
-        <?php if(isset($link)){ ?>;
+        <?php if (isset($link)) { ?>;
             var link = <?php echo json_encode($link); ?>;
 
-            if(link!= ""){
+            if (link != "") {
                 var nric = $('#text').val();
                 var url = 'https://api.qrserver.com/v1/create-qr-code/?data=' + link + '&amp;size=200x200';
                 $('#barcode').attr('src', url);
             }
-        <?php }?>;
-        
+        <?php } ?>;
+
 
         function clearSession() {
             window.location.href = "index.php";
         }
-
     </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

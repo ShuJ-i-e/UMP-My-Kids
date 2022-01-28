@@ -53,13 +53,13 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
                 </a>
             </div>
             <ul class="list-unstyled components">
-                <li>
+                <li  class="active">
                     <a href="../owner_main.php">Home</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li class="active">
+                        <li>
                             <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
@@ -90,7 +90,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
                         </li>
                     </ul>
                 </li>
-                <li  class="active">
+                <li>
                     <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Salary</a>
                     <ul class="collapse list-unstyled" id="salarySubmenu">
