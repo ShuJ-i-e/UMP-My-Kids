@@ -53,64 +53,42 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
                 </a>
             </div>
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="staff_main.php">Home</a>
-                </li>
                 <li>
-                    <a href="module2/staff_index.php">Parents & Kids</a>
+                <a href="../staff_main.php">Home</a>
+                </li>
+                <li class="active">
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="module6/staff_schedule_list.php">List</a>
+                            <a href="../module6/staff_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="module6/staff_schedule_report.php">Report</a>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                 <li>
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="module3/staff_view.php">List</a>
+                            <a href="../module3/staff_view.php">List</a>
                         </li>
                         <li>
-                            <a href="module3/staff_index.php">Index</a>
+                            <a href="../module3/staff_index.php">Index</a>
                         </li>
                         <li>
-                            <a href="module3/staff_report.php">Report</a>
+                            <a href="../module3/staff_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="../module5/salary_detail.php">Salary</a>
+                </li>
             </ul>
-            <?php
-            require "conn.php";
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            } else {
-                $sql = "SELECT staff.staffID FROM staff
-                    INNER JOIN salary ON staff.staffID=salary.staffID";
-                $result = $conn->query($sql);
-
-                $count = $result->num_rows;
-                $i = 0;
-                if ($count > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $a[$i] = $row["staffID"];
-                        $i++;
-                    }
-                    for ($i = 0; $i < $count; $i++) {
-                        echo "<li>";
-                        $view_url = "../module5/staff_salary_detail.php?id=" . $a[$i];
-                        echo "<a href=" . $view_url . ">Salary</a></li>";
-                    }
-                }
-            }
-            ?>
             </li>
             </ul>
         </nav>
