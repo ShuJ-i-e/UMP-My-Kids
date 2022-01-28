@@ -1,15 +1,15 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    //direct user back to main when no session
-    else{
-        header("Location: ../index.php"); 
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
+//direct user back to main when no session
+else {
+    header("Location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,8 +55,7 @@
                     <a href="#">Home</a>
                 </li>
                 <li>
-                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Users</a>
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
                     <ul class="collapse list-unstyled" id="userSubmenu">
                         <li>
                             <a href="staffPage.php">Staff</a>
@@ -90,8 +89,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -99,8 +97,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
@@ -109,19 +106,19 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
+
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
-                  
-                </div>
-              </div>
             </div>
 
             <!-- Content Start-->
@@ -165,7 +162,16 @@
                         <th>ID</th>
                     </tr>
                     <?php
-                    $conn = mysqli_connect('localhost', 'root', '','ump_mykids');
+                    //Get Heroku ClearDB connection information
+                    $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+                    $cleardb_server = $cleardb_url["host"];
+                    $cleardb_username = $cleardb_url["user"];
+                    $cleardb_password = $cleardb_url["pass"];
+                    $cleardb_db = substr($cleardb_url["path"], 1);
+                    $active_group = 'default';
+                    $query_builder = TRUE;
+                    // Connect to DB
+                    $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
@@ -180,13 +186,10 @@
                                 $i++;
                             }
                             for ($i = 0; $i < $count; $i++) {
-                               
+
                                 echo "<tr>";
                                 echo "<td>" . $a[$i] . "</td>";
                                 echo "<td>" . $b[$i] . "</td>";
-
-                                
-                               
                             }
                         }
                     }
@@ -229,7 +232,7 @@
                         <th>ID</th>
                     </tr>
                     <?php
-                     $conn = mysqli_connect('localhost', 'root', '','ump_mykids');
+                    $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
@@ -244,14 +247,11 @@
                                 $i++;
                             }
                             for ($i = 0; $i < $count; $i++) {
-                                
-                                
+
+
                                 echo "<tr>";
                                 echo "<td>" . $a[$i] . "</td>";
                                 echo "<td>" . $b[$i] . "</td>";
-
-                               
-                                
                             }
                         }
                     }
@@ -270,10 +270,10 @@
 
 
 
-            
-            
-          
-           
+
+
+
+
 
 
             <!-- Footer Start -->
@@ -301,12 +301,12 @@
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
-       
+
 
         // Get the modal
         var modal = document.getElementById("myModal");
@@ -318,22 +318,23 @@
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         /// When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-            function clearSession() {
+
+        function clearSession() {
             window.location.href = "../index.php";
             $.get("clearsession.php");
         }
@@ -344,7 +345,7 @@
         function search() {
             var searchTxt = document.getElementById("searchTxt").value;
             var select = document.getElementById("option").value;
-            
+
             $.ajax({
                 type: "POST",
                 url: "search.php",
@@ -371,12 +372,12 @@
                             $('#parentsInformationDynamic').show();
                             console.log(result);
                             parent_info = JSON.parse(result);
-                         
+
 
                             var row = '<tr><td>' + parent_info[0].username + '</td>';
-                                
+
                             $('#parentsInformationDynamic').append(row);
-                           
+
                         }
                     } else {
                         if (result == "fail") {

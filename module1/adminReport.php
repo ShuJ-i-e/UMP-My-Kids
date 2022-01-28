@@ -189,7 +189,7 @@ else {
                         <tr>
                             <th>Total number of Admin</th>
                             <?php
-                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                           $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
                             if ($conn->connect_error) {
                                 die("Connection failed: " . $conn->connect_error);
                             } else {
@@ -202,7 +202,7 @@ else {
                         <tr>
                             <th>Total number of Staff</th>
                             <?php
-                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                            $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
                             if ($conn->connect_error) {
                                 die("Connection failed: " . $conn->connect_error);
                             } else {
@@ -215,7 +215,7 @@ else {
                         <tr>
                             <th>Total number of Parents</th>
                             <?php
-                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                            $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
                             if ($conn->connect_error) {
                                 die("Connection failed: " . $conn->connect_error);
                             } else {
@@ -229,7 +229,7 @@ else {
                         <tr>
                             <th>Most year Register</th>
                             <?php
-                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                            $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
                             if ($conn->connect_error) {
                                 die("Connection failed: " . $conn->connect_error);
                             } else {
