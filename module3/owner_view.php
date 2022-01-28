@@ -68,6 +68,7 @@
                 <li>
                     <a href="../staff_main.php">Home</a>
                 </li>
+<<<<<<< HEAD
                 <li>
                     <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
@@ -76,6 +77,13 @@
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
                             <a href="../module6/staff_schedule_list.php">List</a>
+=======
+                <li class="active">
+                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
+                    <ul class="collapse list-unstyled" id="parentsSubmenu">
+                        <li class="active">
+                            <a href="../module2/owner_index.php">List</a>
+>>>>>>> parent of 971f093 (Owner view)
                         </li>
                         <li>
                             <a href="../module6/staff_schedule_report.php">Report</a>
@@ -83,9 +91,19 @@
                     </ul>
                 </li>
                 <li>
+<<<<<<< HEAD
                 <li class="active">
+=======
+>>>>>>> parent of 971f093 (Owner view)
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
+<<<<<<< HEAD
+=======
+                        <li>
+                            <a href="../module3/owner_index.php">List</a>
+                        </li>
+>>>>>>> parent of 971f093 (Owner view)
                         <li>
                             <a href="../module3/staff_view.php">List</a>
                         </li>
@@ -172,14 +190,18 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
+<<<<<<< HEAD
                         $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory`, `salary` from staff";
+=======
+                        $sql = "SELECT `staffID`, `staffName`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
+>>>>>>> parent of 971f093 (Owner view)
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $a[$i] = $row["staffID"];
-                                $b[$i] = $row["username"];
+                                $b[$i] = $row["staffName"];
                                 $c[$i] = $row["phoneNumber"];
                                 $d[$i] = $row["address"];
                                 $e[$i] = $row["yearRegister"];
