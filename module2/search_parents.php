@@ -1,7 +1,7 @@
 <?php
 require "conn.php";
 $searchTxt = $_POST['searchTxt'];
-$user_id = $_SESSION['user_id'];
+$user_id = $_POST['parentID'];
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

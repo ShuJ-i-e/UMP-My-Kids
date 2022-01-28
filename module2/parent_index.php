@@ -347,7 +347,7 @@
             $.ajax({
                 type: "POST",
                 url: "search_parents.php",
-                data: {searchTxt: searchTxt},
+                data: {searchTxt: searchTxt, parentID: $loginID},
                 success: function(result) {
                     if (result == "fail") {
                         $('#errorTxt').show();
