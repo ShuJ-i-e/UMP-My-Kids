@@ -117,6 +117,7 @@
                                     
                                     <select name="staffType" class="custom-select border-0 px-4" style="height: 47px;">
                                         <option selected>Staff Type</option>
+                                        <option value="Owner">Owner</option>
                                         <option value="Teacher">Teacher</option>
                                         <option value="Worker">Worker</option>
                                         <option value="Caretakers">Infant Caretakers</option>
