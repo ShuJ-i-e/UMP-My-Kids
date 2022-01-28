@@ -16,7 +16,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>UMP MY KIDS</title>
+    <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link href="img/favicon.ico" rel="icon">
@@ -66,21 +66,25 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../user_main.php">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
-                    <a href="../module2/parent_index.php">Parents & Kids</a>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="../module6/user_schedule_list.php">Kid's Activity</a>
+                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
+                    <ul class="collapse list-unstyled" id="activitySubmenu">
+                        <li>
+                            <a href="../module6/staff_schedule_list.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Payment</a>
-                </li>
-                <li>
-                <li  class="active">
+                <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
                             <a href="../module3/parent_view.php">List</a>
@@ -88,8 +92,20 @@
                         <li>
                             <a href="../module3/parent_index.php">Index</a>
                         </li>
-                        <li  class="active">
+                        <li>
                             <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                 </li>
             </ul>
             </li>
@@ -117,7 +133,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
+                               <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -140,10 +156,12 @@
             </div>
             <!-- Modal End -->
             <!-- Content Start -->
+            <div class="text-center">
             <div class="card-header bg-secondary text-center p-4">
-                <h1 class="text-white m-0">Report</h1>
+                <h1 class="text-white m-0">Summary</h1>
             </div>
             <br>
+            </div>
             <table>
                 <tr>
                     <th>Staff ID</th>
@@ -175,9 +193,10 @@
                 ?>
             </table>
             <br>
-            <div class="text-center">
-                <h4 class="card-title">Summary</h4>
+            <div class="card-header bg-secondary text-center p-4">
+                <h1 class="text-white m-0">Report</h1>
             </div>
+            <br>
             <table>
                 <tr>
                     <th>Total number of Staff (Teacher)</th>
