@@ -17,7 +17,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>KidKinder - Kindergarten Website Template</title>
+    <title>UMP MY KIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
