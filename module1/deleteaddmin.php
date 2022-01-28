@@ -19,12 +19,12 @@ $query = "DELETE FROM `admin` WHERE adminID = $adminID"	;
 
     
 
-     if (mysqli_query($link, $query)) {
+     if (mysqli_query($conn, $query)) {
         echo "Data Deleted";
      } else {
         echo("Erorr");
      }
-     mysqli_close($link);
+     mysqli_close($conn);
 
 
 ?>

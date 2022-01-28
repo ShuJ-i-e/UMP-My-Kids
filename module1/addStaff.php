@@ -25,12 +25,12 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
      $query = "insert into staff (username,password,phoneNumber,address,email,yearRegister,status)
      VALUES ('$username', '$password', '$phoneNumber', '$address','$email','$yearRegister','$status')";
 
-     if (mysqli_query($link, $query)) {
+     if (mysqli_query($conn, $query)) {
         echo "Data insert";
      } else {
         echo("Data failed");
      }
-     mysqli_close($link);
+     mysqli_close($conn);
 
 
 ?>

@@ -1,15 +1,15 @@
 <?php
-    // Start the session
-    session_start();
-    
-    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
-        $loginUsername= $_SESSION["username"];
-        $loginID= $_SESSION["user_id"];
-    }
-    //direct user back to main when no session
-    else{
-        header("Location: ../index.php"); 
-    }
+// Start the session
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
+    $loginUsername = $_SESSION["username"];
+    $loginID = $_SESSION["user_id"];
+}
+//direct user back to main when no session
+else {
+    header("Location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +41,8 @@
 
 <body>
     <div class="wrapper">
-       <!-- Sidebar  -->
-       <nav id="sidebar">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
             <div class="sidebar-header">
                 <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 25px;">
                     <i class="flaticon-043-teddy-bear"></i>
@@ -55,8 +55,7 @@
                     <a href="ownerPage.php">Home</a>
                 </li>
                 <li>
-                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Users</a>
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
                     <ul class="collapse list-unstyled" id="userSubmenu">
                         <li>
                             <a href="staffPage.php">Staff</a>
@@ -90,8 +89,7 @@
                         </nav>
                     </div>
                     <div class="p-2">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="min-height: 150px;min-width:max-content">
+                        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px;min-width:max-content">
                             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                                 <i class="flaticon-043-teddy-bear"></i>
                                 <span class="text-white">UMP MY-KIDS</span>
@@ -99,8 +97,7 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <nav class="d-flex justify-content-end navbar navbar-expand-lg"
-                            style="float:right; margin-top: 50px">
+                        <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
                                 <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
@@ -109,164 +106,165 @@
             </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close">&times;</span>
-                  <h2>UMP MY-KIDS</h2>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>UMP MY-KIDS</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
+
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
-                  
-                </div>
-              </div>
             </div>
 
             <div class="container-fluid py-5">
-                
-            <div class="container">
-                   
+
+                <div class="container">
+
                 </div>
 
                 <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='addAdminPage.php'"><i class='fa fa-plus'></i> addAdmin</button>
-            <div id="adminInfoDiv">
+                <div id="adminInfoDiv">
 
-                <h3 class=" mb-4" style="text-align: center">Report</h3>
+                    <h3 class=" mb-4" style="text-align: center">Report</h3>
 
-                <table id="adminsInformation" class="table">
-                    <tr>
-                        <th>Admin ID</th>
-                        <th>User Name</th>
-                        <th>phone Number</th>
-                        <th>Address</th>
-                        <th>Year Register</th>
-                    </tr>
-                    <?php
-                    //Get Heroku ClearDB connection information
-$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-$cleardb_server = $cleardb_url["host"];
-$cleardb_username = $cleardb_url["user"];
-$cleardb_password = $cleardb_url["pass"];
-$cleardb_db = substr($cleardb_url["path"],1);
-$active_group = 'default';
-$query_builder = TRUE;
-// Connect to DB
-$conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);                    if ($link->connect_error) {
-                        die("Connection failed: " . $link->connect_error);
-                    } else {
-                        $sql = "SELECT `adminID`, `username`, `phoneNumber`, `address`, `yearRegister` from admin";
-                        $result = $link->query($sql);
-                        $count = $result->num_rows;
-                        $i = 0;
-                        if ($count > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $a[$i] = $row["adminID"];
-                                $b[$i] = $row["username"];
-                                $c[$i] = $row["phoneNumber"];
-                                $d[$i] = $row["address"];
-                                $e[$i] = $row["yearRegister"];
-                                $i++;
-                            }
-                            for ($i = 0; $i < $count; $i++) { 
-                                echo "<tr>";
-                                echo "<td>" . $a[$i] . "</td>";
-                                echo "<td>" . $b[$i] . "</td>";
-                                echo "<td>" . $c[$i] . "</td>";
-                                echo "<td>" . $d[$i] . "</td>";
-                                echo "<td>" . $e[$i] . "</td>";
+                    <table id="adminsInformation" class="table">
+                        <tr>
+                            <th>Admin ID</th>
+                            <th>User Name</th>
+                            <th>phone Number</th>
+                            <th>Address</th>
+                            <th>Year Register</th>
+                        </tr>
+                        <?php
+                        //Get Heroku ClearDB connection information
+                        $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+                        $cleardb_server = $cleardb_url["host"];
+                        $cleardb_username = $cleardb_url["user"];
+                        $cleardb_password = $cleardb_url["pass"];
+                        $cleardb_db = substr($cleardb_url["path"], 1);
+                        $active_group = 'default';
+                        $query_builder = TRUE;
+                        // Connect to DB
+                        $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        } else {
+                            $sql = "SELECT `adminID`, `username`, `phoneNumber`, `address`, `yearRegister` from admin";
+                            $result = $conn->query($sql);
+                            $count = $result->num_rows;
+                            $i = 0;
+                            if ($count > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $a[$i] = $row["adminID"];
+                                    $b[$i] = $row["username"];
+                                    $c[$i] = $row["phoneNumber"];
+                                    $d[$i] = $row["address"];
+                                    $e[$i] = $row["yearRegister"];
+                                    $i++;
+                                }
+                                for ($i = 0; $i < $count; $i++) {
+                                    echo "<tr>";
+                                    echo "<td>" . $a[$i] . "</td>";
+                                    echo "<td>" . $b[$i] . "</td>";
+                                    echo "<td>" . $c[$i] . "</td>";
+                                    echo "<td>" . $d[$i] . "</td>";
+                                    echo "<td>" . $e[$i] . "</td>";
+                                }
                             }
                         }
-                    }
-                    ?>
-                </table>
-                <br>
-                <div class="text-center">
-                    <h4>Summary</h4>
-                    
+                        ?>
+                    </table>
+                    <br>
+                    <div class="text-center">
+                        <h4>Summary</h4>
+
+                    </div>
+
+                    <table class="table">
+                        <tr>
+                            <th>Total number of Admin</th>
+                            <?php
+                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            } else {
+                                $result = mysqli_query($conn, "SELECT COUNT(adminID) FROM admin");
+                                $row = $result->fetch_row();
+                                echo "<td>" . $row[0] . "</td>";
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <th>Total number of Staff</th>
+                            <?php
+                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            } else {
+                                $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff");
+                                $row = $result->fetch_row();
+                                echo "<td>" . $row[0] . "</td>";
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <th>Total number of Parents</th>
+                            <?php
+                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            } else {
+                                $result = mysqli_query($conn, "SELECT COUNT(parentID) FROM parents");
+                                $row = $result->fetch_row();
+                                echo "<td>" . $row[0] . "</td>";
+                            }
+                            ?>
+                        </tr>
+
+                        <tr>
+                            <th>Most year Register</th>
+                            <?php
+                            $conn = mysqli_connect('localhost', 'root', '', 'ump_mykids');
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            } else {
+                                $i = 0;
+                                $result = mysqli_query($conn, "SELECT yearRegister FROM admin");
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $yearRegister[$i] = date("Y") - $row["yearRegister"];
+                                    $i++;
+                                }
+                                $totalYear = 0;
+
+                                for ($i = 0; $i < $count; $i++) {
+                                    $totalYear = $totalYear + (int)$yearRegister[$i];
+                                }
+                                $avgYear = $totalYear / $i;
+                                $avg_pretty = number_format($avgYear, 2, '.', '');
+                                $row = $result->fetch_row();
+                                echo "<td>" . 2021 . "</td>";
+                            }
+                            ?>
+                        </tr>
+                    </table>
                 </div>
-                
-                <table class="table">
-                <tr>
-                    <th>Total number of Admin</th>
-                    <?php
-                     $conn = mysqli_connect('localhost', 'root', '','ump_mykids');
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(adminID) FROM admin");
-                        $row = $result->fetch_row();
-                        echo "<td>" . $row[0] . "</td>";
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number of Staff</th>
-                    <?php
-                     $conn = mysqli_connect('localhost', 'root', '','ump_mykids');
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff");
-                        $row = $result->fetch_row();
-                        echo "<td>" . $row[0] . "</td>";
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number of Parents</th>
-                    <?php
-                     $conn = mysqli_connect('localhost', 'root', '','ump_mykids');
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(parentID) FROM parents");
-                        $row = $result->fetch_row();
-                        echo "<td>" . $row[0] . "</td>";
-                    }
-                    ?>
-                </tr>
-                
-                <tr>
-                    <th>Most year Register</th>
-                    <?php
-                      $conn = mysqli_connect('localhost', 'root', '','ump_mykids');
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $i = 0;
-                        $result = mysqli_query($conn, "SELECT yearRegister FROM admin");
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $yearRegister[$i] = date("Y") - $row["yearRegister"];
-                            $i++;
-                        }
-                       $totalYear = 0;
-
-                        for ($i = 0; $i < $count; $i++) {
-                            $totalYear = $totalYear + (int)$yearRegister[$i];
-                        }
-                        $avgYear = $totalYear / $i;
-                        $avg_pretty = number_format($avgYear, 2, '.', '');
-                        $row = $result->fetch_row();
-                        echo "<td>" . 2021 . "</td>";
-                    }
-                    ?>
-                </tr>
-            </table>
-            </div>
             </div>
             <br>
             <br>
             <div>
-                  
+
             </div>
             <div style="width: 500px; height: 500px;  margin:40px 0px 0px 250px">
-                <canvas id="chart" ></canvas>
+                <canvas id="chart"></canvas>
             </div>
-            
-          
-           
+
+
+
 
 
             <!-- Footer Start -->
@@ -295,8 +293,8 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
@@ -311,26 +309,27 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         /// When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-            function clearSession() {
+
+        function clearSession() {
             window.location.href = "../index.php";
             $.get("clearsession.php");
         }
-        
+
         $.get('data.php', function(response, status) {
             console.log(response);
             const list = JSON.parse(response);
@@ -363,7 +362,6 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
 
             const chart = new Chart(document.getElementById('chart'), config);
         });
-   
     </script>
 
     <!-- Template Javascript -->
@@ -371,4 +369,3 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
 </body>
 
 </html>
-

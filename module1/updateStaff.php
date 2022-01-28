@@ -28,12 +28,12 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
 
      
 
-     if (mysqli_query($link, $query)) {
+     if (mysqli_query($conn, $query)) {
          echo ("Data Updated");
      } else {
         echo("Update failed");
      }
-     mysqli_close($link);
+     mysqli_close($conn);
 
 
 ?>
