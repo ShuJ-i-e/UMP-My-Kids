@@ -16,7 +16,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>UMP MY KIDS</title>
+    <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link href="img/favicon.ico" rel="icon">
@@ -86,7 +86,7 @@
                 <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
-                        <li>
+                        <li class="active">
                             <a href="../module3/staff_view.php">List</a>
                         </li>
                         <li>
@@ -98,7 +98,14 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="../module5/salary_detail.php">Salary</a>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                 </li>
             </ul>
             </li>
@@ -171,14 +178,14 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     } else {
-                        $sql = "SELECT `staffID`, `staffName`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
+                        $sql = "SELECT `staffID`, `username`, `phoneNumber`, `address`, `yearRegister`, `status`, `staffType`, `medicationHistory` from staff";
                         $result = $conn->query($sql);
                         $count = $result->num_rows;
                         $i = 0;
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $a[$i] = $row["staffID"];
-                                $b[$i] = $row["staffName"];
+                                $b[$i] = $row["username"];
                                 $c[$i] = $row["phoneNumber"];
                                 $d[$i] = $row["address"];
                                 $e[$i] = $row["yearRegister"];

@@ -16,7 +16,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>UMP MY KIDS</title>
+    <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link href="img/favicon.ico" rel="icon">
@@ -98,7 +98,14 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="../module5/salary_detail.php">Salary</a>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
                 </li>
             </ul>
             </li>
@@ -150,7 +157,10 @@
             <!-- Modal End -->
             <!-- Content Start -->
             <div class="text-center">
-                <h4 class="card-title">Report</h4>
+            <div class="card-header bg-secondary text-center p-4">
+                <h1 class="text-white m-0">Summary</h1>
+            </div>
+            <br>
             </div>
             <table>
                 <tr>
