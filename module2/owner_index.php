@@ -319,11 +319,11 @@
                             }
                             for ($i = 0; $i < $count; $i++) {
                                 $view_url = "owner_view_parent.php?id=" . $b[$i];
-                                $edit_url = "owner_edit_parent.php?id=" . $b[$i];
+                                // $edit_url = "owner_edit_parent.php?id=" . $b[$i];
                                 echo "<tr>";
                                 echo "<td>" . $a[$i] . "</td>";
                                 echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a>";
-                                echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
+                                // echo "<a class='btn btn-warning btn-sm action-btn' href=" . $edit_url . " data-toggle='tooltip' id='Edit'><i class='fa fa-edit'></i></a>";
                             }
                         }
                     }
@@ -462,11 +462,11 @@
                             console.log(result);
                             parent_info = JSON.parse(result);
                             var view_url = "owner_view_kid.php?id=" + parent_info[0].kidsID;
-                            var edit_url = "owner_edit_kid.php?id=" + parent_info[0].kidsID;
+                            // var edit_url = "owner_edit_kid.php?id=" + parent_info[0].kidsID;
 
                             var row = '<tr><td>' + parent_info[0].username + '</td>' +
                                 '<td><a class="btn btn-info btn-sm action-btn" href="' + view_url + '" data-toggle="tooltip" id="View"><i class="fa fa-eye"></i></a>' +
-                                '<a class="btn btn-warning btn-sm action-btn" href="' + edit_url + '" data-toggle="tooltip" id="Edit"><i class="fa fa-edit"></i></a>' +
+                                // '<a class="btn btn-warning btn-sm action-btn" href="' + edit_url + '" data-toggle="tooltip" id="Edit"><i class="fa fa-edit"></i></a>' +
                                 '</td>';
                             $('#parentsInformationDynamic').append(row);
                         }
