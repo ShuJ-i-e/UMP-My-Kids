@@ -72,7 +72,10 @@ if (isset($_SESSION["username"]) && isset($_SESSION["user_id"])) {
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="../module3/owner_index.php">List</a>
+                            <a href="../module3/owner_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/owner_index.php">Index</a>
                         </li>
                         <li>
                             <a href="../module3/owner_report.php">Report</a>
