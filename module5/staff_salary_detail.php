@@ -16,7 +16,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Salary- UMP MY KIDS</title>
+    <title>Salary - UMP MYKIDS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -55,6 +55,7 @@
         tr:hover {
             background-color: #dddddd;
         }
+
     /* Dropdown Button */
 .dropbtn {
   background-color: #04AA6D;
@@ -111,64 +112,39 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../owner_main.php">Home</a>
-                </li>
-                <li class="active">
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
-                    <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li class="active">
-                            <a href="../module2/owner_index.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module2/owner_report.php">Report</a>
-                        </li>
-                    </ul>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
-                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
-                        <li>
-                            <a href="../module3/owner_index.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module3/owner_report.php">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
-                    <ul class="collapse list-unstyled" id="paymentSubmenu">
-                        <li>
-                            <a href="#">List</a>
-                        </li>
-                        <li>
-                            <a href="#">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li  class="active">
-                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Salary</a>
-                    <ul class="collapse list-unstyled" id="salarySubmenu">
-                        <li>
-                            <a href="../module5/salarylist.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module5/report_test.php">Report</a>
-                        </li>
-                    </ul>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="../module6/owner_schedule_list.php">List</a>
+                            <a href="../module6/staff_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="../module6/owner_schedule_report.php">Report</a>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                <li>
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/staff_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/staff_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/staff_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="../module5/salary_detail.php">Salary</a>
                 </li>
             </ul>
         </nav>
@@ -201,7 +177,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- The Modal -->
             <div class="modal" id="myModal">
             <div class="modal-content">
@@ -218,68 +193,87 @@
                 </div>
               </div>
             </div>
-            <!-- End Modal -->
-
 
  <!-- Content Start-->
- <table>
+
  <div class="col-lg-12 mb-5">
-    <div class="card border-0 bg-light shadow-sm pb-2">
-        <div class="card-header bg-secondary text-center p-4">
-            <h1 class="text-white m-0">Salary</h1>
-        </div>
-        <div class="card-body text-center">
-            <h3 class="card-title">Salary List</h3>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_deleteList.php'"><i class='fa fa-plus'></i> Delete Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_updateList.php'"><i class='fa fa-plus'></i> Update Staff</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salary_insertDetail.php'"><i class='fa fa-plus'></i> Insert Salary Detail</button>
-            <button class="btn btn-secondary px-4 mx-auto float-right" onclick="location.href='salarylist_search.php'"><i class='fa fa-plus'></i> Search Staff</button>
-        </div>
-    </div>
-</div>
+                <div class="card border-0 bg-light shadow-sm pb-2">
+                    <div class="card-header bg-secondary text-center p-4">
+                        <h1 class="text-white m-0">Salary</h1>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Staff Detail</h4>
+                    </div>
+                    <div class="card-footer bg-transparent py-4 px-5">
+                        <div class="row border-bottom">
+                            <div class="col-6 py-1 text-right border-right"><strong>Staff's Name</strong></div>
+                            <?php
+                            $staffID = $_GET['id'];
+                            require "conn.php";
+                            if (isset($staffID)) {
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } else {
 
-            <tr>
-                <th>Name</th>
-                <th>Staff Type</th>
-                <th>Pay Status</th>
-                <th>Salary Details</th>
-            </tr>
-            <?php
-            require "conn.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }else {
-                    $sql = "SELECT staff.staffID, staff.username, staff.amount, staff.staffType, salary.payStatus FROM staff
-                    INNER JOIN salary ON staff.staffID=salary.staffID" ;
-                    $result = $conn->query($sql);
+                                    $staff_sql = "SELECT * from staff where staffID=$staffID";
+                                    $result = $conn->query($staff_sql);
+                                    $count = $result->num_rows;
+                                    $i = 0;
+                                    $staff_row = mysqli_fetch_assoc($result);
+                                    if ($count > 0) {
+                                        echo "<div class='col-6 py-1'>" . $staff_row['username'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['phoneNumber'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['address'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $staff_row['yearRegister'] . "</div></div></div><hr>";
+                                        echo "<div class='card-body text-center'>";
+                                        echo "<h4 class='card-title'>Salary Details</h4></div>";
+                                        echo "<div class='card-footer bg-transparent py-4 px-5'>";
 
-                    if (!$result) {
-                        trigger_error('Invalid query: ' . $conn->error);
-                    }
+                                        $salary_sql = "SELECT * from staff join salary ON staff.staffID=salary.staffID where staff.staffID=$staffID";
+                                        $result = $conn->query($salary_sql);
+                                        $count = $result->num_rows;
+                                        $i = 0;
+                                        if ($count > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $a[$i] = $row["amount"];
+                                            $b[$i] = $row["payStatus"];
+                                            $c[$i] = $row["payDay"];
+                                            $i++;
+                                        }
+                                        for ($i = 0; $i < $count; $i++) {
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Salary Amount</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $a[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Status</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $b[$i] . "</div></div>";
+                                            echo "<div class='row border-bottom'>";
+                                            echo "<div class='col-6 py-1 text-right border-right'><strong>Payment Date</strong></div>";
+                                            echo "<div class='col-6 py-1'>" . $c[$i] . "</div></div><br>";
+                                    
+                                        }
+                                    }
+                                    }
+                                }
+                            } else {
+                                echo "error!";
+                            }
 
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["username"];
-                            $b[$i] = $row["staffType"];
-                            $c[$i] = $row["payStatus"];
-                            $d[$i] = $row["staffID"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td>" . $b[$i] . "</td>";
-                            echo "<td>" . $c[$i] . "</td>";
+                            ?>
+                        
+                    </div>
+                </div>
+            </div>
 
-                            $view_url = "salary_detail.php?id=" . $d[$i];
-                            echo "<td><a class='btn btn-info btn-sm action-btn' href=" . $view_url . " data-toggle='tooltip' id='View'><i class='fa fa-eye'></i></a></td>";
-                        }
-                    }
-                }
-                ?>
-    </table>
+  
 <!-- Content End-->
 
 <!-- Footer Start -->
@@ -312,7 +306,6 @@ $('#sidebarCollapse').on('click', function() {
     $('#sidebar').toggleClass('active');
 });
 });
-
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -347,7 +340,7 @@ function clearSession() {
 </script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>
