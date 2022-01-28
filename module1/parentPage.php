@@ -132,7 +132,7 @@
                         
                         <div style="margin-left: 150px;" class="col-lg-7">
                             
-                         <a href="updateparentPage.php"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Update Parent</button></a>
+                         <a href="updateParentPage.php"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Update Parent</button></a>
                             <a href="deleteParentPage.php"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Delete Parent</button> </a>
                            <a href="addParentPage.php"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Add new Parent</button></a> 
                                 

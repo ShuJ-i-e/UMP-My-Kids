@@ -130,7 +130,7 @@
                        
                         <div class="col-lg-7">
                             
-                            <form  method="post" action="updateparentPage.php">
+                            <form  method="post" action="updateParentPage.php">
                                  <h3>Update Parent</h3>
                             <table class="table">
                                 

@@ -132,7 +132,7 @@
                         
                         <div style="margin-left: 150px;" class="col-lg-7">
                             
-                         <a href="updatestaffPage.php"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Update Staff</button></a>
+                         <a href="updateStaffPage.php"> <button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Update Staff</button></a>
                             <a href="deleteStaffPage.php"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Delete Staff</button> </a>
                            <a href="addStaffPage.php"><button class="btn btn-primary mt-2 py-2 px-4" style="margin: 10px;float:right">Add new Staff</button></a> 
                                 
