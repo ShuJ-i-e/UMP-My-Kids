@@ -1,3 +1,16 @@
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        header("Location: ../index.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,63 +64,53 @@
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../staff_main.php">Home</a>
                 </li>
                 <li>
-                    <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
-                    <ul class="collapse list-unstyled" id="parentsSubmenu">
-                        <li>
-                            <a href="owner_index.php">List</a>
-                        </li>
-                        <li>
-                            <a href="owner_report.php">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
-                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
-                        <li>
-                            <a href="parent_view.php">List</a>
-                        </li>
-                        <li>
-                            <a href="parent_index.php">Index</a>
-                        </li>
-                        <li class="active">
-                            <a href="parent_report.php">Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payment</a>
-                    <ul class="collapse list-unstyled" id="paymentSubmenu">
-                        <li>
-                            <a href="#">List</a>
-                        </li>
-                        <li>
-                            <a href="#">Report</a>
-                        </li>
-                    </ul>
+                    <a href="../module2/staff_index.php">Parents & Kids</a>
                 </li>
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module6/staff_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module6/staff_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-
+                <li>
+                <li class="active">
+                    <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+                    <ul class="collapse list-unstyled" id="manpowerSubmenu">
+                        <li>
+                            <a href="../module3/parent_view.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_index.php">Index</a>
+                        </li>
+                        <li>
+                            <a href="../module3/parent_report.php">Report</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
+                    <ul class="collapse list-unstyled" id="salarySubmenu">
+                        <li>
+                            <a href="../module5/salarylist.php">List</a>
+                        </li>
+                        <li>
+                            <a href="../module5/report_test.php">Report</a>
+                        </li>
+                </li>
+            </ul>
+            </li>
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -130,7 +133,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                                <i class="fas fa-lock"></i> Parent</a>
+                               <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -146,17 +149,19 @@
                         <p>Are you sure you want to logout?</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
                         <button class="btn btn-light" style="margin: 10px;float:right">No</button>
                     </div>
                 </div>
             </div>
             <!-- Modal End -->
             <!-- Content Start -->
+            <div class="text-center">
             <div class="card-header bg-secondary text-center p-4">
-                <h1 class="text-white m-0">Report</h1>
+                <h1 class="text-white m-0">Summary</h1>
             </div>
             <br>
+            </div>
             <table>
                 <tr>
                     <th>Staff ID</th>
@@ -188,21 +193,22 @@
                 ?>
             </table>
             <br>
-            <div class="text-center">
-                <h4 class="card-title">Summary</h4>
+            <div class="card-header bg-secondary text-center p-4">
+                <h1 class="text-white m-0">Report</h1>
             </div>
+            <br>
             <table>
                 <tr>
                     <th>Total number of Staff (Teacher)</th>
                     <?php
                     if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     } else {
                         $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
                         WHERE staffType = 'Teacher'");
                         $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numTeacher=$row[0];
+                        echo "<td>" . $row[0] . "</td>";
+                        $numTeacher = $row[0];
                     }
                     ?>
                 </tr>
@@ -210,13 +216,13 @@
                     <th>Total number of Staff (Infant Caretaker)</th>
                     <?php
                     if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     } else {
                         $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
                         WHERE staffType = 'Infant Caretaker'");
                         $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numCaretaker=$row[0];
+                        echo "<td>" . $row[0] . "</td>";
+                        $numCaretaker = $row[0];
                     }
                     ?>
                 </tr>
@@ -224,13 +230,13 @@
                     <th>Total number of Staff (Worker)</th>
                     <?php
                     if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     } else {
                         $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
                         WHERE staffType = 'Worker'");
                         $row = $result->fetch_row();
-                        echo "<td>".$row[0]."</td>";
-                        $numWorker=$row[0];
+                        echo "<td>" . $row[0] . "</td>";
+                        $numWorker = $row[0];
                     }
                     ?>
                 </tr>
@@ -238,32 +244,35 @@
 
             <head>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    google.charts.load("current", {
+                        packages: ["corechart"]
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Staff Type', 'Numbers'],
-          ['Teacher', <?php echo $numTeacher;?>],
-          ['Infant Caretaker', <?php echo $numCaretaker;?>],
-          ['Worker', <?php echo $numWorker;?>]
-        ]);
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Staff Type', 'Numbers'],
+                            ['Teacher', <?php echo $numTeacher; ?>],
+                            ['Infant Caretaker', <?php echo $numCaretaker; ?>],
+                            ['Worker', <?php echo $numWorker; ?>]
+                        ]);
 
-        var options = {
-          title: 'Manpower Distribution',
-          is3D: true,
-        };
+                        var options = {
+                            title: 'Manpower Distribution',
+                            is3D: true,
+                        };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
-  </head>
-  <body>
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-  </body>
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                        chart.draw(data, options);
+                    }
+                </script>
+            </head>
+
+            <body>
+                <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+            </body>
 
             <!-- Content End -->
             <!-- Footer Start -->
@@ -320,6 +329,10 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+        function clearSession() {
+            window.location.href = "../index.php";
+            $.get("clearsession.php");
         }
     </script>
 

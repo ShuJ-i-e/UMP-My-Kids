@@ -18,40 +18,25 @@
     <meta charset="utf-8">
     <title>KidKinder - Kindergarten Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Favicon -->
+    <link href="../img/favicon.ico" rel="icon">
 
-    <link href="img/favicon.ico" rel="icon">
-
+    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
+    <!-- Flaticon Font -->
     <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
 
+    <!-- Libraries Stylesheet -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
+    <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 8px;
-            width: 150px;
-        }
-
-        tr:hover {
-            background-color: #dddddd;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -89,7 +74,7 @@
                         <li>
                             <a href="../module3/staff_view.php">List</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="../module3/staff_index.php">Index</a>
                         </li>
                         <li>
@@ -133,7 +118,7 @@
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                               <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
+                                <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -154,127 +139,64 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal End -->
-            <!-- Content Start -->
-            <div class="text-center">
-            <div class="card-header bg-secondary text-center p-4">
-                <h1 class="text-white m-0">Summary</h1>
+            <!-- End Modal -->
+            <!-- Content Start-->
+            <div class="col-lg-12 mb-5">
+                <div class="card border-0 bg-light shadow-sm pb-2">
+                    <div class="card-header bg-secondary text-center p-4">
+                        <button class="btn btn-light px-4 mx-auto float-left" onclick="location.href='staff_index.php'"><i class='fa fa-chevron-left'></i> Back</button>
+                        <h1 class="text-white m-0">Worker</h1>
+                    </div>
+                    <div class="card-footer bg-transparent py-4 px-5">
+                        <div class="row border-bottom">
+                            <div class="col-6 py-1 text-right border-right"><strong>Worker's Name</strong></div>
+                            <?php
+                            $kidsID = $_GET['id'];
+                            require "connect.php";
+                            if (isset($staffID)) {
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } else {
+                                    $sql = "SELECT `username`, `phoneNumber`, `address`, `yearRegister`, `staffType`, `yearRegister`, `medicationHistory` from staff";
+                                    $result = $conn->query($sql);
+                                    $count = $result->num_rows;
+                                    $i = 0;
+                                    $row = mysqli_fetch_assoc($result);
+                                    if ($count > 0) {
+                                        $dateregister = date("Y") - $row['yearRegister'];
+                                        echo "<div class='col-6 py-1'>" . $row['username'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Phone Number</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['phoneNumber'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Address</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['address'] . "</div>";
+                                        echo "</div>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['yearRegister'] . "</div></div></div><hr>";
+                                        echo "<div class='card-body text-center'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Staff Type</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $row['staffType'] . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Year Register</strong></div>";
+                                        echo "<div class='col-6 py-1'>" . $dateregister . "</div></div>";
+                                        echo "<div class='row border-bottom'>";
+                                        echo "<div class='col-6 py-1 text-right border-right'><strong>Medication History</strong></div>";
+                                        echo " <div class='col-6 py-1'>" . $row['medicationHistory'] . "</div>";
+                                        
+                                    }
+                                }
+                            } else {
+                                echo "Not available!";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br>
-            </div>
-            <table>
-                <tr>
-                    <th>Staff ID</th>
-                    <th>Staff Type</th>
-                </tr>
-
-                <?php
-                require "connect.php";
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } else {
-                    $sql = "SELECT `staffID`, `staffType` from staff";
-                    $result = $conn->query($sql);
-                    $count = $result->num_rows;
-                    $i = 0;
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $a[$i] = $row["staffID"];
-                            $b[$i] = $row["staffType"];
-                            $i++;
-                        }
-                        for ($i = 0; $i < $count; $i++) {
-                            echo "<tr>";
-                            echo "<td>" . $a[$i] . "</td>";
-                            echo "<td>" . $b[$i] . "</td>";
-                        }
-                    }
-                }
-                ?>
-            </table>
-            <br>
-            <div class="card-header bg-secondary text-center p-4">
-                <h1 class="text-white m-0">Report</h1>
-            </div>
-            <br>
-            <table>
-                <tr>
-                    <th>Total number of Staff (Teacher)</th>
-                    <?php
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
-                        WHERE staffType = 'Teacher'");
-                        $row = $result->fetch_row();
-                        echo "<td>" . $row[0] . "</td>";
-                        $numTeacher = $row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number of Staff (Infant Caretaker)</th>
-                    <?php
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
-                        WHERE staffType = 'Infant Caretaker'");
-                        $row = $result->fetch_row();
-                        echo "<td>" . $row[0] . "</td>";
-                        $numCaretaker = $row[0];
-                    }
-                    ?>
-                </tr>
-                <tr>
-                    <th>Total number of Staff (Worker)</th>
-                    <?php
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } else {
-                        $result = mysqli_query($conn, "SELECT COUNT(staffID) FROM staff
-                        WHERE staffType = 'Worker'");
-                        $row = $result->fetch_row();
-                        echo "<td>" . $row[0] . "</td>";
-                        $numWorker = $row[0];
-                    }
-                    ?>
-                </tr>
-            </table>
-
-            <head>
-
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script type="text/javascript">
-                    google.charts.load("current", {
-                        packages: ["corechart"]
-                    });
-                    google.charts.setOnLoadCallback(drawChart);
-
-                    function drawChart() {
-                        var data = google.visualization.arrayToDataTable([
-                            ['Staff Type', 'Numbers'],
-                            ['Teacher', <?php echo $numTeacher; ?>],
-                            ['Infant Caretaker', <?php echo $numCaretaker; ?>],
-                            ['Worker', <?php echo $numWorker; ?>]
-                        ]);
-
-                        var options = {
-                            title: 'Manpower Distribution',
-                            is3D: true,
-                        };
-
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                        chart.draw(data, options);
-                    }
-                </script>
-            </head>
-
-            <body>
-                <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-            </body>
-
-            <!-- Content End -->
+            <!-- Content End-->
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
 
@@ -292,6 +214,7 @@
     <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
+    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
@@ -336,6 +259,7 @@
         }
     </script>
 
+    <!-- Template Javascript -->
     <script src="../js/main.js"></script>
 </body>
 

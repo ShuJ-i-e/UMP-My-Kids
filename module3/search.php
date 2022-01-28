@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 } else {
     if($option=="teacher")
     {
-        $sql = "SELECT staffID, staffName FROM `staff` WHERE `staffName` LIKE '%{$searchTxt}%' ";
+        $sql = "SELECT staffID, username FROM `staff` WHERE `username` LIKE '%{$searchTxt}%' ";
         $result = mysqli_query($conn, $sql);
         $count = $result->num_rows;
         if ($count > 0) {
@@ -24,7 +24,7 @@ if ($conn->connect_error) {
     }
     else if($option=="caretaker")
     {
-    $sql = "SELECT staffID, staffName FROM `staff` WHERE `staffName` LIKE '%{$searchTxt}%' ";
+    $sql = "SELECT staffID, username FROM `staff` WHERE `staffName` LIKE '%{$searchTxt}%' ";
     $result = mysqli_query($conn, $sql);
     $count = $result->num_rows;
     if ($count > 0) {
@@ -37,7 +37,7 @@ if ($conn->connect_error) {
     }
     else 
     {
-    $sql = "SELECT staffID, staffName FROM `staff` WHERE `staffName` LIKE '%{$searchTxt}%' ";
+    $sql = "SELECT staffID, username FROM `staff` WHERE `staffName` LIKE '%{$searchTxt}%' ";
     $result = mysqli_query($conn, $sql);
     $count = $result->num_rows;
     if ($count > 0) {

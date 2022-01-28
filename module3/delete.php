@@ -1,10 +1,7 @@
 <?php
 require "connect.php";
-
-$username= $_POST["username"]
-$staffID = $_GET['staffID'];
+$staffID = $_GET['id'];
 $page = $_GET['page'];
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {
@@ -16,22 +13,22 @@ if ($conn->connect_error) {
         mysqli_query($conn, $sql);
         if ($conn->query($sql) === TRUE) {
             if ($page == "parents") {
-                header("Location: parent_index.php?msg=You have deleted kids with Kid ID: $staffID 's information successfully");
+                header("Location: parent_index.php?msg=You have deleted staff with Staff ID: $staffID 's information successfully");
             } else if ($page == "owner") {
-                header("Location: owner_index.php?msg=You have deleted kids with Kid ID: $staffID 's information successfully");
+                header("Location: owner_index.php?msg=You have deleted staff with Staff ID: $staffID 's information successfully");
             } else {
-                header("Location: staff_index.php?msg=You have deleted kids with Kid ID: $staffID 's information successfully");
+                header("Location: staff_index.php?msg=You have deleted staff with Staff ID: $staffID 's information successfully");
             }
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     } else {
         if ($page == "parents") {
-            header("Location: parent_index.php?msg=Database does not have any information of kid with Kid ID: $staffID");
+            header("Location: parent_index.php?msg=Database does not have any information of staff with Staff ID: $staffID");
         } else if ($page == "owner") {
-            header("Location: owner_index.php?msg=Database does not have any information of kid with Kid ID: $staffID");
+            header("Location: owner_index.php?msg=Database does not have any information of staff with Staff ID: $staffID");
         } else {
-            header("Location: staff_index.php?msg=Database does not have any information of kid with Kid ID: $staffID");
+            header("Location: staff_index.php?msg=Database does not have any information of staff with staff ID: $staffID");
         }
     }
 }

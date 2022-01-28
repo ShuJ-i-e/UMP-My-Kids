@@ -1,3 +1,16 @@
+<?php
+    // Start the session
+    session_start();
+    
+    if(isset($_SESSION["username"]) && isset($_SESSION["user_id"]) ){
+        $loginUsername= $_SESSION["username"];
+        $loginID= $_SESSION["user_id"];
+    }
+    //direct user back to main when no session
+    else{
+        header("Location: ../index.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,11 +33,6 @@
 
     <link href="../css/style.css" rel="stylesheet">
 </head>
-<?php
-// Start the session
-session_start();
-$_SESSION["username"] = "owner";
-?>
 
 <body>
     <div class="wrapper">
@@ -36,34 +44,31 @@ $_SESSION["username"] = "owner";
                     <span class="text-white">UMP MY-KIDS</span>
                 </a>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="../owner_main.php">Home</a>
                 </li>
                 <li>
                     <a href="#parentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parents & Kids</a>
                     <ul class="collapse list-unstyled" id="parentsSubmenu">
                         <li>
-                        <a href="owner_index.php">List</a>
+                            <a href="../module2/owner_index.php">List</a>
                         </li>
                         <li>
-                        <a href="owner_report.php">Report</a>
+                            <a href="../module2/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li  class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
-
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
-                            <a href="owner_view.php">List</a>
+                            <a href="../module3/owner_view.php">List</a>
                         </li>
                         <li class="active">
-                            <a href="owner_index.php">Index</a>
-                        </li>
+                            <a href="../module3/owner_index.php">Index</a>
                         <li>
-                            <a href="owner_report.php">Report</a>
+                            <a href="../module3/owner_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -82,17 +87,15 @@ $_SESSION["username"] = "owner";
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="#">List</a>
+                            <a href="../module6/owner_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="#">Report</a>
+                            <a href="../module6/owner_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
             <div class="container-fluid bg-primary mb-5">
@@ -115,7 +118,7 @@ $_SESSION["username"] = "owner";
                     <div class="p-2">
                         <nav class="d-flex justify-content-end navbar navbar-expand-lg" style="float:right; margin-top: 50px">
                             <button type="button" id="logoutBtn" class="btn btn-info">
-                            <i class="fas fa-lock"></i><?php $_SESSION["username"] ?></a>
+                            <i class="fas fa-lock"></i> <?php echo $loginUsername; ?></a>
                         </nav>
                     </div>
                 </div>
@@ -131,7 +134,7 @@ $_SESSION["username"] = "owner";
                         <p>Are you sure you want to logout?</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" style="margin: 10px;float:left">Yes</button>
+                        <button class="btn btn-secondary" style="margin: 10px;float:left" onclick="clearSession()">Yes</button>
                         <button class="btn btn-light" style="margin: 10px;float:right">No</button>
                     </div>
                 </div>
@@ -290,6 +293,10 @@ $_SESSION["username"] = "owner";
                     console.log('request failed');
                 }
             });
+        }
+        function clearSession() {
+            window.location.href = "../index.php";
+            $.get("clearsession.php");
         }
     </script>
 
