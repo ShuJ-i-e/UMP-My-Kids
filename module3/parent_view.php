@@ -66,19 +66,19 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="../staff_main.php">Home</a>
+                    <a href="../parent_main.php">Home</a>
                 </li>
                 <li>
-                    <a href="../module2/staff_index.php">Parents & Kids</a>
+                    <a href="../module2/parent_index.php">Parents & Kids</a>
                 </li>
                 <li>
                     <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
                     <ul class="collapse list-unstyled" id="activitySubmenu">
                         <li>
-                            <a href="../module6/staff_schedule_list.php">List</a>
+                            <a href="../module6/parent_schedule_list.php">List</a>
                         </li>
                         <li>
-                            <a href="../module6/staff_schedule_report.php">Report</a>
+                            <a href="../module6/parent_schedule_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
@@ -87,13 +87,13 @@
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li class="active">
-                            <a href="../module3/staff_view.php">List</a>
+                            <a href="../module3/parent_view.php">List</a>
                         </li>
                         <li>
-                            <a href="../module3/staff_index.php">Index</a>
+                            <a href="../module3/parent_index.php">Index</a>
                         </li>
                         <li>
-                            <a href="../module3/staff_report.php">Report</a>
+                            <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>

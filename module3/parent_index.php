@@ -69,26 +69,22 @@
                 </a>
             </div>
             <ul class="list-unstyled components">
-                <li>
-                <a href="../staff_main.php">Home</a>
+            <li>
+                    <a href="../user_main.php">Home</a>
                 </li>
                 <li>
-                    <a href="../module2/staff_index.php">Parents & Kids</a>
+                    <a href="../module2/parent_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
-                    <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="../module6/staff_schedule_list.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module6/staff_schedule_report.php">Report</a>
-                        </li>
-                    </ul>
+                    <a href="../module6/user_schedule_list.php">Kid's Activity</a>
+                </li>
+                <li>
+                    <a href="#">Payment</a>
                 </li>
                 <li>
                 <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
                             <a href="../module3/parent_view.php">List</a>
@@ -96,27 +92,14 @@
                         <li class="active">
                             <a href="../module3/parent_index.php">Index</a>
                         </li>
-                        <li>
+                        
                             <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#salarySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Salary</a>
-                    <ul class="collapse list-unstyled" id="salarySubmenu">
-                        <li>
-                            <a href="../module5/salarylist.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module5/report_test.php">Report</a>
-                        </li>
-                </li>
-            </ul>
-            </li>
             </ul>
         </nav>
-        <!-- Page Content  -->
-        <div id="content">
+        <!-- Page Content  -->        <div id="content">
             <div class="container-fluid bg-primary mb-5">
                 <div class="d-flex justify-content-between mb-3">
                     <div class="p-2">
