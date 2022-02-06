@@ -82,24 +82,25 @@
                     <a href="#">Payment</a>
                 </li>
                 <li>
-                <li class="active">
+                <li  class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
 
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
                             <a href="../module3/parent_view.php">List</a>
                         </li>
-                        <li class="active">
+                        <li  class="active">
                             <a href="../module3/parent_index.php">Index</a>
                         </li>
-                        
+                        <li>
                             <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </nav>
-        <!-- Page Content  -->        <div id="content">
+        <!-- Page Content  -->     
+         <div id="content">
             <div class="container-fluid bg-primary mb-5">
                 <div class="d-flex justify-content-between mb-3">
                     <div class="p-2">

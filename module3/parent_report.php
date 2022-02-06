@@ -65,26 +65,22 @@
                 </a>
             </div>
             <ul class="list-unstyled components">
-                <li>
-                    <a href="../parent_main.php">Home</a>
+            <li>
+                    <a href="../user_main.php">Home</a>
                 </li>
-                <li>
+                <li >
                     <a href="../module2/parent_index.php">Parents & Kids</a>
                 </li>
                 <li>
-                    <a href="#activitySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Activity</a>
-                    <ul class="collapse list-unstyled" id="activitySubmenu">
-                        <li>
-                            <a href="../module6/parent_schedule_list.php">List</a>
-                        </li>
-                        <li>
-                            <a href="../module6/parent_schedule_report.php">Report</a>
-                        </li>
-                    </ul>
+                    <a href="../module6/user_schedule_list.php">Kid's Activity</a>
+                </li>
+                <li>
+                    <a href="#">Payment</a>
                 </li>
                 <li>
                 <li class="active">
                     <a href="#manpowerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manpower</a>
+
                     <ul class="collapse list-unstyled" id="manpowerSubmenu">
                         <li>
                             <a href="../module3/parent_view.php">List</a>
@@ -92,13 +88,11 @@
                         <li>
                             <a href="../module3/parent_index.php">Index</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="../module3/parent_report.php">Report</a>
                         </li>
                     </ul>
                 </li>
-            </ul>
-            </li>
             </ul>
         </nav>
         <!-- Page Content  -->
